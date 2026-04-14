@@ -1,0 +1,42 @@
+<product-card class="product-cart-item">
+	<a href="{{ product_small.url }}">
+		<div class="product-cart-item-image">
+			{% if product_small.featured_image %}
+				{%- render 'responsive-image', image: product_small.featured_image, sizes: '192x0', priority: 'low' -%}
+			{% else %}
+				<div class="thb-placeholder" style="height:75px;">
+					{%-
+						liquid
+						capture index
+							cycle '1', '2', '3', '4', '5', '6'
+						endcapture
+					-%}
+					{{ 'product-' | append: index | placeholder_svg_tag }}
+				</div>
+			{% endif %}
+		</div>
+	</a>
+	<div>
+		{%-
+			liquid
+			assign product_title = product_small.title
+			if predictive_search
+				assign product_title = product_title | highlight: predictive_search.terms
+			endif
+		-%}
+		
+        {%-  assign product_title_short_first = product_title | split: " - " | first -%}
+        {%-  assign product_title_short_second = product_title | split: " - " | last -%}
+    	<a href="{{ product_small.url }}" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ product_title_short_first}}</a>
+    	<a href="{{ product_small.url }}" title="{{ product_card_product.title | escape }}" class="product-card-type" style="margin-top:-5px;">{{ product_title_short_second}}</a>
+
+		
+		{% render 'product-price', product: product_small %}
+		{% if quick_add %}
+		<quick-view class="product-card-quickview button white btn-xs" href="#Product-Drawer" data-product-handle="{{ product_small.handle }}" tabindex="-1">
+			<div class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</div>
+			<span>{{ 'products.product.quick_view' | t }}</span>
+		</quick-view>
+		{% endif %}
+	</div>
+</product-card>

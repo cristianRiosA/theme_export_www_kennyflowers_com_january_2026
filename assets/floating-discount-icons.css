@@ -1,0 +1,363 @@
+/* Floating Discount Icons - Easter Egg Feature */
+
+.floating-discount-icons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+/* Individual floating icon */
+.floating-icon {
+  position: fixed;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1000;
+}
+
+.floating-icon.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.floating-icon.is-revealed {
+  z-index: 1001;
+}
+
+/* Icon image wrapper */
+.floating-icon__image-wrapper {
+  width: var(--icon-size, 50px);
+  height: var(--icon-size, 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 3px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.floating-icon__image-wrapper img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.floating-icon:hover .floating-icon__image-wrapper {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(255, 255, 255, 0.7);
+}
+
+.floating-icon.is-revealed .floating-icon__image-wrapper {
+  transform: scale(0.8);
+  opacity: 0.5;
+}
+
+/* Floating animation keyframes */
+@keyframes floatBob {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+
+@keyframes floatDrift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(10px, -5px);
+  }
+  66% {
+    transform: translate(-5px, 5px);
+  }
+}
+
+/* Animation speed variants */
+.floating-icon[data-speed="slow"] .floating-icon__image-wrapper {
+  animation: floatBob 6s ease-in-out infinite;
+}
+
+.floating-icon[data-speed="medium"] .floating-icon__image-wrapper {
+  animation: floatBob 4s ease-in-out infinite;
+}
+
+.floating-icon[data-speed="fast"] .floating-icon__image-wrapper {
+  animation: floatBob 2.5s ease-in-out infinite;
+}
+
+/* Pause animation when revealed */
+.floating-icon.is-revealed .floating-icon__image-wrapper {
+  animation-play-state: paused;
+}
+
+/* Reveal panel */
+.floating-icon__reveal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  z-index: 2;
+}
+
+.floating-icon.is-revealed .floating-icon__reveal {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floating-icon__reveal-content {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  min-width: 220px;
+  max-width: 280px;
+  position: relative;
+}
+
+/* Close button */
+.floating-icon__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  color: #666;
+}
+
+.floating-icon__close:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+/* Success message */
+.floating-icon__message {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+/* Code display */
+.floating-icon__code-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px dashed #ccc;
+}
+
+.floating-icon__code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #e63946;
+  letter-spacing: 1px;
+  flex: 1;
+  text-align: left;
+}
+
+/* Copy button */
+.floating-icon__copy {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.floating-icon__copy:hover {
+  background: #555;
+  transform: scale(1.02);
+}
+
+.floating-icon__copy:active {
+  transform: scale(0.98);
+}
+
+.floating-icon__copy-success {
+  display: none;
+  color: #22c55e;
+}
+
+.floating-icon__copy.is-copied {
+  background: #22c55e;
+}
+
+.floating-icon__copy.is-copied .floating-icon__copy-text {
+  display: none;
+}
+
+.floating-icon__copy.is-copied .floating-icon__copy-success {
+  display: inline;
+  color: #fff;
+}
+
+/* Toast notification */
+.floating-icon__toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #333;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  z-index: 1002;
+  pointer-events: none;
+}
+
+.floating-icon__toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Celebration animation */
+@keyframes celebrate {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+.floating-icon.is-revealed .floating-icon__reveal {
+  animation: celebrate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Sparkle effect on reveal */
+.floating-icon.is-revealed::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: sparkle 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 767px) {
+  .floating-icon__reveal-content {
+    min-width: 200px;
+    max-width: 250px;
+    padding: 16px 18px;
+  }
+  
+  .floating-icon__message {
+    font-size: 13px;
+  }
+  
+  .floating-icon__code {
+    font-size: 14px;
+  }
+  
+  .floating-icon__code-wrapper {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .floating-icon__code {
+    text-align: center;
+  }
+  
+  .floating-icon__copy {
+    width: 100%;
+  }
+}
+
+/* Disable floating icons in theme editor for easier editing */
+.shopify-design-mode .floating-discount-icons {
+  position: relative;
+  height: auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+.shopify-design-mode .floating-discount-icons::before {
+  content: 'Floating Discount Icons (Preview disabled in editor)';
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.shopify-design-mode .floating-icon {
+  position: relative;
+  display: inline-flex;
+  margin: 10px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.shopify-design-mode .floating-icon .floating-icon__image-wrapper {
+  animation: none;
+}
+

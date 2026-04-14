@@ -1,0 +1,171 @@
+{%- liquid
+  assign chosen_menu = section.settings.menu
+  assign selector = section.settings.top_level_selector | default: '.main-menu > ul > li'
+  assign min_width = section.settings.desktop_min_width | default: 1025
+  assign hide_mode = section.settings.hide_mode | default: 'positions'
+  assign hidden_titles_raw = section.settings.titles_to_hide | downcase | strip
+  assign hidden_titles = hidden_titles_raw
+  assign title_delimiter = section.settings.title_delimiter | default: ','
+
+  if hidden_titles_raw != blank
+    assign hidden_titles = hidden_titles_raw | split: title_delimiter
+    for t in hidden_titles
+      assign trimmed = t | strip
+      if forloop.first
+        assign hidden_titles = trimmed
+      else
+        assign hidden_titles = hidden_titles | append: '||' | append: trimmed
+      endif
+    endfor
+  endif
+-%}
+
+{%- comment -%}
+  This section only prints CSS. It targets top-level <li> nodes under the selector you provide.
+  Make sure the selector points to the LIs for your desktop main menu (examples below).
+
+  Examples (adapt to your theme):
+  - Reformation / FuelThemes often: ".header .main-menu > ul > li"
+  - Dawn-like: ".header__inline-menu > ul > li"
+  - Generic: ".site-nav > li"
+{%- endcomment -%}
+
+{%- style -%}
+@media screen and (min-width: {{ min_width }}px) {
+
+    /* DEBUG — TEMPORARY */
+    /* {{ selector }} {
+    outline: 2px dashed magenta !important;
+    outline-offset: 2px;
+    } */
+
+  {%- if hide_mode == 'positions' -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'hide_by_position' and block.settings.enable_hide and block.settings.position != blank -%}
+        {{ selector }}:nth-child({{ block.settings.position | plus: 0 }}) {
+          display: none !important;
+        }
+      {%- endif -%}
+    {%- endfor -%}
+  {%- elsif hide_mode == 'titles' and chosen_menu and linklists[chosen_menu] -%}
+    {%- assign titles_pipe = hidden_titles | default: '' -%}
+    {%- if titles_pipe != '' -%}
+      {%- assign titles_array = titles_pipe | split: '||' -%}
+      {%- assign max = linklists[chosen_menu].links.size -%}
+      {%- for link in linklists[chosen_menu].links -%}
+        {%- assign idx = forloop.index -%}
+        {%- assign this_title = link.title | downcase | strip -%}
+        {%- assign match = false -%}
+        {%- for ht in titles_array -%}
+          {%- assign target = ht | downcase | strip -%}
+          {%- if this_title == target -%}{% assign match = true %}{% break %}{% endif -%}
+        {%- endfor -%}
+        {%- if match -%}
+          {{ selector }}:nth-child({{ idx }}) { display: none !important; }
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+}
+{%- endstyle -%}
+
+
+{% schema %}
+{
+  "name": "Desktop menu visibility",
+  "tag": "section",
+  "class": "desktop-menu-visibility",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu to map (for title mode)",
+      "info": "Pick your main desktop menu. Only used when Hide mode = By titles."
+    },
+    {
+      "type": "text",
+      "id": "top_level_selector",
+      "label": "Top-level LI selector",
+      "default": ".header .main-menu > ul > li",
+      "info": "CSS selector pointing to the desktop nav’s top-level <li> elements."
+    },
+    {
+        "type": "range",
+        "id": "desktop_min_width",
+        "label": "Desktop breakpoint (min-width)",
+        "min": 640,
+        "max": 1600,
+        "step": 16,
+        "unit": "px",
+        "default": 1024
+    },
+    {
+      "type": "select",
+      "id": "hide_mode",
+      "label": "Hide mode",
+      "default": "positions",
+      "options": [
+        { "value": "positions", "label": "By positions (blocks)" },
+        { "value": "titles", "label": "By titles (auto-map)" }
+      ]
+    },
+    {
+        "type": "textarea",
+        "id": "titles_to_hide",
+        "label": "Titles to hide (when using By titles)",
+        "info": "Comma-separated (or use custom delimiter below). Matches EXACT top-level link titles, case-insensitive.",
+        "default": "Example: Men, Women, Sale"
+    },
+    {
+      "type": "text",
+      "id": "title_delimiter",
+      "label": "Title delimiter",
+      "default": ",",
+      "info": "Change if you prefer using | or ; instead of comma."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hide_by_position",
+      "name": "Hide item by position",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_hide",
+          "label": "Hide this item",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Top-level item position",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "Item 1" },
+            { "value": "2", "label": "Item 2" },
+            { "value": "3", "label": "Item 3" },
+            { "value": "4", "label": "Item 4" },
+            { "value": "5", "label": "Item 5" },
+            { "value": "6", "label": "Item 6" },
+            { "value": "7", "label": "Item 7" },
+            { "value": "8", "label": "Item 8" },
+            { "value": "9", "label": "Item 9" },
+            { "value": "10", "label": "Item 10" },
+            { "value": "11", "label": "Item 11" },
+            { "value": "12", "label": "Item 12" },
+            { "value": "13", "label": "Item 13" },
+            { "value": "14", "label": "Item 14" },
+            { "value": "15", "label": "Item 15" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Desktop menu visibility",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}

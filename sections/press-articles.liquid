@@ -1,0 +1,59 @@
+<div class="container-fluid press-small-list">
+      {%- for block in section.blocks -%}
+
+        <a href="{{ block.settings.press_url }}" target="_blank">
+          <div class="row press-story press-small" style="background:white;border-radius:4px;box-shadow:0px 0px 10px 1px rgba(0,0,0,0.1);">
+            <div class="col-sm-12 col-md-3 img-left-box" style="position:relative"><img class="secondary-press-img" src="{{ block.settings.press_logo_image | image_url: width: 200 }}"></div>
+            <div class="col-sm-12 col-md-9 press-small-title" style="padding:15px;">
+              <h4>{{ block.settings.press_title }}</h4>
+            </div>
+          </div>
+        </a>
+      {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Press Articles",
+  "class": "section-press-articles",
+  "blocks": [
+    {
+      "type": "press-article",
+      "name": "Press",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "press_logo_image",
+          "label": "Press Logo"
+        },
+        {
+          "type": "textarea",
+          "id": "press_title",
+          "label": "Press Title"
+        },
+        {
+          "id": "press_url",
+          "type": "url",
+          "label": "Press Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Articles",
+		"blocks": [
+			{
+				"type": "press-article"
+			},
+			{
+				"type": "press-article"
+			},
+			{
+				"type": "press-article"
+			}
+		]
+    }
+  ]
+}
+{% endschema %}

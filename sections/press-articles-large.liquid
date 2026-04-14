@@ -1,0 +1,79 @@
+<div class="container-fluid press-large" style="width:80%;margin:0 auto -40px;">
+  <h2 style="text-align:center;">Featured Press</h2>
+
+  {%- for block in section.blocks -%}
+    <div class="row press-story" style="background:white;border-radius:4px;box-shadow:0px 0px 10px 1px rgba(0,0,0,0.1);">
+      <div class="col-sm-12 col-md-4 press-feature-bg-img" style="position:relative;background-image: url({{ block.settings.press_image_background | image_url }})">
+        <div class="darken" {% if block.settings.press_image_background_blur == true %} style="backdrop-filter: blur(5px);" {% endif %}></div>
+        <img src="{{ block.settings.press_logo_image | image_url: width: 200 }}">
+      </div>
+      <div class="col-sm-12 col-md-8" style="padding:20px;">
+        <h3 style="margin-bottom:15px;">{{ block.settings.press_title }}</h3>
+        <p style="font-size:18px;color:#444">{{ block.settings.press_preview_text }}</p>
+        <a href="{{ block.settings.press_url }}" target="_blank" class="btn btn--secondary">Read Full Article</a>
+      </div>
+    </div>
+  {%- endfor -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Press Articles Large",
+  "class": "section-press-articles-large",
+  "blocks": [
+    {
+      "type": "press-article",
+      "name": "Press",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "press_logo_image",
+          "label": "Press Logo"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_image_background",
+          "label": "Press Image Background"
+        },
+        {
+          "type": "checkbox",
+          "id": "press_image_background_blur",
+          "label": "Blur Press Image Background"
+        },
+        {
+          "type": "textarea",
+          "id": "press_title",
+          "label": "Press Title"
+        },
+        {
+          "type": "textarea",
+          "id": "press_preview_text",
+          "label": "Press Preview Text"
+        },
+        {
+          "id": "press_url",
+          "type": "url",
+          "label": "Press Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Articles",
+		"blocks": [
+			{
+				"type": "press-article"
+			},
+			{
+				"type": "press-article"
+			},
+			{
+				"type": "press-article"
+			}
+		]
+    }
+  ]
+}
+{% endschema %}

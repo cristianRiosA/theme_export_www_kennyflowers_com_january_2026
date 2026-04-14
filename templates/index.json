@@ -1,0 +1,786 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16479477632637c9a7": {
+      "type": "slideshow",
+      "blocks": {
+        "164794776393e76b8e-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/kenny-flowers-resortwear-spring-summer-new-releases.jpg",
+            "mobile_image": "shopify://shop_images/matching-couples-kenny-flowers-vacation-outfits-best-designers-brands-1.jpg",
+            "slide_link": "shopify://collections/new-releases",
+            "video_background": false,
+            "video": "",
+            "subheading": "Spring it on",
+            "heading": "New Releases Just Landed",
+            "heading_size": "h1",
+            "content": "",
+            "description_size": "medium",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 43,
+            "overlay_gradient": "",
+            "button_1_text": "Shop Men",
+            "button_1_link": "shopify://collections/men",
+            "button_1_outline": false,
+            "button_2_text": "Shop Women",
+            "button_2_link": "shopify://collections/women",
+            "button_2_outline": false
+          }
+        },
+        "slide_8jWeUF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Grid_1200x600_4.png",
+            "mobile_image": "shopify://shop_images/Kenny-Flowers-womens-blue-white-greece-maxi-resort-dress-with-smocked-back-10copy.jpg",
+            "slide_link": "shopify://collections/greece",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "",
+            "heading": "RESTOCK: The Greece Collection",
+            "heading_size": "h1-large",
+            "content": "Sold out styles are back.",
+            "description_size": "medium",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Opa Now",
+            "button_1_link": "shopify://collections/greece",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_F3hM9G": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Kenny-Flowers-Margaritaville-homepage-image.png",
+            "mobile_image": "shopify://shop_images/Kenny-Flowers-Margaritaville-mens-coral-match-your-parot-swim-trunks-4.jpg",
+            "slide_link": "shopify://collections/margaritaville-by-kenny-flowers",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Welcome to",
+            "heading": "Margaritaville by Kenny Flowers",
+            "heading_size": "h1",
+            "content": "It's 5 O'Clock Right Here.",
+            "description_size": "large",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Now",
+            "button_1_link": "shopify://collections/margaritaville-by-kenny-flowers",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_7FaHyj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Kenny-Flowers-mens-womens-blue-margaritaville-matching-couple-golf-polos-homepage.jpg",
+            "mobile_image": "shopify://shop_images/Kenny-Flowers-mens-womens-blue-margaritaville-matching-couple-golf-polos.jpg",
+            "slide_link": "shopify://collections/golf",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Golf season is here",
+            "heading": "Dress to the 9's",
+            "heading_size": "h1-xlarge",
+            "content": "The KF Country Club pro shop is restocked",
+            "description_size": "medium",
+            "content_position": "bottom-right",
+            "text_alignment": "right",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "hit the links",
+            "button_1_link": "shopify://collections/golf",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_z9NwjX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/kenny-flowers-paradiso-tropical-collection-mens-womens-matching-outfits-vacation.png",
+            "slide_link": "shopify://collections/new-releases",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Welcome to",
+            "heading": "THE PARADISO COLLECTION",
+            "heading_size": "h1-xlarge",
+            "content": "Colorful. Carefree. Cabana-Ready.",
+            "description_size": "medium",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop New Releases",
+            "button_1_link": "shopify://collections/new-releases",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "shopify://collections/women",
+            "button_2_outline": false
+          }
+        },
+        "slide_Pmb8Jn": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/private-warehouse-sale_f33f1996-6efc-4420-af18-cc39226f6bc9.jpg",
+            "slide_link": "shopify://collections/final-sail",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Masters Sale",
+            "heading": "This One's Major",
+            "heading_size": "h1-xlarge",
+            "content": "Final hours. Up to 60% off 150+ styles ends tonight.",
+            "description_size": "medium",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop the Sale",
+            "button_1_link": "shopify://collections/final-sail",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "164794776393e76b8e-0",
+        "slide_8jWeUF",
+        "slide_F3hM9G",
+        "slide_7FaHyj",
+        "slide_z9NwjX",
+        "slide_Pmb8Jn"
+      ],
+      "settings": {
+        "desktop_height": "desktop-height-550",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "autoplay": true,
+        "autoplay_length": 10,
+        "transition": "slide",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1662389920b1295ea2": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 40,
+        "spacer_desktop": 35,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "collection_list_AbtYhy": {
+      "type": "collection-list",
+      "name": "Collection list",
+      "settings": {
+        "heading": "",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection_list": [
+          "men",
+          "women",
+          "trending-swim-and-resort-wear",
+          "kiddy-flowers",
+          "margaritaville-by-kenny-flowers",
+          "the-holiday-collection"
+        ],
+        "image_ratio": "portrait",
+        "layout": "carousel",
+        "style": "style2",
+        "columns_desktop": 5,
+        "columns_mobile": "2",
+        "show_progress_bar": true,
+        "mobile_swipe": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1662459178b0886a69": {
+      "type": "rich-text",
+      "blocks": {
+        "4551cbda-76ff-4a07-a279-a29df7956af6": {
+          "type": "subheading",
+          "settings": {
+            "text": "IN THE PRESS"
+          }
+        }
+      },
+      "block_order": [
+        "4551cbda-76ff-4a07-a279-a29df7956af6"
+      ],
+      "settings": {
+        "section_width": "grid",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "scrolling_text_p7XDUM": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text_MRr6Xj": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/forbes-logo-black-transparent_3de362b8-66c0-4200-b053-be0cc29e88f7.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_FBpEn8": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/maxim_360x_70dd02f0-c29e-4f52-badf-a3033a6c3827.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_jFfj4j": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/esquire-kenny-flowers-mask-mission.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_dMmpd6": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/vogue-logo.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_zGTmMp": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/travel-leisure.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_MRr6Xj",
+        "text_FBpEn8",
+        "text_jFfj4j",
+        "text_dMmpd6",
+        "text_zGTmMp"
+      ],
+      "custom_css": [
+        ".scrolling-text--image--small {height: 25px; opacity: 0.5;}"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "height": "height-auto",
+        "full_width": true,
+        "direction": "left",
+        "speed": "50s",
+        "font_family": "body",
+        "text_size": 16,
+        "text_uppercase": false,
+        "image_size": "small",
+        "color_bg": "#ffffff",
+        "color_text": "#151515",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "gallery_ewrGe9": {
+      "type": "gallery",
+      "blocks": {
+        "image_XQ4FFV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kenny-flowers-paradiso-shirt-bikini-matching-womens-6_1.jpg",
+            "subheading": "",
+            "title": "Fresh Off the Island",
+            "text": "",
+            "link_label": "New Releases",
+            "link": "shopify://collections/new-releases",
+            "use_text_button": false,
+            "block_link": "shopify://collections/new-releases",
+            "product_list": []
+          }
+        },
+        "image_cepXmg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/white-linen-short-sleeve-button-down-kenny-flowers-casa-blanca-resort-wear-min_ba28c37c-d0ef-4b97-b1ec-2944ebc7774b.jpg",
+            "subheading": "",
+            "title": "Best Sellers",
+            "text": "",
+            "link_label": "Shop Now",
+            "link": "shopify://collections/trending-swim-and-resort-wear",
+            "use_text_button": false,
+            "block_link": "shopify://collections/trending-swim-and-resort-wear",
+            "product_list": []
+          }
+        },
+        "image_BXmTxT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3L1A8563-2_1.jpg",
+            "subheading": "",
+            "title": "His & Hers",
+            "text": "",
+            "link_label": "Shop Matching",
+            "link": "shopify://collections/matching-couples-outfits",
+            "use_text_button": false,
+            "block_link": "shopify://collections/matching-couples-outfits",
+            "product_list": []
+          }
+        }
+      },
+      "block_order": [
+        "image_XQ4FFV",
+        "image_cepXmg",
+        "image_BXmTxT"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 1068px) {.gallery__item-content {padding: 20px; }}",
+        ".gallery__item-content h4 + .button {margin-top: 0px;}",
+        ".gallery__item-content {padding: 15px;}"
+      ],
+      "name": "Gallery",
+      "settings": {
+        "columns_desktop": 3,
+        "section_width": "full-width-row",
+        "mobile_swipe": false,
+        "image_ratio": "landscape",
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "column_spacing": "medium",
+        "heading_size": "h2",
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "rich_text_c8dqzw": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_htwKWQ": {
+          "type": "subheading",
+          "settings": {
+            "text": "WELCOME TO PARADISE."
+          }
+        },
+        "heading_GPCW8i": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "text": "CODE: NEW20",
+            "size": "h3"
+          }
+        },
+        "button_NKwD8V": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop New Releases",
+            "link": "shopify://collections/new-releases",
+            "button_outline": false
+          }
+        },
+        "button_DcgKh8": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop Best Sellers",
+            "link": "shopify://collections/trending-swim-and-resort-wear",
+            "button_outline": false
+          }
+        },
+        "button_yCTxn7": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop up to 75% off",
+            "link": "shopify://collections/final-sail",
+            "button_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_htwKWQ",
+        "heading_GPCW8i",
+        "button_NKwD8V",
+        "button_DcgKh8",
+        "button_yCTxn7"
+      ],
+      "custom_css": [
+        ".button {margin-bottom: 15px;}",
+        ".button:hover {color: white;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "section_width": "full-width-row",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "image_with_text_overlay_KX7qxq": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_KfX9XX": {
+          "type": "subheading",
+          "settings": {
+            "text": "'Tis The Season"
+          }
+        },
+        "heading_A9Q6Nz": {
+          "type": "heading",
+          "settings": {
+            "text": "NEW HOLIDAY COLLECTION",
+            "heading_size": "h1-xlarge"
+          }
+        },
+        "text_MDewyF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Fresh. Festive. Effortless. Santa only made so many of these.</p>",
+            "description_size": "medium"
+          }
+        },
+        "button_AK9ndi": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_KfX9XX",
+        "heading_A9Q6Nz",
+        "text_MDewyF",
+        "button_AK9ndi"
+      ],
+      "disabled": true,
+      "name": "Image with text overlay",
+      "settings": {
+        "section_width": "full-width-row",
+        "image": "shopify://shop_images/The_Pine_Time_-_Long_Sleeve_2.jpg",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-650",
+        "mobile_height": "mobile-height-500",
+        "content_width": "medium",
+        "content_position": "bottom-center",
+        "text_alignment": "center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "166366563622039b3e": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Vacation Essentials",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
+        "collection": "home-page-highlights",
+        "display_type": "carousel",
+        "product_limit": 8,
+        "columns_desktop": 4,
+        "show_view_all": false,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "16624594877292080f": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 0,
+        "spacer_desktop": 40,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "testimonials_db3EQw": {
+      "type": "testimonials",
+      "blocks": {
+        "quote_AETkfe": {
+          "type": "quote",
+          "settings": {
+            "stars": "5",
+            "text": "Seriously I cannot get over how much I love this dress and want to wear it every day. Will be planning a vacation JUST so I can wear this dress in the experience it deserves!!!!",
+            "author": "Rachel B."
+          }
+        },
+        "quote_GXdRQ3": {
+          "type": "quote",
+          "settings": {
+            "stars": "5",
+            "text": "I have purchased approximately 25 of your shirts in the past 3 years and love them all. The La Brisa short sleeve crochet shirt did not disappoint.",
+            "author": "John S."
+          }
+        }
+      },
+      "block_order": [
+        "quote_AETkfe",
+        "quote_GXdRQ3"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "full_width": true,
+        "text_size": "medium",
+        "pagination": "dots",
+        "autoplay": true,
+        "autoplay_length": 5,
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "16626364694d37e9d5": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 0,
+        "spacer_desktop": 60,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "collection_list_xYMhbR": {
+      "type": "collection-list",
+      "name": "Collection list",
+      "settings": {
+        "heading": "Shop by Collection",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection_list": [
+          "paradiso",
+          "greece",
+          "margaritaville-by-kenny-flowers",
+          "the-amalfi-collection",
+          "blue-zone-approved",
+          "golf",
+          "the-nantucket",
+          "kenny-flowers-the-bvis-collection",
+          "the-africa-collection",
+          "jungle"
+        ],
+        "image_ratio": "portrait",
+        "layout": "grid",
+        "style": "style2",
+        "columns_desktop": 5,
+        "columns_mobile": "2",
+        "show_progress_bar": true,
+        "mobile_swipe": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "image_with_text_xUG6YY": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_WGH7eX": {
+          "type": "subheading",
+          "settings": {
+            "text": "Margaritaville by KF"
+          }
+        },
+        "heading_bKc8tj": {
+          "type": "heading",
+          "settings": {
+            "text": "Ode to Jimmy",
+            "heading_size": "h3"
+          }
+        },
+        "text_cQgjXM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Inspired by Jimmy Buffett’s favorite Kenny Flowers shirt - the one he rocked on tour all summer long in 2018. </p><p>Designed in collaboration with Margaritaville, this shirt blends paradise on land and at sea. Grab yours before it sells out again.</p>",
+            "description_size": "medium"
+          }
+        },
+        "button_48nz49": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "shopify://products/ode-to-jimmy-short-sleeve-shirt"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_WGH7eX",
+        "heading_bKc8tj",
+        "text_cQgjXM",
+        "button_48nz49"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "image": "shopify://shop_images/Kenny-Flowers-Mens-short-sleeve-blue-button-down-ode-to-jimmy-hawaiian-shirt-margaritaville-1.jpg",
+        "use_video": false,
+        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "video_controls": true,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "section_width": "full-width-row",
+        "layout": "image_first",
+        "content_position": "text-left",
+        "color_bg": "#ffffff",
+        "color_text": "#151515",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "16620983071df6eb29": {
+      "type": "text-with-icons",
+      "blocks": {
+        "1662098307788ca717-0": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "Customer Support",
+            "text": "<p>Mon - Sat, 10am - 9pm</p>"
+          }
+        },
+        "1662098307788ca717-1": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "Easy Returns",
+            "text": "<p>Returns extended to 60 days</p>"
+          }
+        },
+        "1662098307788ca717-2": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "Gift Package",
+            "text": "<p>Free packaging over $100</p>"
+          }
+        },
+        "2c4a636c-cb89-4faf-82e6-13a0e7241006": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "One-year Warranty",
+            "text": "<p>No questions asked</p>"
+          }
+        }
+      },
+      "block_order": [
+        "1662098307788ca717-0",
+        "1662098307788ca717-1",
+        "1662098307788ca717-2",
+        "2c4a636c-cb89-4faf-82e6-13a0e7241006"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "left",
+        "icon_position": "left",
+        "icon_size": "large",
+        "heading_size": "medium",
+        "mobile_swipe": true,
+        "color_bg": "#ffffff",
+        "color_heading": "#151515",
+        "color_text": "#151515",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "featured_blog_EGdVcw": {
+      "type": "featured-blog",
+      "name": "Blog posts",
+      "settings": {
+        "heading": "Unbuttoned.",
+        "heading_left": true,
+        "description": "<p>A blog for those living life unbuttoned.</p>",
+        "full_width": true,
+        "blog": "unbuttoned-by-kenny-flowers",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "mobile_swipe": true,
+        "image_ratio": "landscape",
+        "show_date": true,
+        "show_excerpt": true,
+        "show_view_all": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "16479477632637c9a7",
+    "1662389920b1295ea2",
+    "collection_list_AbtYhy",
+    "1662459178b0886a69",
+    "scrolling_text_p7XDUM",
+    "gallery_ewrGe9",
+    "rich_text_c8dqzw",
+    "image_with_text_overlay_KX7qxq",
+    "166366563622039b3e",
+    "16624594877292080f",
+    "testimonials_db3EQw",
+    "16626364694d37e9d5",
+    "collection_list_xYMhbR",
+    "image_with_text_xUG6YY",
+    "16620983071df6eb29",
+    "featured_blog_EGdVcw"
+  ]
+}

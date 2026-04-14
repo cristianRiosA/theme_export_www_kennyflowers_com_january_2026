@@ -1,0 +1,65 @@
+{% liquid
+  assign uses_comma_decimals = false
+  assign currency_test_string = 101 | money_without_currency
+
+  if currency_test_string == '1,01'
+    assign uses_comma_decimals = true
+  endif
+
+  assign max_value = nil
+  assign min_value = nil
+  if uses_comma_decimals
+    if filter.max_value.value
+      assign max_value = filter.max_value.value | money_without_currency | replace: '.', ''
+    endif
+    if filter.min_value.value
+      assign min_value = filter.min_value.value | money_without_currency | replace: '.', ''
+    endif
+    assign range_max = filter.range_max | money_without_currency | replace: '.', ''
+  else
+    if filter.max_value.value
+      assign max_value = filter.max_value.value | money_without_currency | replace: ',', ''
+    endif
+    if filter.min_value.value
+      assign min_value = filter.min_value.value | money_without_currency | replace: ',', ''
+    endif
+    assign range_max = filter.range_max | money_without_currency | strip_html | replace: ',', '' | divided_by: 1.00
+  endif
+%}
+{%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+<span class="price-highest">{{ "products.facets.max_price" | t: price: max_price_amount }}</span>
+<price-slider class="price_slider_wrapper">
+  <div
+    class="price_slider"
+    data-min-value="{{ min_value }}"
+    data-min-name="filter.v.price.gte"
+    data-min="0"
+    data-max-value="{{ max_value }}"
+    data-max-name="filter.v.price.lte"
+    data-max="{{ range_max }}">
+  </div>
+  <div class="price_slider_amount">
+    <div>
+      <span class="field-currency">{{ cart.currency.symbol }}</span>
+      <input class="field__input field__input_min"
+        name="{{ filter.min_value.param_name }}"
+        id="Filter-{{ filter.label | escape }}-GTE"
+        value="{{ min_value }}"
+        type="text"
+        placeholder="0"
+      >
+      </input>
+    </div>
+    <div>
+      <span class="field-currency">{{ cart.currency.symbol }}</span>
+      <input class="field__input field__input_max"
+        name="{{ filter.max_value.param_name }}"
+        id="Filter-{{ filter.label | escape }}-LTE"
+        value="{{ max_value }}"
+        type="text"
+        placeholder="{{ filter.range_max | money_without_currency }}"
+      >
+      </input>
+    </div>
+  </div>
+</price-slider>

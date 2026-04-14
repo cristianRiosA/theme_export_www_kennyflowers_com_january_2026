@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'SaaSeries - AD';
+  src: url('https://cdn.shopify.com/s/files/1/0804/1709/files/saaseries_-_ad-webfont.ttf?v=1691682040')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SaaSeries - FD';
+  src: url('https://cdn.shopify.com/s/files/1/0804/1709/files/saaseries_-_fd-webfont.ttf?v=1691682040')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SaaSeries - CD';
+  src: url('https://cdn.shopify.com/s/files/1/0804/1709/files/SaaSeries_-_CD.ttf?v=1691786911')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SaaSeries - EMD';
+  src: url('https://cdn.shopify.com/s/files/1/0804/1709/files/SaaSeries_-_EMD.ttf?v=1714662737')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CormorantGaramond - Regular';
+  src: url('https://cdn.shopify.com/s/files/1/0804/1709/files/CormorantGaramond-Regular.ttf?v=1691764864')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

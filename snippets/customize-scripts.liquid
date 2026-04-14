@@ -1,0 +1,104 @@
+<!-- CRUISE CONTROL -->
+<script async src="/a/cruise/cruise-control.js"></script>
+
+
+<!-- Begin: Northbeam pixel -->
+<script>(function(){var r;(n=r=r||{}).A="identify",n.B="trackPageView",n.C="fireEmailCaptureEvent",n.D="fireCustomGoal",n.E="firePurchaseEvent";var n="//j.northbeam.io/ota-sp/08ad1f54-b27b-42e0-8f05-46383ca80324.js";function t(n){for(var e=[],r=1;r<arguments.length;r++)e[r-1]=arguments[r];a.push({fnName:n,args:e})}var a=[],e=((e={_q:a})[r.A]=function(n,e){return t(r.A,n,e)},e[r.B]=function(){return t(r.B)},e[r.C]=function(n,e){return t(r.C,n,e)},e[r.D]=function(n,e){return t(r.D,n,e)},e[r.E]=function(n){return t(r.E,n)},window.Northbeam=e,document.createElement("script"));e.async=!0,e.src=n,document.head.appendChild(e);})()</script>
+<!-- End: Northbeam pixel -->
+
+<!-- TRIPLE WHALE -->
+
+<link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://conf.config-security.com/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://whale.camera/' crossorigin />
+<script>
+/* >> TriplePixel :: start*/
+window.TriplePixelData={TripleName:"kenny-flowers.myshopify.com",ver:"2.12",plat:"SHOPIFY",isHeadless:false},function(W,H,A,L,E,_,B,N){function O(U,T,P,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,P?(H.open("POST",U,!0),H.setRequestHeader("Content-Type","text/plain")):H.open("GET",U,!0),H.send(JSON.stringify(P||{})),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):P||(N[B]=R)):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1,P))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1,L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)};try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push({u:location.href,r:document.referrer,t:Date.now(),id:L()}),A.setItem(H+"U",JSON.stringify(E))}catch(e){}var i,m,p;A.getItem('"!nC`')||(_=A,A=N,A[H]||(E=A[H]=function(t,e,a){return void 0===a&&(a=[]),"State"==t?E.s:(W=L(),(E._q=E._q||[]).push([W,t,e].concat(a)),W)},E.s="Installed",E._q=[],E.ch=W,B="configSecurityConfModel",N[B]=1,O("https://conf.config-security.com/model",5),i=L(),m=A[atob("c2NyZWVu")],_.setItem("di_pmt_wt",i),p={id:i,action:"profile",avatar:_.getItem("auth-security_rand_salt_"),time:m[atob("d2lkdGg=")]+":"+m[atob("aGVpZ2h0")],host:A.TriplePixelData.TripleName,plat:A.TriplePixelData.plat,url:window.location.href,ref:document.referrer,ver:A.TriplePixelData.ver},O("https://api.config-security.com/event",5,p),O("https://whale.camera/live/dot.txt",5)))}}("","TriplePixel",localStorage);
+/* << TriplePixel :: end*/
+</script>
+
+<!-- KIWI SIZING -->
+<!-- KIWI SIZING -->
+<!-- KIWI SIZING -->
+
+  <script>
+  window.KiwiSizing = window.KiwiSizing === undefined ? {} : window.KiwiSizing;
+  KiwiSizing.shop = "{{ shop.permanent_domain }}";
+  {% assign t = template | prepend: '/' | append: '.' %}
+  {% if t contains '/product.' %}
+  KiwiSizing.data = {
+    collections: "{{ product.collections | map: 'id' | join: ','}}",
+    tags: {{ product.tags | join: ',' | json}},
+    product: "{{product.id}}",
+    vendor: {{product.vendor | json}},
+    type: {{product.type | json}},
+    title: {{product.title | json}},
+    images: {{product.images | json}},
+  };
+  {% endif %}
+  </script>
+
+<!-- POST PILOT SITEMATCH -->
+<!-- POST PILOT SITEMATCH -->
+<!-- POST PILOT SITEMATCH -->
+
+<script type='text/javascript'>
+var script = document.createElement('script');
+script.src = 'https://xp2023-pix.s3.amazonaws.com/px_BoZuc.js';
+document.getElementsByTagName('head')[0].appendChild(script);
+</script>
+
+<!-- IUBENDA  -->
+<!-- IUBENDA  -->
+<!-- IUBENDA  -->
+
+  <script type="text/javascript">
+  var _iub = _iub || [];
+  _iub.csConfiguration = {"applyGdprForCH":false,"askConsentAtCookiePolicyUpdate":true,"countryDetection":true,"enableFadp":true,"enableLgpd":true,"enableUspr":true,"floatingPreferencesButtonDisplay":"bottom-right","gdprAppliesGlobally":false,"lang":"en","lgpdAppliesGlobally":false,"perPurposeConsent":true,"siteId":3335333,"usprPurposes":"s,sh,adv","whitelabel":false,"cookiePolicyId":89677045, "banner":{ "acceptButtonColor":"#0073CE","acceptButtonDisplay":true,"backgroundColor":"#FFFDFD","closeButtonDisplay":false,"customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"linksColor":"#000000","position":"float-bottom-left","rejectButtonDisplay":true,"textColor":"#000000" }};
+  <!-- code for Shopify (1 of 2) -->
+    var onPreferenceFirstExpressedCallback = function(consent) {
+        if (true == _iub.csConfiguration.perPurposeConsent) {
+            consent.consent = Object.keys(consent.purposes).every(function(k) {
+                return consent.purposes[k]
+            });
+        }
+        window.Shopify.customerPrivacy.setTrackingConsent(consent.consent, function() {});
+    }
+    if (typeof _iub.csConfiguration.callback === 'object') {
+        _iub.csConfiguration.callback.onPreferenceFirstExpressed = onPreferenceFirstExpressedCallback;
+    } else {
+        _iub.csConfiguration.callback = {
+            onPreferenceFirstExpressed: onPreferenceFirstExpressedCallback
+        };
+    }
+  </script>
+  
+  <script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js"></script>
+  <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+  <!-- code for Shopify (2 of 2) - Tracking API -->
+  <script type="text/javascript">
+      window.Shopify.loadFeatures([{
+              name: 'consent-tracking-api',
+              version: '0.1',
+          }, ],
+          function(error) {
+              if (error) {
+                  throw error;
+              }
+          });
+  </script>
+
+<!-- Hotjar Tracking Code -->
+<!-- Hotjar Tracking Code -->
+<!-- Hotjar Tracking Code -->
+
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:2037501,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>

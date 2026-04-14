@@ -1,0 +1,129 @@
+.logo-list__logo {
+  transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+}
+
+.logo-list {
+  padding: 0 15px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .logo-list {
+    padding: 0 50px;
+  }
+}
+
+/* Keep original tighter container */
+.logo-list {
+  max-width: 1080px;
+}
+
+/* ============================= */
+/* Grid + Variables */
+/* ============================= */
+
+.logo-list__inner {
+  --logo-columns: 5;
+  --logo-max-height: 60px;
+  --logo-gap-x: 40px;
+  --logo-gap-y: 40px;
+
+  display: grid;
+  column-gap: var(--logo-gap-x);
+  row-gap: var(--logo-gap-y);
+
+  justify-content: center;
+  pointer-events: none;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media only screen and (min-width: 768px) {
+  .logo-list__inner {
+    grid-template-columns: repeat(var(--logo-columns), minmax(0, 1fr));
+  }
+}
+
+.logo-list__inner:hover > * {
+  opacity: 0.6;
+}
+
+.logo-list__inner:hover > *:hover {
+  opacity: 1;
+}
+
+/* ============================= */
+/* Swipe on mobile */
+/* ============================= */
+
+@media only screen and (max-width: 767px) {
+  .logo-list__inner.swipe-on-mobile {
+    margin: 0 -15px;
+    width: calc(100% + 30px);
+    padding: 0 15px;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(50%, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+
+    overflow-x: auto;
+    justify-content: flex-start;
+    pointer-events: all;
+
+    column-gap: var(--logo-gap-x);
+    row-gap: var(--logo-gap-y);
+
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .logo-list__inner.swipe-on-mobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  .logo-list__inner.swipe-on-mobile .logo-list__logo {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* ============================= */
+/* Logo items */
+/* ============================= */
+
+.logo-list__logo {
+  text-align: center;
+  pointer-events: all;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-list__logo a {
+  display: block;
+}
+
+.logo-list__logo img,
+.logo-list__logo svg {
+  max-height: var(--logo-max-height);
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.logo-list__logo .placeholder_svg_tag {
+  border-radius: 50%;
+  background: rgba(var(--color-body-rgb), 0.03);
+  fill: var(--color-body);
+}
+
+/* Preserve theme alignment flag */
+.logo-list.logo-list--centered-true .logo-list__logo {
+  display: flex;
+  align-items: center;
+}

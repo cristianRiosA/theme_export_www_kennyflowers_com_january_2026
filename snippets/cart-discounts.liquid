@@ -1,0 +1,45 @@
+<cart-discounts class="cart-discounts">
+  {%- if discount_form -%}
+    <div class="cart-discounts--inner">
+      <label for="cart-discount" class="visually-hidden">{{ 'discounts.discount_code' | t }}</label>
+      <input id="cart-discount" class="cart-discounts--input full" name="discount" placeholder="{{ 'discounts.discount_code' | t }}" type="text">
+      <button type="submit" class="button cart-discounts--button">
+        <span>{{ 'discounts.apply' | t }}</span>
+        <span class="loading-overlay">{%- render 'svg-icons' with 'thb-loading' -%}</span>
+      </button>
+    </div>
+    <div class="cart-discounts--error form-notification error" role="alert" hidden>
+      {% render 'svg-icons' with 'thb-error' %}
+      <span class="cart-discounts--error-text">{{ 'discounts.discount_code_error' | t: code: 'test' }}</span>
+    </div>
+    <script src="{{ 'cart-discounts.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+  {%- liquid
+    assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code'
+
+    for item in cart.items
+      for allocation in item.line_level_discount_allocations
+        if allocation.discount_application.type == 'discount_code'
+          assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | concat: discount_codes
+        endif
+      endfor
+    endfor
+
+    assign discount_codes = discount_codes | uniq
+
+  -%}
+  {%- for discount in discount_codes -%}
+    <div class="cart-discounts--row">
+      <div><span class="cart-discounts--name">{{ discount.title }}</span><button class="cart-discounts--remove">{%- render 'svg-icons' with 'close' -%}</button></div>
+      <span class="price">
+        <span class="amount">
+          {% if settings.currency_code_enabled %}
+          -{{ discount.total_allocated_amount | money_with_currency }}
+          {% else %}
+          -{{ discount.total_allocated_amount | money }}
+          {% endif %}
+        </span>
+      </span>
+    </div>
+  {%- endfor -%}
+</cart-discounts>

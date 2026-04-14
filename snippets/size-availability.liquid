@@ -1,0 +1,270 @@
+{%- assign size_list = "" -%}
+{%- assign number_variants = product.variants.size -%}
+{%- assign scroll_arrow_div = "" -%}
+{%- assign scroll_arrow_div_keep = "<div class='scroll-arrow-left'><img src='https://cdn.shopify.com/s/files/1/0804/1709/files/kf-right-arrow.png?v=1694607797'/></div><div class='scroll-arrow-right'><img src='https://cdn.shopify.com/s/files/1/0804/1709/files/kf-right-arrow.png?v=1694607797'/></div>" -%}
+
+{%- liquid 
+   if number_variants == 1
+     assign variant_class = 'variant_sizes_1'
+   elsif number_variants == 2
+     assign variant_class = 'variant_sizes_2'
+   elsif number_variants == 3
+     assign variant_class = 'variant_sizes_3'
+   elsif number_variants == 4
+     assign variant_class = 'variant_sizes_4'
+   elsif number_variants == 5
+     assign variant_class = 'variant_sizes_5'
+   elsif number_variants == 6
+     assign variant_class = 'variant_sizes_6'
+   elsif number_variants == 7
+     assign variant_class = 'variant_sizes_7'
+   elsif number_variants == 8
+     assign variant_class = 'variant_sizes_8'
+   elsif number_variants == 9
+     assign variant_class = 'variant_sizes_9'
+   elsif number_variants == 10
+     assign variant_class = 'variant_sizes_10'
+   elsif number_variants == 11
+     assign variant_class = 'variant_sizes_11'
+   elsif number_variants == 12
+     assign variant_class = 'variant_sizes_12'
+   elsif number_variants == 13
+     assign variant_class = 'variant_sizes_13'
+   elsif number_variants == 14
+     assign variant_class = 'variant_sizes_14'
+   elsif number_variants == 15
+     assign variant_class = 'variant_sizes_15'
+   elsif number_variants == 18
+     assign variant_class = 'variant_sizes_18'
+   elsif number_variants > 14
+     assign variant_class = 'variant_sizes_over_14'
+   endif
+   
+   
+-%}
+
+{%- comment -%}
+  Use product metafield 'switch_style_preview' to determine default display
+  Metafield: custom.switch_style_preview (boolean)
+  - If TRUE: Show the first style option by default (Short 4.5", Slim Fit, Mesh Lining)
+  - If FALSE or empty: Show the second style option by default (Classic 6.5", Regular, No Mesh Lining)
+
+  Legacy support: Also check custom.force_switch for backwards compatibility
+  Metafield: custom.force_switch (text)
+  Values: 'slim', 'short', 'regular', or empty
+{%- endcomment -%}
+
+{%- liquid
+    assign switch_style_preview = product.metafields.custom.switch_style_preview | default: false
+    assign force_switch = product.metafields.custom.force_switch | default: ''
+
+    if switch_style_preview == true or force_switch == 'slim' or force_switch == 'short'
+      assign force_slim = true
+      assign force_short = true
+    else
+      assign force_slim = false
+      assign force_short = false
+    endif
+-%}
+
+{% if number_variants > 20 %} <div class="product-card-spacer"></div> {% endif %}
+
+{%- for option in product.options -%}
+  {%- assign option_name = option | downcase -%}
+  {%- assign color_count = option.values | size -%}
+  
+  <div style="display:none" data-option="{{option_name}}"></div>
+    
+  {%- if option_name contains 'size' -%}
+    
+    <div class="overlay-size-preview {% if number_variants > 20 %} hide {% endif %}" data-option="{{option_name}}">
+      <span class="product-sizes-preview">
+
+        {%- assign optionIndex = "option" | append: forloop.index -%}
+        {%- assign values = '' -%}
+        <div class="quick-buy-sizes {{ variant_class }}">
+          {{ scroll_arrow_div }}
+
+          
+    
+          {%- assign basic_array_start = '<div id="regular_' | append: product.id  | append :'" class="slide-sizes basic_row">' -%}
+          {%- assign basic_array_start_show = '<div id="regular_' | append: product.id  | append :'" class="slide-sizes basic_row show">' -%}
+          
+          {%- assign slim_fit_array = '' -%}
+          {%- assign slim_fit_array_start = '<div id="slimfit_'| append: product.id  | append :'" class="slide-sizes slim_fit_row">' -%}
+          {%- assign slim_fit_array_start_show = '<div id="slimfit_'| append: product.id  | append :'" class="slide-sizes slim_fit_row show">' -%}
+          {%- assign regular_fit_array = '' -%}
+          {%- assign regular_fit_array_start = '<div id="regular_' | append: product.id  | append :'" class="slide-sizes regular_row">' -%}
+          {%- assign regular_fit_array_start_show = '<div id="regular_' | append: product.id  | append :'" class="slide-sizes regular_row show">' -%}
+
+          {%- assign mesh_lining_array = '' -%}
+          {%- assign mesh_lining_array_start = '<div id="meshlining_'| append: product.id  | append :'" class="slide-sizes meshlining_row">' -%}
+          {%- assign mesh_lining_array_start_show = '<div id="meshlining_'| append: product.id  | append :'" class="slide-sizes meshlining_row show">' -%}
+          {%- assign no_mesh_lining_array = '' -%}
+          {%- assign no_mesh_lining_array_start = '<div id="nomeshlining_' | append: product.id  | append :'" class="slide-sizes nomeshlining_row">' -%}
+          {%- assign no_mesh_lining_array_start_show = '<div id="nomeshlining_' | append: product.id  | append :'" class="slide-sizes nomeshlining_row show">' -%}
+          
+          {%- for variant in product.variants -%}
+
+          
+            {%- assign value = variant[optionIndex] -%}
+
+            {%- assign loading_div = '<span class="size-loading" id="loading_div_'|append:variant.id | append: '"><svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            	<circle class="spinner-path" fill="none" stroke-width="6" cx="33" cy="33" r="30" stroke="var(--color-accent)"></circle>
+            </svg></span>' -%}
+          
+            {%- if variant.option1 == 'Slim Fit' or variant.option2 == 'Slim Fit' or variant.option3 == 'Slim Fit' -%}
+              {%- assign slim_fit_row = true -%}
+          
+              {%- if variant.available -%}
+
+                  {% capture size_button %}<div href="{{variant.url}}" class="size-preview-button available" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+          		  {% assign slim_fit_array = slim_fit_array | append: '<div href="' | append: variant.url | append: '" class="size-preview-button available" data-toggle="' | append: variant.id | append: '">' | append: value | append: loading_div | append: '</div>' %}
+
+              {%- else -%}
+                  {% capture size_button %}<div class="unavailable size-preview-button" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+                  {% assign slim_fit_array = slim_fit_array | append: '<div href="' | append: variant.url | append: '" class="unavailable size-preview-button " data-toggle="' | append: variant.id | append: '">' | append: value | append: '</div>' %}
+          	  {%- endif -%}
+
+            {%- elsif variant.option1 == 'Mesh Lining' or variant.option2 == 'Mesh Lining' or variant.option3 == 'Mesh Lining' -%}
+              {%- assign mesh_lining_row = true -%}
+          
+              {%- if variant.available -%}
+                  {% capture size_button %}<div href="{{variant.url}}" class="size-preview-button available" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+          		  {% assign mesh_lining_array = mesh_lining_array | append: '<div href="' | append: variant.url | append: '" class="size-preview-button available" data-toggle="' | append: variant.id | append: '">' | append: value | append: loading_div | append: '</div>' %}
+
+              {%- else -%}
+                  {% capture size_button %}<div class="unavailable size-preview-button " data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+                  {% assign mesh_lining_array = mesh_lining_array | append: '<div href="' | append: variant.url | append: '" class="unavailable size-preview-button" data-toggle="' | append: variant.id | append: '">' | append: value | append: '</div>' %}
+          	  {%- endif -%}
+
+            {%- elsif variant.option1 == 'Short 4.5"' or variant.option2 == 'Short 4.5"' or variant.option3 == 'Short 4.5"' -%}
+              {%- assign euro_fit_row = true -%}
+              {%- assign slim_fit_row = true -%}
+
+              {%- if variant.available -%}
+                  {% capture size_button %}<div href="{{variant.url}}" class="size-preview-button available" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+          		  {% assign slim_fit_array = slim_fit_array | append: '<div href="' | append: variant.url | append: '" class="size-preview-button available" data-toggle="' | append: variant.id | append: '">' | append: value | append: loading_div | append: '</div>' %}
+              {%- else -%}
+                  {% capture size_button %}<div class="unavailable size-preview-button" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+                  {% assign slim_fit_array = slim_fit_array | append: '<div href="' | append: variant.url | append: '" class="unavailable size-preview-button " data-toggle="' | append: variant.id | append: '">' | append: value | append: '</div>' %}
+          	  {%- endif -%}
+
+            {%- elsif variant.option1 == 'Classic 6.5"' or variant.option2 == 'Classic 6.5"' or variant.option3 == 'Classic 6.5"' -%}
+              {%- assign euro_fit_row = true -%}
+              {%- assign regular_fit_row = true -%}
+
+              {%- if variant.available -%}
+                  {% capture size_button %}<div href="{{variant.url}}" class="size-preview-button available" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+          		  {% assign regular_fit_array = regular_fit_array | append: '<div href="' | append: variant.url | append: '" class="size-preview-button available" data-toggle="' | append: variant.id | append: '">' | append: value | append: loading_div | append: '</div>' %}
+              {%- else -%}
+                  {% capture size_button %}<div class="unavailable size-preview-button" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+                  {% assign regular_fit_array = regular_fit_array | append: '<div href="' | append: variant.url | append: '" class="unavailable size-preview-button " data-toggle="' | append: variant.id | append: '">' | append: value | append: '</div>' %}
+          	  {%- endif -%}
+
+            {%- elsif variant.option1 == 'No Lining 6.5"' or variant.option2 == 'No Lining 6.5"' or variant.option3 == 'No Lining 6.5"' -%}
+              {%- assign no_mesh_lining_row = true -%}
+
+              {%- if variant.available -%}
+                  {% capture size_button %}<div href="{{variant.url}}" class="size-preview-button available" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+          		  {% assign no_mesh_lining_array = no_mesh_lining_array | append: '<div href="' | append: variant.url | append: '" class="size-preview-button available" data-toggle="' | append: variant.id | append: '">' | append: value | append: loading_div | append: '</div>' %}
+              {%- else -%}
+                  {% capture size_button %}<div class="unavailable size-preview-button" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+                  {% assign no_mesh_lining_array = no_mesh_lining_array | append: '<div href="' | append: variant.url | append: '" class="unavailable size-preview-button" data-toggle="' | append: variant.id | append: '">' | append: value | append: '</div>' %}
+          	  {%- endif -%}
+          	  
+            {%- else -%}
+              {%- assign regular_fit_row = true -%}
+          
+          	  {%- if variant.available -%}
+                  {% capture size_button %}<div href="{{variant.url}}" class="size-preview-button available" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+          		  {% assign regular_fit_array = regular_fit_array | append: '<div href="' | append: variant.url | append: '" class="size-preview-button available" data-toggle="' | append: variant.id | append: '">' | append: value | append: loading_div | append: '</div>' %}
+              {%- else -%}
+                  {% capture size_button %}<div class="unavailable size-preview-button" data-toggle="{{variant.id}}">{{ value }}</div>{% endcapture %}
+                  {% assign regular_fit_array = regular_fit_array | append: '<div href="' | append: variant.url | append: '" class="unavailable size-preview-button" data-toggle="' | append: variant.id | append: '">' | append: value | append: '</div>' %}
+          	  {%- endif -%}
+          
+            {%- endif -%}
+
+
+          {%- endfor -%}
+          
+          {%- comment -%}
+            Determine which toggle buttons to show based on what variant types exist
+          {%- endcomment -%}
+
+          {%- if slim_fit_row and regular_fit_row -%}
+            {%- comment -%}Product has both Slim Fit and Regular (or Short 4.5" and Classic 6.5"){%- endcomment -%}
+            {% assign slim_fit_array = slim_fit_array | append: '</div>' %}
+            {% assign regular_fit_array = regular_fit_array | append: '</div>' %}
+
+            {%- comment -%}Determine which row to show by default{%- endcomment -%}
+            {%- if force_slim or force_short -%}
+              {{ regular_fit_array_start }}
+              {{ regular_fit_array }}
+              {{ slim_fit_array_start_show }}
+              {{ slim_fit_array }}
+            {%- else -%}
+              {{ regular_fit_array_start_show }}
+              {{ regular_fit_array }}
+              {{ slim_fit_array_start }}
+              {{ slim_fit_array }}
+            {%- endif -%}
+
+            {%- comment -%}Show appropriate toggle buttons{%- endcomment -%}
+            {%- if euro_fit_row -%}
+              {%- comment -%}This is a swim trunk with Short/Classic lengths{%- endcomment -%}
+              {%- if force_short -%}
+                <div class='toggle_size_preview_fit'><button type="button" id="slimFitToggle_{{product.id}}" class='slim-fit-toggle show' onclick='toggleSlimSizeRows({{product.id}})'>Short 4.5"</button><button type="button" id="regularFitToggle_{{product.id}}" class='regular-fit-toggle' style="margin-right:0px;margin-left:4px;" onclick='toggleRegularSizeRows({{product.id}})'>Classic 6.5"</button></div>
+              {%- else -%}
+                <div class='toggle_size_preview_fit'><button type="button" id="slimFitToggle_{{product.id}}" class='slim-fit-toggle' onclick='toggleSlimSizeRows({{product.id}})'>Short 4.5"</button><button type="button" id="regularFitToggle_{{product.id}}" class='regular-fit-toggle show' style="margin-right:0px;margin-left:4px;" onclick='toggleRegularSizeRows({{product.id}})'>Classic 6.5"</button></div>
+              {%- endif -%}
+            {%- else -%}
+              {%- comment -%}This is a shirt with Slim/Regular fits{%- endcomment -%}
+              {%- if force_slim -%}
+                <div class='toggle_size_preview_fit'><button type="button" id="regularFitToggle_{{product.id}}" class='regular-fit-toggle' onclick='toggleRegularSizeRows({{product.id}})'>Regular</button><button type="button" id="slimFitToggle_{{product.id}}" class='slim-fit-toggle show' onclick='toggleSlimSizeRows({{product.id}})'>Slim Fit</button></div>
+              {%- else -%}
+                <div class='toggle_size_preview_fit'><button type="button" id="regularFitToggle_{{product.id}}" class='regular-fit-toggle show' onclick='toggleRegularSizeRows({{product.id}})'>Regular</button><button type="button" id="slimFitToggle_{{product.id}}" class='slim-fit-toggle' onclick='toggleSlimSizeRows({{product.id}})'>Slim Fit</button></div>
+              {%- endif -%}
+            {%- endif -%}
+
+          {%- elsif mesh_lining_row and no_mesh_lining_row -%}
+            {%- comment -%}Product has both Mesh Lining and No Mesh Lining{%- endcomment -%}
+            {% assign mesh_lining_array = mesh_lining_array | append: '</div>' %}
+            {% assign no_mesh_lining_array = no_mesh_lining_array | append: '</div>' %}
+            {{ mesh_lining_array_start_show }}
+            {{ mesh_lining_array }}
+            {{ no_mesh_lining_array_start }}
+            {{ no_mesh_lining_array }}
+          	<div class='toggle_size_preview_fit'><button type="button" id="meshLiningToggle_{{product.id}}" class='regular-fit-toggle show' onclick='toggleMeshRows({{product.id}})'>Mesh Lining</button><button type="button" id="noMeshLiningToggle_{{product.id}}" class='slim-fit-toggle' onclick='toggleNoMeshRows({{product.id}})'>No Mesh Lining</button></div>
+
+          {%- else -%}
+            {%- comment -%}Product has only one style type - no toggles needed{%- endcomment -%}
+          	{%- if slim_fit_row -%}
+              {% assign slim_fit_array = slim_fit_array | append: '</div>' %}
+              {{ slim_fit_array_start_show }}
+              {{ slim_fit_array }}
+            {%- endif -%}
+            {%- if regular_fit_row -%}
+              {% assign regular_fit_array = regular_fit_array | append: '</div>' %}
+              {{ basic_array_start_show }}
+          	  {{ regular_fit_array }}
+            {%- endif -%}
+            {%- if mesh_lining_row -%}
+              {% assign mesh_lining_array = mesh_lining_array | append: '</div>' %}
+              {{ mesh_lining_array_start_show }}
+              {{ mesh_lining_array }}
+            {%- endif -%}
+            {%- if no_mesh_lining_row -%}
+              {% assign no_mesh_lining_array = no_mesh_lining_array | append: '</div>' %}
+              {{ no_mesh_lining_array_start_show }}
+              {{ no_mesh_lining_array }}
+            {%- endif -%}
+          {%- endif -%}
+
+        </div>
+      </span>
+    </div>
+  {%- endif -%}
+
+{%- endfor -%}

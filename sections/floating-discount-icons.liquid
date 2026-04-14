@@ -1,0 +1,165 @@
+{{- 'floating-discount-icons.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'floating-discount-icons.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign discount_code = section.settings.discount_code
+  assign success_message = section.settings.success_message
+  assign icons_visible = section.settings.icons_visible
+  assign float_speed = section.settings.float_speed
+  assign icon_size = section.settings.icon_size
+-%}
+
+{%- if section.blocks.size > 0 and discount_code != blank -%}
+<floating-discount-icons 
+  class="floating-discount-icons"
+  data-discount-code="{{ discount_code | escape }}"
+  data-success-message="{{ success_message | escape }}"
+  data-icons-visible="{{ icons_visible }}"
+  data-float-speed="{{ float_speed }}"
+  data-icon-size="{{ icon_size }}"
+>
+  {%- for block in section.blocks -%}
+    {%- if block.settings.image != blank -%}
+      <div class="floating-icon" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+        <div class="floating-icon__image-wrapper" style="--icon-size: {{ icon_size }}px;">
+          <img 
+            src="{{ block.settings.image | image_url: width: icon_size | times: 2 }}"
+            alt="{{ block.settings.image.alt | default: 'Discount icon' | escape }}"
+            width="{{ icon_size }}"
+            height="{{ icon_size }}"
+            loading="lazy"
+          >
+        </div>
+        <div class="floating-icon__reveal">
+          <div class="floating-icon__reveal-content">
+            <button class="floating-icon__close" aria-label="Close">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <p class="floating-icon__message">{{ success_message }}</p>
+            <div class="floating-icon__code-wrapper">
+              <code class="floating-icon__code">{{ discount_code }}</code>
+              <button class="floating-icon__copy" data-code="{{ discount_code | escape }}">
+                <span class="floating-icon__copy-text">Copy</span>
+                <span class="floating-icon__copy-success">Copied!</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+  {%- comment -%} Toast notification for copy feedback {%- endcomment -%}
+  <div class="floating-icon__toast" aria-live="polite" aria-atomic="true">
+    Code copied to clipboard!
+  </div>
+</floating-discount-icons>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Floating Discount Icons",
+  "class": "section-floating-discount-icons",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Discount Settings"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount Code",
+      "default": "SURPRISE10",
+      "info": "The discount code shoppers will receive when they click an icon"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "🎉 You found a secret discount!",
+      "info": "Message shown when a shopper clicks an icon"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "range",
+      "id": "icons_visible",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Icons visible at once",
+      "default": 3,
+      "info": "Number of icons floating on the page"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "float_speed",
+      "label": "Float animation speed",
+      "default": "medium",
+      "options": [
+        {
+          "value": "slow",
+          "label": "Slow"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "fast",
+          "label": "Fast"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon image",
+          "info": "Upload a fun icon or image (PNG with transparency recommended)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating Discount Icons",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": ["collection", "index", "page", "product"],
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
+

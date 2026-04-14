@@ -1,0 +1,233 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const videos = document.querySelectorAll('video.autoplay-when-visible');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(e => console.log("Autoplay failed", e));
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.5 // Adjust as needed
+    });
+
+    videos.forEach(video => {
+      observer.observe(video);
+    });
+  });
+</script>
+
+<script defer="defer">
+  function scrollSizes(id) {
+    // var size_availability = div.getElementsByClassName('slide-sizes');
+    // console.log(id);
+    var size_preview_div = $('#regular_'+id);
+    // console.log(size_preview_div);
+    setTimeout(function() {
+       size_preview_div.animate( { scrollLeft: '+=100' }, 1000);
+    },500)
+  }
+
+  function toggleMen() {
+    $('#Filter-Mobile-category-1').click();
+    if($('.new-release-filter-button-men').hasClass('active')) {
+      $('.new-release-filter-button-men').removeClass('active');
+    } else {
+      $('.new-release-filter-button-men').addClass('active');
+    }
+    
+  }
+  
+  function toggleWomen() {
+    $('#Filter-Mobile-category-2').click();
+    if($('.new-release-filter-button-women').hasClass('active')) {
+      $('.new-release-filter-button-women').removeClass('active');
+    } else {
+      $('.new-release-filter-button-women').addClass('active');
+    }
+  }
+
+  function toggleKids() {
+    $('#Filter-Mobile-category-3').click();
+    $('#Filter-Mobile-category-4').click();
+    if($('.new-release-filter-button-kids').hasClass('active')) {
+      $('.new-release-filter-button-kids').removeClass('active');
+    } else {
+      $('.new-release-filter-button-kids').addClass('active');
+    }
+  }
+
+  function toggleRegularSizeRows(variable) {
+    console.log('toggleRegularSizeRows', variable);
+    const slimfitEl = document.getElementById('slimfit_'+variable);
+    const regularEl = document.getElementById('regular_'+variable);
+    const slimToggleEl = document.getElementById('slimFitToggle_'+variable);
+    const regularToggleEl = document.getElementById('regularFitToggle_'+variable);
+
+    if (slimfitEl) slimfitEl.classList.remove('show');
+    if (regularEl) regularEl.classList.add('show');
+    if (slimToggleEl) slimToggleEl.classList.remove('show');
+    if (regularToggleEl) regularToggleEl.classList.add('show');
+  }
+
+  function toggleSlimSizeRows(variable) {
+    console.log('toggleSlimSizeRows', variable);
+    const slimfitEl = document.getElementById('slimfit_'+variable);
+    const regularEl = document.getElementById('regular_'+variable);
+    const slimToggleEl = document.getElementById('slimFitToggle_'+variable);
+    const regularToggleEl = document.getElementById('regularFitToggle_'+variable);
+
+    if (regularEl) regularEl.classList.remove('show');
+    if (slimfitEl) slimfitEl.classList.add('show');
+    if (regularToggleEl) regularToggleEl.classList.remove('show');
+    if (slimToggleEl) slimToggleEl.classList.add('show');
+  }
+
+  function toggleMeshRows(variable) {
+    console.log('toggleMeshRows', variable);
+    const noMeshEl = document.getElementById('nomeshlining_'+variable);
+    const meshEl = document.getElementById('meshlining_'+variable);
+    const noMeshToggleEl = document.getElementById('noMeshLiningToggle_'+variable);
+    const meshToggleEl = document.getElementById('meshLiningToggle_'+variable);
+
+    if (noMeshEl) noMeshEl.classList.remove('show');
+    if (meshEl) meshEl.classList.add('show');
+    if (noMeshToggleEl) noMeshToggleEl.classList.remove('show');
+    if (meshToggleEl) meshToggleEl.classList.add('show');
+  }
+
+  function toggleNoMeshRows(variable) {
+    console.log('toggleNoMeshRows', variable);
+    const noMeshEl = document.getElementById('nomeshlining_'+variable);
+    const meshEl = document.getElementById('meshlining_'+variable);
+    const noMeshToggleEl = document.getElementById('noMeshLiningToggle_'+variable);
+    const meshToggleEl = document.getElementById('meshLiningToggle_'+variable);
+
+    if (meshEl) meshEl.classList.remove('show');
+    if (noMeshEl) noMeshEl.classList.add('show');
+    if (meshToggleEl) meshToggleEl.classList.remove('show');
+    if (noMeshToggleEl) noMeshToggleEl.classList.add('show');
+  }
+
+  var add_to_cart = true;
+
+  jQuery(document).on('click','.size-preview-button', function() { 
+    console.log('click size preview');
+    var product_id = $(this).attr("data-toggle");
+    
+    if(add_to_cart) {
+      add_to_cart = false;
+      $('#loading_div_'+product_id).addClass('show');
+      addSize(product_id);
+    }
+    
+  });
+
+  $(".menu-item-has-children").on({
+    mouseenter: function () {
+      $(this).addClass("hotjar-open");
+    },
+    mouseleave: function () {
+      $(this).removeClass("hotjar-open");
+    }
+  });
+
+  function getSectionsToRender() {
+    return [{
+      id: 'Cart',
+      section: 'main-cart',
+      selector: '.thb-cart-form'
+    },
+    {
+      id: 'Cart-Drawer',
+      section: 'cart-drawer',
+      selector: '.cart-drawer'
+    },
+    {
+      id: 'cart-drawer-toggle',
+      section: 'cart-bubble',
+      selector: '.thb-item-count'
+    }];
+  }
+
+  function renderContents(parsedState) {
+      this.getSectionsToRender().forEach((section => {
+        if (!document.getElementById(section.id)) {
+          return;
+        }
+        const elementToReplace = document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
+        elementToReplace.innerHTML = this.getSectionInnerHTML(parsedState.sections[section.section], section.selector);
+        if (typeof CartDrawer !== 'undefined') {
+          new CartDrawer();
+        }
+        if (typeof Cart !== 'undefined') {
+          new Cart().renderContents(parsedState);
+        }
+      }));
+
+
+      if (document.getElementById('Cart-Drawer')) {
+        document.getElementById('Cart-Drawer').classList.add('active');
+        document.body.classList.add('open-cart');
+        document.body.classList.add('open-cc');
+        if (document.getElementById('Cart-Drawer').querySelector('.product-recommendations--full')) {
+          document.getElementById('Cart-Drawer').querySelector('.product-recommendations--full').classList.add('active');
+        }
+        dispatchCustomEvent('cart-drawer:open');
+      }
+    }
+  
+    function getSectionInnerHTML(html, selector = '.shopify-section') {
+      return new DOMParser()
+        .parseFromString(html, 'text/html')
+        .querySelector(selector).innerHTML;
+    }
+
+  function addSize(variantID) {
+
+    const config = {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/javascript'
+      }
+    };
+    let formData = new FormData();
+
+    formData.append('id', variantID);
+    formData.append('quantity', 1);
+    formData.append('sections', getSectionsToRender().map((section) => section.section));
+    formData.append('sections_url', window.location.pathname);
+
+    config.body = formData;
+
+    fetch(`${theme.routes.cart_add_url}`, config)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.status) {
+          return;
+        }
+        this.renderContents(response);
+
+        dispatchCustomEvent('cart:item-added', {
+          product: response.hasOwnProperty('items') ? response.items[0] : response
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        add_to_cart = true;
+        $('#loading_div_'+variantID).removeClass('show');
+        // size.classList.remove('loading');
+        // size.removeAttribute('aria-disabled');
+      });
+  }
+
+
+
+</script>

@@ -1,0 +1,17 @@
+{% comment %}
+=======================================================
+This file is managed by MagicPass. Do not modify.
+To remove, please click "Remove from store" in our app.
+https://apps.shopify.com/password-protected-pages
+=======================================================
+{% endcomment %}
+
+
+{% layout none %}
+[{% for result in search.results %}
+  {% if result.id != search.results.last.id %}
+    { "id": {{ result.id | json }}, "title": {{ result.title | json }} },
+  {% else %}
+    { "id": {{ result.id | json }}, "title": {{ result.title | json }} }
+  {% endif %}
+{% endfor %}]

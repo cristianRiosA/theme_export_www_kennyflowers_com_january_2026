@@ -1,0 +1,18 @@
+<div class="sub-menu mega-menu-container" tabindex="-1">
+  <div class="mega-menu-container--inner">
+    {%- if link.links.size > 0 -%}
+    <div class="destination-megamenu">
+      {%- for l in link.links -%}
+        {%- if l.type == 'collection_link' and l.object.featured_image -%}
+        {%- assign collection_title = l.object.metafields.descriptors.subtitle | default: l.title -%}
+        {%- assign destination_image = l.object.metafields.my_fields.collection_photo_portrait | default: l.object.featured_image -%}
+        <a href="{{ l.url }}" class="destination-square" style="background-image: url('{{ destination_image | image_url: width: 300 }}');">
+          <div class="square-title">{{ collection_title }}</div>
+        </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+

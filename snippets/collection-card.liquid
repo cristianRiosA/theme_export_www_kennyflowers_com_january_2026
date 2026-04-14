@@ -1,0 +1,88 @@
+{%- liquid
+	assign grid_collection_image = nil
+	assign index_c = index | modulo: 6 | plus: 1
+-%}
+{%- if grid_collection == empty -%}
+	{%- assign grid_collection_url = '#' -%}
+	{%- assign grid_collection_title = 'onboarding.collection_title' | t -%}
+{%- else -%}
+	{%- assign grid_collection_url = grid_collection.url -%}
+	{%- comment -%} Use short_collection_title metafield if available, otherwise fall back to regular title {%- endcomment -%}
+	{%- if grid_collection.metafields.custom.short_collection_title != blank -%}
+		{%- assign grid_collection_title = grid_collection.metafields.custom.short_collection_title -%}
+	{%- else -%}
+		{%- assign grid_collection_title = grid_collection.title -%}
+	{%- endif -%}
+	{%- comment -%} Use collection_photo_portrait metafield if available, otherwise fall back to featured_image {%- endcomment -%}
+	{%- assign portrait_metafield = grid_collection.metafields.my_fields.collection_photo_portrait -%}
+	{%- if portrait_metafield != blank -%}
+		{%- assign grid_collection_image = portrait_metafield -%}
+		{%- assign use_metafield_image = true -%}
+	{%- elsif grid_collection.featured_image -%}
+		{%- assign grid_collection_image = grid_collection.featured_image -%}
+		{%- assign use_metafield_image = false -%}
+	{%- endif -%}
+{%- endif -%}
+{%- liquid
+	assign sizes = '320x320,640x640,960x960,1280x1280'
+	assign media_aspect_percentage = 100 | append: '%'
+  if media_aspect_ratio == 'portrait'
+    assign sizes = '320x400,640x800,960x1200,1280x1600'
+  elsif media_aspect_ratio == 'adapt'
+    assign sizes = '320x0,640x0,960x0,1280x0'
+		assign media_aspect_percentage = 100 | divided_by: grid_collection_image.aspect_ratio | append: '%'
+  endif
+
+	assign mobile_columns_class = 'small-12'
+
+	if is_carousel
+		if columns_mobile == '2'
+			assign mobile_columns_class = 'small-6'
+		endif
+		assign columns_class = 'medium-6 large-4'
+		case columns_desktop
+			when 2
+				assign columns_class = 'medium-6'
+			when 3
+				assign columns_class = 'medium-4'
+			when 4
+				assign columns_class = 'medium-6 large-3'
+			when 5
+				assign columns_class = 'medium-1/5 large-1/5'
+			when 6
+				assign columns_class = 'medium-3 large-2'
+		endcase
+		assign columns_class = columns_class | append: ' carousel__slide columns'
+	endif
+
+-%}
+<div class="{{ mobile_columns_class }} {{ columns_class }}">
+	<div class="collection-card {{ style }}">
+		<div class="collection-card__image media-aspect-{{ media_aspect_ratio }}" style="--var-media-aspect-ratio: {{ media_aspect_percentage }}">
+			<a href="{{ grid_collection_url }}" class="collection-card__link" title="{{ grid_collection_title | escape }}">
+				{% if grid_collection == empty %}
+					<div class="thb-placeholder">{{ 'collection-' | append: index | placeholder_svg_tag }}</div>
+				{% else %}
+					{% if grid_collection_image %}
+						{% if use_metafield_image %}
+							<img class="lazyload" src="{{ grid_collection_image | image_url: width: 640 }}" 
+								srcset="{{ grid_collection_image | image_url: width: 320 }} 320w,
+									{{ grid_collection_image | image_url: width: 640 }} 640w,
+									{{ grid_collection_image | image_url: width: 960 }} 960w,
+									{{ grid_collection_image | image_url: width: 1280 }} 1280w"
+								sizes="(max-width: 767px) 100vw, 33vw"
+								alt="{{ grid_collection_title | escape }}" />
+						{% else %}
+							{%- render 'responsive-image', image: grid_collection_image, sizes: sizes -%}
+						{% endif %}
+					{% else %}
+						<div class="thb-placeholder">{{ 'collection-' | append: index_c | placeholder_svg_tag }}</div>
+					{% endif %}
+				{% endif %}
+			</a>
+		</div>
+		<div class="collection-card__content">
+			<a href="{{ grid_collection_url }}" class="collection-card__link {% if style == 'style1' %}text-button{% endif %}" title="{{ grid_collection_title | escape }}">{{ grid_collection_title }}</a>
+		</div>
+	</div>
+</div>

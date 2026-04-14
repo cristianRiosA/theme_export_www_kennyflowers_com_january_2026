@@ -1,0 +1,574 @@
+{% comment %}Copyright (c) Blotout, Inc.{% endcomment %}
+{% capture init %}
+<script>
+  !function(u){window.edgetag=window.edgetag||function(){(edgetag.stubs=edgetag.stubs||[]).push(arguments)};const t=document.createElement("script");t.type="text/javascript",t.src=u,t.async=!0;const e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}('https://qaili.kennyflowers.com/load');
+
+  !function() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    const userId = params.get('et_u_id') || '';
+
+    edgetag('init', {
+      edgeURL: 'https://qaili.kennyflowers.com',
+      disableConsentCheck: !false,
+      userId
+    });
+  }();
+</script>
+{% endcapture %}
+{{ init | strip_newlines  | replace: '  ', '' | replace: '  ', '' }}
+
+
+{% capture code %}
+<script>
+!function() {
+  const sendEvent = ({name, payload = {}, beacon = false}) => {
+    let options = {};
+    if (beacon) {
+      options = { method: 'beacon' };
+    }
+
+    edgetag('tag', name, payload, {}, options);
+  };
+
+  const sendUser = (user) => {
+    if (!user || !Object.keys(user).length) {
+      return;
+    }
+
+    edgetag('data', user);
+  };
+
+  const getUser = (form, selectors) => {
+    const user = {};
+    if (!selectors) {
+      return user;
+    }
+
+    Object.entries(selectors).forEach(([userKey, selector]) => {
+      if (!selector || selector.length === 0) {
+        return;
+      }
+
+      const selectorArray = Array.isArray(selector) ? selector : [selector];
+      for (const selector of selectorArray) {
+        if (!selector) {
+          continue;
+        }
+
+        const inputUserValue = form.querySelector(selector);
+        const userValue = (inputUserValue && inputUserValue.value) || '';
+        if (userValue) {
+          user[userKey] = userValue;
+          break;
+        }
+      }
+    });
+
+    return user;
+  };
+
+  const getLocalCurrency = () => {
+    if(Shopify && Shopify.currency && Shopify.currency.active) {
+      return Shopify.currency.active.toUpperCase();
+    }
+    return '{{shop.currency | upcase}}';
+  };
+
+  const newsletterFormSelectors = [
+    '#ContactFooter',
+    '.klaviyo-form',
+    '#wisepops-root',
+    '#contact_form',
+    'form[id*="newsletter" i]',
+    'form[id*="subscribe" i]',
+    'form.ml-block-form'
+  ];
+
+  
+
+  const newsletterForm = newsletterFormSelectors.join(',');
+  const actions = [
+    {
+      selectors: ['button[type="submit"]', 'form[action="/cart"]'],
+      length: 2,
+      fun: (ele) => {
+        sendInitiateCheckout();
+      },
+      current: 0
+    },
+    {
+      selectors: ['[name="checkout"]', 'form[action="/cart"]'],
+      length: 2,
+      fun: (ele) => {
+        sendInitiateCheckout();
+      },
+      current: 0
+    },
+    {
+      selectors: ['a[href="/checkout"]'],
+      length: 1,
+      fun: (ele) => {
+        sendInitiateCheckout();
+      },
+      current: 0
+    },
+    {
+      selectors: ['a[href="/checkout/"]'],
+      length: 1,
+      fun: (ele) => {
+        sendInitiateCheckout();
+      },
+      current: 0
+    },
+    {
+      selectors: ['[form="cart"]'],
+      length: 1,
+      fun: (ele) => {
+        sendInitiateCheckout();
+      },
+      current: 0
+    },
+    {
+      selectors: ['button.rebuy-cart__checkout-button'],
+      length: 1,
+      fun: (ele) => {
+        sendInitiateCheckout();
+      },
+      current: 0
+    },
+    {
+      selectors: ['[type="submit"]', 'form[action="/account/login"]'],
+      length: 2,
+      fun: (ele) => {
+        const user = getUser(ele, {
+          email: 'input[type="email"]'
+        });
+
+        sendUser(user);
+      },
+      current: 0
+    },
+    {
+      selectors: ['[type="submit"]', 'form[action="/account"]'],
+      length: 2,
+      fun: (ele) => {
+        let user = getUser(ele, {
+          email: 'input[type="email"]',
+          phone: 'input[type="tel"]',
+          firstName: 'input[name*="first" i]:not([type="hidden" i])',
+          lastName: 'input[name*="last" i]:not([type="hidden" i])'
+        });
+
+        if (!user.firstName && !user.lastName) {
+          user = {
+            ...user,
+            ...getUser(ele, { firstName: 'input[name*="name" i]' })
+          };
+        }
+
+        sendUser(user);
+        edgetag('tag', 'CompleteRegistration');
+      },
+      current: 0
+    },
+    {
+      selectors: ['[type="submit"]', newsletterForm],
+      length: 2,
+      fun: (ele) => {
+        const user = getUser(ele, {
+          email: ['input[type="email"]', 'input[name*="email" i]:not([type="hidden" i]'],
+          phone: ['input[type="tel"]', 'input[name*="phone" i]:not([type="hidden" i]'],
+          firstName: 'input[name*="name" i]:not([type="hidden" i]',
+          dateOfBirth: 'input[name*="birthday" i]:not([type="hidden" i]'
+        });
+        sendUser(user);
+        edgetag('tag', 'Subscribe', {}, {}, { method: 'beacon' });
+      },
+      current: 0
+    },
+    {
+    selectors: ['button', newsletterForm],
+      length: 2,
+      fun: (ele) => {
+        const user = getUser(ele, {
+          email: ['input[type="email"]', 'input[name*="email" i]:not([type="hidden" i]'],
+          phone: ['input[type="tel"]', 'input[name*="phone" i]:not([type="hidden" i]'],
+          firstName: 'input[name*="name" i]:not([type="hidden" i]',
+          dateOfBirth: 'input[name*="birthday" i]:not([type="hidden" i]'
+        });
+        sendUser(user);
+        edgetag('tag', 'Subscribe', {}, {}, { method: 'beacon' });
+      },
+      current: 0
+    },
+    {
+      selectors: ['[type="submit"]', 'form[action^="/contact"]'],
+      length: 2,
+      fun: (ele) => {
+        const user = getUser(ele, {
+          email: ['input[type="email"]', 'input[name*="email" i]:not([type="hidden" i]'],
+          phone: ['input[type="tel"]', 'input[name*="phone" i]:not([type="hidden" i]'],
+          firstName: ['input[name*="first" i]:not([type="hidden" i]', 'input[name*="name" i]:not([type="hidden" i]', 'input[name*="nom" i]:not([type="hidden" i]'],
+          lastName: 'input[id*="last" i]:not([type="hidden" i]'
+        });
+
+        sendUser(user);
+        edgetag('tag', 'Contact');
+      },
+      current: 0
+    }
+  ];
+
+  const resetActions = () => {
+    for (let i = 0; i < actions.length; i++) {
+      actions[i].current = 0;
+    }
+  };
+
+  const checkElement = (element) => {
+    if (!element || element.nodeName === 'BODY') {
+      resetActions();
+      return
+    }
+
+    if (element.nodeName !== 'DIV' && element.nodeName !== 'INPUT' && element.nodeName !== 'A' && element.nodeName !== 'BUTTON' && element.nodeName !== 'FORM') {
+      checkElement(element.parentElement);
+      return
+    }
+
+    for (let i = 0; i < actions.length; ++i) {
+      if (element.matches(actions[i].selectors[actions[i].current])) {
+        ++actions[i].current;
+        if (actions[i].length === actions[i].current) {
+          actions[i].fun(element);
+          resetActions();
+          return
+        }
+      }
+    }
+
+    checkElement(element.parentElement);
+  };
+
+
+  let cartProcessedItems = [];
+  const sendCartData = (payload, requestType) => {
+
+    const isDuplicate = () => {
+      if (!cartProcessedItems || !Array.isArray(cartProcessedItems) || !cartProcessedItems.length) {
+        return false;
+      }
+
+      const currentTimestamp = Date.now();
+      cartProcessedItems = cartProcessedItems.filter(item => (currentTimestamp - item.timestamp) <= 500);
+
+      try {
+        const payloadString = JSON.stringify(payload);
+        return cartProcessedItems.some(item => item.payload === payloadString && item.requestType !== requestType);
+      } catch {
+        return false;
+      }
+    };
+
+    if (!payload || !Array.isArray(payload) || !payload.length) {
+      return;
+    }
+
+    if (!requestType) {
+      console.error("[EdgeTag] Request Type is missing in sendData");
+    }
+
+    if (isDuplicate()) {
+      return;
+    }
+
+    payload.forEach(item => {
+      if (item.price == null || item.price === "" || !item.id) {
+        return;
+      }
+
+      edgetag('tag', 'AddToCart', {
+        currency: getLocalCurrency(),
+        value: parseFloat(item.price) / 100,
+        contents: [{
+          id: item.product_id,
+          variantId: item.variant_id,
+          quantity: 1,
+          item_price: parseFloat(item.price) / 100,
+          title: item.title,
+          category: item.product_type,
+          image: item.image,
+          brand: item.vendor,
+          url: window.origin + item.url,
+          type: 'product',
+        }]
+      }, {}, { method: 'beacon' });
+
+      addItemFromAddToValueCart(item);
+    });
+
+    cartProcessedItems.push({
+      requestType,
+      payload: JSON.stringify(payload),
+      timestamp: Date.now()
+    });
+  };
+
+  let currentCartValue = null;
+  const sendInitiateCheckout = () => {
+    const payload = {};
+
+    if (currentCartValue && Object.keys(currentCartValue).length && currentCartValue.total_price != null) {
+      let total = 0;
+      payload.currency = currentCartValue.currency;
+
+     payload.contents = currentCartValue.items.map(item => {
+        const itemPrice = parseFloat(item.price / 100);
+        total += itemPrice * item.quantity;
+
+        return {
+          id: item.product_id,
+          quantity: item.quantity,
+          item_price: itemPrice,
+          variantId: item.variant_id,
+          title: item.title,
+          image: item.image,
+          brand: item.vendor,
+          url: window.origin + item.url,
+          type: 'product',
+        };
+      });
+
+      payload.value = total;
+    }
+
+    const cartToken = (localStorage.getItem('cartToken') || "").replace(/"/g, '');
+    if (cartToken) {
+      payload.checkoutUrl = document.location.origin + '/checkouts/cn/' + cartToken;
+    }
+
+    edgetag('tag', 'InitiateCheckout', payload, {}, { method: 'beacon' });
+  };
+
+  const addItemFromAddToValueCart = (item) => {
+    if (!currentCartValue || !Object.keys(currentCartValue).length || !currentCartValue.items || !currentCartValue.items.length) {
+      currentCartValue = {
+        currency: getLocalCurrency(),
+        item_count: 1,
+        total_price: item.price,
+        items: [item]
+      };
+
+      return;
+    }
+
+    const findIndex = currentCartValue.items.findIndex(element => element.product_id === item.product_id && element.variant_id === item.variant_id);
+    currentCartValue.item_count += 1;
+    currentCartValue.total_price += parseFloat(item.price);
+
+    if (findIndex !== -1) {
+      currentCartValue.items[findIndex].quantity += 1;
+    } else {
+      currentCartValue.items.push(item);
+    }
+  };
+
+  const networkListener = function() {
+    const fetch = window.fetch;
+     window.fetch = function() {
+       return fetch.apply(this, Array.prototype.slice.call(arguments)).then(function(t) {
+         if (!t || !t.ok || !t.url) {
+          return t;
+         }
+
+         try {
+            if (t.url.indexOf("/cart/add") !== -1) {
+              const myResponse = t.clone();
+              Promise.resolve(myResponse.json()).then(e => {
+                if (!e) {
+                  return;
+                }
+
+                const payload = e.items ? e.items : [e];
+                sendCartData(payload, 'fetch');
+              });
+              return t;
+            }
+
+            if (t.url.indexOf("/cart.js") !== -1 || t.url.indexOf("/cart/change") !== -1) {
+              const myResponse = t.clone();
+              Promise.resolve(myResponse.json()).then(e => {
+                if (!e) {
+                  return;
+                }
+
+                currentCartValue = e;
+              });
+              return t;
+            }
+
+         } catch (e) {
+         }
+         return t;
+       });
+     };
+
+    const origOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function() {
+      this.addEventListener('load', function() {
+        if (!this._url) {
+          return;
+        }
+
+        if (this._url.indexOf("/cart/add") !== -1) {
+          try {
+            const e = JSON.parse(this.responseText);
+            if (!e) {
+              return;
+            }
+
+            const payload = e.items ? e.items : [e];
+            sendCartData(payload, 'XMLHttpRequest');
+          } catch (e) {
+
+          }
+          return;
+        }
+
+        if (this._url.indexOf("/cart.js") !== -1 || this._url.indexOf("/cart/change") !== -1) {
+          try {
+            const e = JSON.parse(this.responseText);
+            if (!e) {
+              return;
+            }
+
+            currentCartValue = e;
+          } catch (e) {
+
+          }
+          return;
+        }
+      });
+      origOpen.apply(this, arguments);
+    };
+  };
+
+  networkListener();
+
+  edgetag('tag', 'PageView');
+
+  window.addEventListener('load', () => {
+    {% if product %}
+      {% if product.selected_variant %}
+        {% assign current = product.selected_variant %}
+      {% elsif product.variants %}
+        {% assign current = product.variants[0] %}
+      {% else %}
+        {% assign current = product %}
+      {% endif %}
+
+      const current = {{current | json}};
+      edgetag('tag', 'ViewContent', {
+        currency: getLocalCurrency(),
+        value: current.price / 100,
+        contents: [{
+          id: '{{product.id}}',
+          variantId: current.id,
+          quantity: 1,
+          item_price: current.price / 100,
+          title: current.name,
+          category: '{{product.type | escape_once}}',
+          brand: '{{product.vendor | escape_once}}',
+          image: '{{product | image_url | prepend: 'https:' }}',
+          url: '{{current.url | prepend: request.origin }}',
+          type: 'product',
+        }],
+      });
+    {% endif %}
+
+    document.addEventListener('click', (e) => {
+      checkElement(e.target);
+    });
+  });
+
+  if (
+    window.location.pathname.startsWith('/search') ||
+    window.location.pathname.startsWith('/pages/search-results-page')
+  ) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const search = searchParams.get('q');
+    if (search) {
+      edgetag('tag', 'Search', { search });
+    }
+  }
+
+  window.addEventListener(
+    'message',
+    (event) => {
+      if (event.origin !== 'https://creatives.attn.tv') {
+        return;
+      }
+
+      if (!event.data || !event.data.__attentive) {
+        return;
+      }
+
+      try {
+        const data = event.data.__attentive;
+
+        if (!data.action || !data.action.includes('LEAD')) {
+          return;
+        }
+
+        const user = {};
+        if(data.email) {
+          user.email = data.email;
+        }
+
+        if(data.phone) {
+          user.phone = data.phone.replace(/[^0-9]/g, '');
+        }
+
+        sendUser(user);
+        edgetag('tag', 'Subscribe');
+      } catch (e) {
+        console.log("[Edgetag]", e);
+      }
+    },
+    false
+  );
+
+  window.addEventListener('message', (event) => {
+    if(!event || !event.origin || !event.data || !event.origin.includes('postscript')) {
+      return;
+    }
+
+    if (event.data.hasOwnProperty('CollectedEmailEvent') && event.data.CollectedEmailEvent.email) {
+      sendUser({ email: event.data.CollectedEmailEvent.email });
+      edgetag('tag', 'Subscribe');
+    }
+  });
+
+  window.juapp = window.juapp||function(){(window.juapp.q=window.juapp.q||[]).push(arguments)};
+  juapp("trackFunc", "engagement", function(email, eventname, promotitle, cmid, options, form) {
+    if (!email) {
+      return;
+    }
+
+    const userData = { email };
+    form.forEach((item) => {
+      if (item.name === "phone_number" && item.value) {
+        userData["phone"] = item.value;
+      }
+    });
+
+    edgetag("data", userData);
+    edgetag("tag", "Subscribe");
+  });
+
+  
+}();
+</script>
+{% endcapture %}
+{{ code | strip_newlines  | replace: '  ', '' | replace: '  ', '' }}

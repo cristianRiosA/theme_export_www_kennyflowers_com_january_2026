@@ -1,0 +1,8 @@
+<a {% if promotion_link != null -%}href="{{ promotion_link }}"{%- else -%}disabled{%- endif %} class="mega-menu-promotion mega-menu-promotion--small">
+	{%- render 'responsive-image', image: promotion_image, sizes: '720x0', priority: 'low' -%}
+	{%- if promotion_link_label != empty -%}
+	<div class="mega-menu-promotion--cover">
+		<span>{{ promotion_link_label }}</span>
+	</div>
+	{%- endif -%}
+</a>
