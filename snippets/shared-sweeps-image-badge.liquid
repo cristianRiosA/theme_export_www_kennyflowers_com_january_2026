@@ -212,19 +212,18 @@
           background: var(--sweeps-accent);
           color: #ffffff;
           text-align: center;
-          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
           font-style: normal;
-          font-weight: 700;
-          font-size: 13px;
+          font-weight: 600;
+          font-size: 15px;
           line-height: 1;
-          letter-spacing: .02em;
-          text-transform: uppercase;
+          letter-spacing: 0;
+          text-transform: none;
           font-variant-numeric: lining-nums tabular-nums;
           font-feature-settings: "lnum" 1, "tnum" 1;
           box-sizing: border-box;
         }
 
-        /* Desktop/tablet: subir la insignia cuando existe el toggle de fits */
         .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {
           bottom: 46px;
         }
@@ -259,7 +258,8 @@
             width: 54px;
             min-width: 54px;
             padding: 0 6px;
-            font-size: 11px;
+            font-size: 12px;
+            font-weight: 600;
           }
 
           .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {

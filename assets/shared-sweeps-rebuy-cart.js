@@ -182,12 +182,13 @@
         padding:0 8px;
         background:var(--sweeps-accent);
         color:#fff;
-        font-size:13px;
-        font-weight:700;
+        font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size:15px;
+        font-weight:600;
         line-height:1;
-        letter-spacing:.02em;
+        letter-spacing:0;
         text-align:center;
-        text-transform:uppercase;
+        text-transform:none;
         font-variant-numeric: lining-nums tabular-nums;
         font-feature-settings:"lnum" 1, "tnum" 1;
         box-sizing:border-box;
@@ -215,7 +216,8 @@
           min-width:54px;
           width:54px;
           padding:0 6px;
-          font-size:11px;
+          font-size:12px;
+          font-weight:600;
         }
       }
     `;
