@@ -407,27 +407,54 @@
           }
 
           function getDisplayedUnitPriceCents() {
-            var selectors = [
-              '[data-product-price]',
-              '.product__price',
-              '#ProductPrice',
+            var preferredSelectors = [
+              '.price ins .money',
+              '.price ins',
+              'ins .money',
+              'ins',
+              '.amount.discounted .money',
+              '.amount.discounted',
+              '.price-item--sale',
               '.price__current .money',
               '.price__current',
-              '.price-item--sale',
               '.current-price.money',
-              '.current-price',
-              '.price-item--regular',
-              '.product__price .money',
-              '.price .money'
+              '.current-price'
             ];
 
-            for (var s = 0; s < selectors.length; s++) {
-              var nodes = scope.querySelectorAll(selectors[s]);
+            for (var s = 0; s < preferredSelectors.length; s++) {
+              var nodes = scope.querySelectorAll(preferredSelectors[s]);
               for (var i = 0; i < nodes.length; i++) {
                 var el = nodes[i];
                 if (!el) continue;
+
+                if (el.closest('del')) continue;
+
                 var cents = parseMoneyToCents(el.textContent);
                 if (cents && cents > 0) return cents;
+              }
+            }
+
+            var fallbackSelectors = [
+              '[data-product-price]',
+              '.product__price .money',
+              '.product__price',
+              '#ProductPrice',
+              '.price .money',
+              '.price .amount',
+              '.price'
+            ];
+
+            for (var f = 0; f < fallbackSelectors.length; f++) {
+              var fallbackNodes = scope.querySelectorAll(fallbackSelectors[f]);
+              for (var j = 0; j < fallbackNodes.length; j++) {
+                var node = fallbackNodes[j];
+                if (!node) continue;
+
+                if (node.closest('del')) continue;
+                if (node.tagName && node.tagName.toLowerCase() === 'del') continue;
+
+                var fallbackCents = parseMoneyToCents(node.textContent);
+                if (fallbackCents && fallbackCents > 0) return fallbackCents;
               }
             }
 
