@@ -114,19 +114,20 @@
         style.id = 'shared-sweeps-rebuy-line-badge-styles';
         style.textContent = `
       .shared-sweeps-rebuy-line-badge{
-        --sweeps-accent:#8fb5af;
+        --sweeps-accent:#88b5b0;
         --sweeps-accent-strong:#7ea59f;
-        --sweeps-text:#626c76;
+        --sweeps-text:#66707a;
         display:inline-grid;
-        grid-template-columns:minmax(0,auto) 72px;
+        grid-template-columns:auto 68px;
         align-items:stretch;
-        min-height:30px;
+        min-height:32px;
         margin-top:8px;
-        background:#fff;
+        background:#ffffff;
         border:1px solid var(--sweeps-accent);
-        box-shadow:0 3px 10px rgba(0,0,0,.05);
+        box-shadow:0 2px 8px rgba(0,0,0,.05);
         overflow:hidden;
         max-width:100%;
+        box-sizing:border-box;
       }
 
       .shared-sweeps-rebuy-line-badge__copy{
@@ -142,22 +143,32 @@
         color:var(--sweeps-text);
         font-weight:700;
         line-height:1;
+        box-sizing:border-box;
+      }
+
+      .shared-sweeps-rebuy-line-badge__prefix,
+      .shared-sweeps-rebuy-line-badge__noun,
+      .shared-sweeps-rebuy-line-badge__count{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        font-size:13px;
+        line-height:1;
+        letter-spacing:.04em;
+        text-transform:uppercase;
+        font-weight:700;
       }
 
       .shared-sweeps-rebuy-line-badge__prefix,
       .shared-sweeps-rebuy-line-badge__noun{
-        font-size:9px;
-        letter-spacing:.07em;
+        color:var(--sweeps-text);
       }
 
       .shared-sweeps-rebuy-line-badge__count{
-        min-width:2.1ch;
+        min-width:auto;
         text-align:center;
         color:var(--sweeps-accent-strong);
-        font-size:18px;
-        font-weight:700;
-        line-height:1;
-        letter-spacing:0;
+        letter-spacing:.01em;
         font-variant-numeric: lining-nums tabular-nums;
         font-feature-settings:"lnum" 1, "tnum" 1;
       }
@@ -166,17 +177,46 @@
         display:flex;
         align-items:center;
         justify-content:center;
-        min-width:72px;
-        width:72px;
+        min-width:68px;
+        width:68px;
         padding:0 8px;
         background:var(--sweeps-accent);
         color:#fff;
-        font-size:14px;
+        font-size:13px;
         font-weight:700;
         line-height:1;
+        letter-spacing:.02em;
         text-align:center;
+        text-transform:uppercase;
         font-variant-numeric: lining-nums tabular-nums;
         font-feature-settings:"lnum" 1, "tnum" 1;
+        box-sizing:border-box;
+      }
+
+      @media (max-width: 749px){
+        .shared-sweeps-rebuy-line-badge{
+          grid-template-columns:minmax(0,1fr) 54px;
+          min-height:28px;
+        }
+
+        .shared-sweeps-rebuy-line-badge__copy{
+          column-gap:4px;
+          padding:0 8px;
+        }
+
+        .shared-sweeps-rebuy-line-badge__prefix,
+        .shared-sweeps-rebuy-line-badge__noun,
+        .shared-sweeps-rebuy-line-badge__count{
+          font-size:11px;
+          letter-spacing:.03em;
+        }
+
+        .shared-sweeps-rebuy-line-badge__mult{
+          min-width:54px;
+          width:54px;
+          padding:0 6px;
+          font-size:11px;
+        }
       }
     `;
         document.head.appendChild(style);
@@ -286,6 +326,8 @@
         document.addEventListener('rebuy:smartcart.show', loadCartAndRender, true);
         document.addEventListener('rebuy:cart.change', loadCartAndRender, true);
         document.addEventListener('cart:refresh', loadCartAndRender, true);
+        document.addEventListener('cart:item-added', loadCartAndRender, true);
+        document.addEventListener('cart:open', loadCartAndRender, true);
 
         setTimeout(loadCartAndRender, 600);
         setTimeout(loadCartAndRender, 1200);
