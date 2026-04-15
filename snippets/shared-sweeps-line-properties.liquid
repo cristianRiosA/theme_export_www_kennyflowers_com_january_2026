@@ -1,0 +1,71 @@
+{% assign sweeps_enabled = settings.sweeps_switch | default: true %}
+
+{% liquid
+  assign sweeps_country = localization.country.iso_code | default: '' | upcase
+  assign sweeps_market_allowed = false
+
+  if sweeps_country == 'US' or sweeps_country == 'CA'
+    assign sweeps_market_allowed = true
+  endif
+%}
+
+{% if sweeps_enabled and sweeps_market_allowed and product != blank %}
+  {% liquid
+    assign p = product
+    assign v = current_variant | default: p.selected_or_first_available_variant
+
+    assign raw_elig = p.metafields.sharedsweeps.eligibility.value | default: p.metafields.sharedsweeps.eligibility
+    assign eligible = true
+    if raw_elig == 'false' or raw_elig == false
+      assign eligible = false
+    endif
+  %}
+
+  {% if eligible %}
+    {% liquid
+      assign currency_iso = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency
+      assign currency_iso = currency_iso | upcase
+
+      assign currency_scale = 1.0
+      if currency_iso == 'COP' or currency_iso == 'CLP' or currency_iso == 'ARS' or currency_iso == 'VND' or currency_iso == 'IDR'
+        assign currency_scale = 1000.0
+      endif
+
+      assign priceoverride_raw = p.metafields.sharedsweeps.priceoverride.value | default: p.metafields.sharedsweeps.priceoverride
+      assign shop_global_mult_raw = shop.metafields.sharedsweeps.global_multiplier.value | default: shop.metafields.sharedsweeps.global_multiplier | default: 1
+      assign product_mult_raw = p.metafields.sharedsweeps.multiplier.value | default: p.metafields.sharedsweeps.multiplier
+      assign bonus_raw = p.metafields.sharedsweeps.bonusEntries.value | default: p.metafields.sharedsweeps.bonusEntries | default: 0
+      assign product_entry_divisor_raw = p.metafields.sharedsweeps.entry_divisor.value | default: p.metafields.sharedsweeps.entry_divisor
+      assign shop_entry_divisor_raw = shop.metafields.sharedsweeps.entry_divisor.value | default: shop.metafields.sharedsweeps.entry_divisor
+
+      assign global_mult = shop_global_mult_raw | plus: 0
+      assign product_mult = product_mult_raw | plus: 0
+
+      assign mult = global_mult
+      if product_mult_raw != blank and product_mult > global_mult
+        assign mult = product_mult
+      endif
+
+      assign bonus = bonus_raw | plus: 0
+
+      assign entry_divisor_raw = product_entry_divisor_raw | default: shop_entry_divisor_raw
+      if entry_divisor_raw == blank
+        assign entry_divisor = currency_scale
+      else
+        assign entry_divisor = entry_divisor_raw | plus: 0.0
+        if currency_scale == 1.0 and entry_divisor >= 1000.0
+          assign entry_divisor = 1.0
+        endif
+        if entry_divisor <= 0
+          assign entry_divisor = currency_scale
+        endif
+      endif
+    %}
+
+    <input type="hidden" name="properties[_ss_mult]" value="{{ mult }}">
+    <input type="hidden" name="properties[_ss_bonus]" value="{{ bonus }}">
+    <input type="hidden" name="properties[_ss_entry_divisor]" value="{{ entry_divisor }}">
+    <input type="hidden" name="properties[_ss_override_unit_price]" value="{% if priceoverride_raw != blank %}{{ priceoverride_raw | plus: 0.0 }}{% endif %}">
+    <input type="hidden" name="properties[_ss_eligible]" value="true">
+  {% endif %}
+{% endif %}

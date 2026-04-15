@@ -1,0 +1,309 @@
+{% assign sweeps_enabled = settings.sweeps_switch | default: true %}
+
+{% liquid
+  assign sweeps_country = localization.country.iso_code | default: '' | upcase
+  assign sweeps_market_allowed = false
+
+  if sweeps_country == 'US' or sweeps_country == 'CA'
+    assign sweeps_market_allowed = true
+  endif
+
+  assign line_item = item | default: product
+%}
+
+{% if sweeps_enabled and sweeps_market_allowed and line_item != blank and line_item.product != blank %}
+  {% liquid
+    assign p = line_item.product
+    assign v = line_item.variant | default: p.selected_or_first_available_variant
+
+    assign raw_elig = p.metafields.sharedsweeps.eligibility.value | default: p.metafields.sharedsweeps.eligibility
+    assign eligible = true
+    if raw_elig == 'false' or raw_elig == false
+      assign eligible = false
+    endif
+
+    assign badge_font = settings.font_accent | default: settings.font_body
+  %}
+
+  {% if eligible %}
+    {% liquid
+      assign currency_iso = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency
+      assign currency_iso = currency_iso | upcase
+
+      assign currency_scale = 1.0
+      if currency_iso == 'COP' or currency_iso == 'CLP' or currency_iso == 'ARS' or currency_iso == 'VND' or currency_iso == 'IDR'
+        assign currency_scale = 1000.0
+      endif
+
+      assign qty = line_item.quantity | default: 1
+
+      assign priceoverride_raw = p.metafields.sharedsweeps.priceoverride.value | default: p.metafields.sharedsweeps.priceoverride
+      assign shop_global_mult_raw = shop.metafields.sharedsweeps.global_multiplier.value | default: shop.metafields.sharedsweeps.global_multiplier | default: 1
+      assign product_mult_raw = p.metafields.sharedsweeps.multiplier.value | default: p.metafields.sharedsweeps.multiplier
+      assign bonus_raw = p.metafields.sharedsweeps.bonusEntries.value | default: p.metafields.sharedsweeps.bonusEntries | default: 0
+      assign product_entry_divisor_raw = p.metafields.sharedsweeps.entry_divisor.value | default: p.metafields.sharedsweeps.entry_divisor
+      assign shop_entry_divisor_raw = shop.metafields.sharedsweeps.entry_divisor.value | default: shop.metafields.sharedsweeps.entry_divisor
+
+      assign global_mult = shop_global_mult_raw | plus: 0
+      assign product_mult = product_mult_raw | plus: 0
+
+      assign mult = global_mult
+      if product_mult_raw != blank and product_mult > global_mult
+        assign mult = product_mult
+      endif
+
+      assign bonus = bonus_raw | plus: 0
+
+      assign entry_divisor_raw = product_entry_divisor_raw | default: shop_entry_divisor_raw
+      if entry_divisor_raw == blank
+        assign entry_divisor = currency_scale
+      else
+        assign entry_divisor = entry_divisor_raw | plus: 0.0
+        if currency_scale == 1.0 and entry_divisor >= 1000.0
+          assign entry_divisor = 1.0
+        endif
+        if entry_divisor <= 0
+          assign entry_divisor = currency_scale
+        endif
+      endif
+
+      if priceoverride_raw == blank
+        assign unit_price_value = line_item.original_price | default: v.price | default: p.price
+        assign base_price = unit_price_value | divided_by: 100.0 | times: qty
+      else
+        assign base_price = priceoverride_raw | plus: 0.0 | times: qty
+      endif
+
+      assign raw_base_entries = base_price | divided_by: entry_divisor
+      assign floored_base_entries = raw_base_entries | floor
+      assign decimal_remainder = raw_base_entries | minus: floored_base_entries | abs
+      assign base_entries = floored_base_entries
+      if decimal_remainder > 0.000001
+        assign base_entries = floored_base_entries | plus: 1
+      endif
+
+      assign entries = base_entries | times: mult | floor
+
+      if entries < 1 and base_price > 0
+        assign entries = 1
+      endif
+
+      if bonus > 0
+        assign entries = entries | plus: bonus
+      endif
+
+      assign noun = 'ENTRIES'
+      if entries == 1
+        assign noun = 'ENTRY'
+      endif
+
+      assign line_uid = line_item.key | default: line_item.id | default: p.id
+      assign badge_id = 'shared-sweeps-mini-cart-line-entries-' | append: line_uid
+    %}
+
+    {% if base_price > 0 %}
+      <div
+        id="{{ badge_id }}"
+        class="shared-sweeps-mini-cart-line-entries"
+        data-line-key="{{ line_item.key }}"
+        data-entry-divisor="{{ entry_divisor }}"
+        data-mult="{{ mult }}"
+        data-bonus="{{ bonus }}"
+        data-override-unit-price="{% if priceoverride_raw != blank %}{{ priceoverride_raw | plus: 0.0 }}{% endif %}"
+        data-initial-qty="{{ qty }}"
+        aria-live="polite"
+        role="status"
+      >
+        <span class="shared-sweeps-mini-cart-line-entries__copy">
+          <span class="shared-sweeps-mini-cart-line-entries__count">{{ entries | number_with_delimiter }}</span>
+          <span class="shared-sweeps-mini-cart-line-entries__noun">{{ noun }}</span>
+        </span>
+        <span class="shared-sweeps-mini-cart-line-entries__mult">{{ mult }}x</span>
+      </div>
+
+      <style>
+        .shared-sweeps-mini-cart-line-entries{
+          display:inline-grid;
+          grid-template-columns:1fr auto;
+          align-items:stretch;
+          min-height:24px;
+          margin:8px 0 0 auto;
+          max-width:100%;
+          background:#ffffff;
+          border:1px solid #43c3c1;
+          box-sizing:border-box;
+          overflow:hidden;
+          box-shadow:0 3px 10px rgba(67,195,193,.08);
+          -webkit-font-smoothing:antialiased;
+          -moz-osx-font-smoothing:grayscale;
+          text-rendering:geometricPrecision;
+        }
+
+        .shared-sweeps-mini-cart-line-entries__copy{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          gap:7px;
+          padding:0 10px 0 11px;
+          min-width:0;
+          background:#ffffff;
+          color:#111111;
+          text-transform:uppercase;
+          white-space:nowrap;
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style:normal;
+          font-weight:700;
+          font-size:9px;
+          line-height:1;
+          letter-spacing:.13em;
+          box-sizing:border-box;
+        }
+
+        .shared-sweeps-mini-cart-line-entries__prefix,
+        .shared-sweeps-mini-cart-line-entries__count,
+        .shared-sweeps-mini-cart-line-entries__noun{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          line-height:1;
+          flex:0 0 auto;
+        }
+
+        .shared-sweeps-mini-cart-line-entries__count{
+          letter-spacing:.06em;
+        }
+
+        .shared-sweeps-mini-cart-line-entries__mult{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          min-width:42px;
+          padding:0 9px;
+          background:#43c3c1;
+          color:#ffffff;
+          text-transform:uppercase;
+          white-space:nowrap;
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style:normal;
+          font-weight:700;
+          font-size:10px;
+          line-height:1;
+          letter-spacing:.05em;
+          box-sizing:border-box;
+        }
+
+        @media only screen and (max-width: 767px){
+          .shared-sweeps-mini-cart-line-entries{
+            min-height:22px;
+            margin-top:7px;
+          }
+
+          .shared-sweeps-mini-cart-line-entries__copy{
+            gap:6px;
+            padding:0 9px 0 10px;
+            font-size:8px;
+            letter-spacing:.11em;
+          }
+
+          .shared-sweeps-mini-cart-line-entries__mult{
+            min-width:38px;
+            padding:0 8px;
+            font-size:9px;
+            letter-spacing:.04em;
+          }
+        }
+      </style>
+
+      <script>
+        (function() {
+          var root = document.getElementById('{{ badge_id }}');
+          if (!root) return;
+          if (root.dataset.bound === 'true') return;
+          root.dataset.bound = 'true';
+
+          var lineKey = root.getAttribute('data-line-key') || '';
+          var cartItem = root.closest('.cart__item') || document;
+          var countEl = root.querySelector('.shared-sweeps-mini-cart-line-entries__count');
+          var nounEl = root.querySelector('.shared-sweeps-mini-cart-line-entries__noun');
+
+          var mult = parseFloat(root.dataset.mult || '1') || 1;
+          var bonus = parseFloat(root.dataset.bonus || '0') || 0;
+          var divisor = parseFloat(root.dataset.entryDivisor || '1') || 1;
+          var overrideUnitPrice = root.dataset.overrideUnitPrice !== '' ? parseFloat(root.dataset.overrideUnitPrice || '0') : null;
+          var fallbackQty = parseInt(root.dataset.initialQty || '1', 10) || 1;
+          var originalUnitPriceCents = {{ line_item.original_price | default: 0 | json }};
+
+          function formatNumber(value) {
+            try {
+              return new Intl.NumberFormat().format(value);
+            } catch(e) {
+              return String(value);
+            }
+          }
+
+          function getQtyInput() {
+            if (lineKey) {
+              var keyed = document.querySelector('input[data-id="' + CSS.escape(lineKey) + '"]');
+              if (keyed) return keyed;
+            }
+            return cartItem.querySelector('.js-qty__num');
+          }
+
+          function getQty() {
+            var input = getQtyInput();
+            if (!input) return fallbackQty;
+
+            var qty = parseInt(input.value, 10);
+            if (isNaN(qty) || qty < 1) return 1;
+            return qty;
+          }
+
+          function updateEntries() {
+            var qty = getQty();
+            var basePrice = 0;
+
+            if (overrideUnitPrice !== null && !isNaN(overrideUnitPrice) && overrideUnitPrice > 0) {
+              basePrice = overrideUnitPrice * qty;
+            } else {
+              basePrice = (originalUnitPriceCents / 100) * qty;
+            }
+
+            var rawBaseEntries = basePrice / divisor;
+            var flooredBaseEntries = Math.floor(rawBaseEntries);
+            var hasDecimalRemainder = Math.abs(rawBaseEntries - flooredBaseEntries) > 0.000001;
+            var baseEntries = hasDecimalRemainder ? flooredBaseEntries + 1 : flooredBaseEntries;
+
+            var entries = Math.floor(baseEntries * mult);
+
+            if (entries < 1 && basePrice > 0) {
+              entries = 1;
+            }
+
+            if (bonus > 0) {
+              entries += bonus;
+            }
+
+            countEl.textContent = formatNumber(entries);
+            nounEl.textContent = entries === 1 ? 'ENTRY' : 'ENTRIES';
+          }
+
+          function queueUpdate() {
+            requestAnimationFrame(updateEntries);
+            setTimeout(updateEntries, 60);
+            setTimeout(updateEntries, 140);
+          }
+
+          updateEntries();
+
+          cartItem.addEventListener('change', queueUpdate, true);
+          cartItem.addEventListener('input', queueUpdate, true);
+          cartItem.addEventListener('click', function(event) {
+            if (event.target.closest('.js-qty__adjust')) {
+              queueUpdate();
+            }
+          }, true);
+        })();
+      </script>
+    {% endif %}
+  {% endif %}
+{% endif %}

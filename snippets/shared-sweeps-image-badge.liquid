@@ -1,0 +1,272 @@
+{% assign sweeps_enabled = settings.sweeps_switch | default: true %}
+
+{% liquid
+  assign sweeps_country = localization.country.iso_code | default: '' | upcase
+  assign sweeps_market_allowed = false
+
+  if sweeps_country == 'US' or sweeps_country == 'CA'
+    assign sweeps_market_allowed = true
+  endif
+
+  assign p = product
+  if p == blank and item != blank
+    assign p = item.product
+  endif
+
+  assign v = current_variant
+  if v == blank and item != blank
+    assign v = item.variant
+  endif
+  if v == blank and p != blank
+    assign v = p.selected_or_first_available_variant
+  endif
+%}
+
+{% if sweeps_enabled and sweeps_market_allowed and p != blank and v != blank %}
+  {% liquid
+    assign raw_elig = p.metafields.sharedsweeps.eligibility.value | default: p.metafields.sharedsweeps.eligibility
+    assign eligible = true
+    if raw_elig == 'false' or raw_elig == false
+      assign eligible = false
+    endif
+
+    assign badge_font = settings.font_accent | default: settings.font_heading | default: settings.font_body
+  %}
+
+  {% if eligible %}
+    {% liquid
+      assign currency_iso = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency
+      assign currency_iso = currency_iso | upcase
+
+      assign currency_scale = 1.0
+      if currency_iso == 'COP' or currency_iso == 'CLP' or currency_iso == 'ARS' or currency_iso == 'VND' or currency_iso == 'IDR'
+        assign currency_scale = 1000.0
+      endif
+
+      assign priceoverride_raw = p.metafields.sharedsweeps.priceoverride.value | default: p.metafields.sharedsweeps.priceoverride
+      assign shop_global_mult_raw = shop.metafields.sharedsweeps.global_multiplier.value | default: shop.metafields.sharedsweeps.global_multiplier | default: 1
+      assign product_mult_raw = p.metafields.sharedsweeps.multiplier.value | default: p.metafields.sharedsweeps.multiplier
+      assign bonus_raw = p.metafields.sharedsweeps.bonusEntries.value | default: p.metafields.sharedsweeps.bonusEntries | default: 0
+      assign product_entry_divisor_raw = p.metafields.sharedsweeps.entry_divisor.value | default: p.metafields.sharedsweeps.entry_divisor
+      assign shop_entry_divisor_raw = shop.metafields.sharedsweeps.entry_divisor.value | default: shop.metafields.sharedsweeps.entry_divisor
+
+      assign global_mult = shop_global_mult_raw | plus: 0
+      assign product_mult = product_mult_raw | plus: 0
+
+      assign mult = global_mult
+      if product_mult_raw != blank and product_mult > global_mult
+        assign mult = product_mult
+      endif
+
+      assign bonus = bonus_raw | plus: 0
+
+      assign entry_divisor_raw = product_entry_divisor_raw | default: shop_entry_divisor_raw
+      if entry_divisor_raw == blank
+        assign entry_divisor = currency_scale
+      else
+        assign entry_divisor = entry_divisor_raw | plus: 0.0
+        if currency_scale == 1.0 and entry_divisor >= 1000.0
+          assign entry_divisor = 1.0
+        endif
+        if entry_divisor <= 0
+          assign entry_divisor = currency_scale
+        endif
+      endif
+
+      if priceoverride_raw == blank
+        assign unit_price_value = v.price | default: p.price
+        assign base_price = unit_price_value | divided_by: 100.0
+      else
+        assign base_price = priceoverride_raw | plus: 0.0
+      endif
+
+      assign raw_base_entries = base_price | divided_by: entry_divisor
+      assign floored_base_entries = raw_base_entries | floor
+      assign decimal_remainder = raw_base_entries | minus: floored_base_entries | abs
+      assign base_entries = floored_base_entries
+
+      if decimal_remainder > 0.000001
+        assign base_entries = floored_base_entries | plus: 1
+      endif
+
+      assign entries = base_entries | times: mult | floor
+
+      if entries < 1 and base_price > 0
+        assign entries = 1
+      endif
+
+      if bonus > 0
+        assign entries = entries | plus: bonus
+      endif
+
+      assign noun = 'ENTRIES'
+      if entries == 1
+        assign noun = 'ENTRY'
+      endif
+
+      assign mult_label = mult | round: 2 | append: '' | replace: '.0', ''
+    %}
+
+    {% if base_price > 0 %}
+      <div
+        class="shared-sweeps-image-badge"
+        aria-label="Earn {{ entries | number_with_delimiter }} {{ noun | downcase }}"
+      >
+        <span class="shared-sweeps-image-badge__copy">
+          <span class="shared-sweeps-image-badge__prefix">EARN</span>
+          <span class="shared-sweeps-image-badge__count">{{ entries | number_with_delimiter }}</span>
+          <span class="shared-sweeps-image-badge__noun">{{ noun }}</span>
+        </span>
+
+        <span class="shared-sweeps-image-badge__mult">{{ mult_label }}×</span>
+      </div>
+
+      <style>
+        .product-card--featured-image-link {
+          position: relative;
+          overflow: hidden;
+          isolation: isolate;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge {
+          --sweeps-accent: #88b5b0;
+          --sweeps-text: #66707a;
+          position: absolute;
+          left: 50%;
+          bottom: 10px;
+          transform: translateX(-50%) translateZ(0);
+          z-index: 999;
+          display: inline-grid;
+          grid-template-columns: auto 82px;
+          align-items: stretch;
+          width: max-content;
+          max-width: calc(100% - 20px);
+          min-height: 38px;
+          background: rgba(255, 255, 255, 0.98);
+          border: 1px solid var(--sweeps-accent);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+          overflow: hidden;
+          box-sizing: border-box;
+          pointer-events: none;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: geometricPrecision;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__copy {
+          display: grid;
+          grid-auto-flow: column;
+          grid-auto-columns: max-content;
+          align-items: center;
+          justify-content: center;
+          column-gap: 6px;
+          min-width: 0;
+          padding: 0 16px;
+          background: rgba(255, 255, 255, 0.98);
+          color: var(--sweeps-text);
+          white-space: nowrap;
+          text-align: center;
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style: normal;
+          font-weight: 700;
+          line-height: 1;
+          box-sizing: border-box;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__prefix,
+        .product-card--featured-image-link .shared-sweeps-image-badge__noun {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          line-height: 1;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          color: var(--sweeps-text);
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__count {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 2.2ch;
+          color: var(--sweeps-accent);
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-size: 21px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: 0;
+          text-align: center;
+          font-variant-numeric: lining-nums tabular-nums;
+          font-feature-settings: "lnum" 1, "tnum" 1;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__mult {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 82px;
+          min-width: 82px;
+          padding: 0 10px;
+          background: var(--sweeps-accent);
+          color: #ffffff;
+          text-align: center;
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style: normal;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 1;
+          letter-spacing: .01em;
+          font-variant-numeric: lining-nums tabular-nums;
+          font-feature-settings: "lnum" 1, "tnum" 1;
+          box-sizing: border-box;
+        }
+
+        @media only screen and (max-width: 767px) {
+          .product-card--featured-image-link .shared-sweeps-image-badge {
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            transform: translateZ(0);
+            width: auto;
+            max-width: none;
+            min-height: 30px;
+            grid-template-columns: minmax(0, 1fr) 56px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__copy {
+            grid-auto-columns: auto;
+            column-gap: 4px;
+            padding: 0 8px;
+            justify-content: center;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__prefix {
+            display: none;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__noun {
+            font-size: 8px;
+            letter-spacing: .05em;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__count {
+            min-width: auto;
+            font-size: 16px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__mult {
+            width: 56px;
+            min-width: 56px;
+            padding: 0 6px;
+            font-size: 13px;
+          }
+
+          .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {
+            bottom: 44px;
+          }
+        }
+      </style>
+    {% endif %}
+  {% endif %}
+{% endif %}

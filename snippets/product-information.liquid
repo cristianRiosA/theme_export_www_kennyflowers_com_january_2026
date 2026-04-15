@@ -37,6 +37,7 @@
             {%- endif -%}
           {%- endif -%}
         </div>
+        {% render 'shared-sweeps-pdp-badge', product: product, current_variant: current_variant, section: section %}
         {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
           <a class="star-rating-container" href="#shopify-product-reviews">
             <div class="star-rating" style="--star-rating: {{ product.metafields.reviews.rating.value.rating }};"></div>

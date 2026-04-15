@@ -78,6 +78,7 @@
   {%- if option_name contains 'size' -%}
     
     <div class="overlay-size-preview {% if number_variants > 20 %} hide {% endif %}" data-option="{{option_name}}">
+      {% render 'shared-sweeps-size-preview-config', product: product %}
       <span class="product-sizes-preview">
 
         {%- assign optionIndex = "option" | append: forloop.index -%}

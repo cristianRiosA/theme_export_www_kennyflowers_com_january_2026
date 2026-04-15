@@ -1,0 +1,533 @@
+{% assign sweeps_enabled = settings.sweeps_switch | default: true %}
+
+{% liquid
+  assign sweeps_country = localization.country.iso_code | default: '' | upcase
+  assign sweeps_market_allowed = false
+
+  if sweeps_country == 'US' or sweeps_country == 'CA'
+    assign sweeps_market_allowed = true
+  endif
+%}
+
+{% if sweeps_enabled and sweeps_market_allowed and product != blank %}
+  {% liquid
+    assign p = product
+    assign v = current_variant | default: p.selected_or_first_available_variant
+
+    assign raw_elig = p.metafields.sharedsweeps.eligibility.value | default: p.metafields.sharedsweeps.eligibility
+    assign eligible = true
+    if raw_elig == 'false' or raw_elig == false
+      assign eligible = false
+    endif
+
+    assign badge_font = settings.font_accent | default: settings.font_heading | default: settings.font_body
+  %}
+
+  {% if eligible %}
+    {% liquid
+      assign currency_iso = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency
+      assign currency_iso = currency_iso | upcase
+
+      assign currency_scale = 1.0
+      if currency_iso == 'COP' or currency_iso == 'CLP' or currency_iso == 'ARS' or currency_iso == 'VND' or currency_iso == 'IDR'
+        assign currency_scale = 1000.0
+      endif
+
+      assign unit_price_cents = v.price | default: p.price
+
+      assign priceoverride_raw = p.metafields.sharedsweeps.priceoverride.value | default: p.metafields.sharedsweeps.priceoverride
+      assign shop_global_mult_raw = shop.metafields.sharedsweeps.global_multiplier.value | default: shop.metafields.sharedsweeps.global_multiplier | default: 1
+      assign product_mult_raw = p.metafields.sharedsweeps.multiplier.value | default: p.metafields.sharedsweeps.multiplier
+      assign bonus_raw = p.metafields.sharedsweeps.bonusEntries.value | default: p.metafields.sharedsweeps.bonusEntries | default: 0
+      assign product_entry_divisor_raw = p.metafields.sharedsweeps.entry_divisor.value | default: p.metafields.sharedsweeps.entry_divisor
+      assign shop_entry_divisor_raw = shop.metafields.sharedsweeps.entry_divisor.value | default: shop.metafields.sharedsweeps.entry_divisor
+
+      assign global_mult = shop_global_mult_raw | plus: 0
+      assign product_mult = product_mult_raw | plus: 0
+
+      assign mult = global_mult
+      if product_mult_raw != blank and product_mult > global_mult
+        assign mult = product_mult
+      endif
+
+      assign bonus = bonus_raw | plus: 0
+
+      assign entry_divisor_raw = product_entry_divisor_raw | default: shop_entry_divisor_raw
+      if entry_divisor_raw == blank
+        assign entry_divisor = currency_scale
+      else
+        assign entry_divisor = entry_divisor_raw | plus: 0.0
+        if currency_scale == 1.0 and entry_divisor >= 1000.0
+          assign entry_divisor = 1.0
+        endif
+        if entry_divisor <= 0
+          assign entry_divisor = currency_scale
+        endif
+      endif
+
+      if priceoverride_raw == blank
+        assign base_price = unit_price_cents | divided_by: 100.0
+      else
+        assign base_price = priceoverride_raw | plus: 0.0
+      endif
+
+      assign raw_base_entries = base_price | divided_by: entry_divisor
+      assign floored_base_entries = raw_base_entries | floor
+      assign decimal_remainder = raw_base_entries | minus: floored_base_entries | abs
+      assign base_entries = floored_base_entries
+      if decimal_remainder > 0.000001
+        assign base_entries = floored_base_entries | plus: 1
+      endif
+
+      assign entries = base_entries | times: mult | floor
+
+      if entries < 1 and base_price > 0
+        assign entries = 1
+      endif
+
+      if bonus > 0
+        assign entries = entries | plus: bonus
+      endif
+
+      assign noun = 'ENTRIES'
+      if entries == 1
+        assign noun = 'ENTRY'
+      endif
+
+      assign mult_label = mult | round: 2 | append: '' | replace: '.0', ''
+
+      assign _uid = section.id | default: p.id | default: 'global'
+      assign badge_id = 'shared-sweeps-pdp-badge-' | append: _uid | append: '-' | append: p.id
+    %}
+
+    {% if base_price > 0 %}
+      <div
+        id="{{ badge_id }}"
+        class="shared-sweeps-pdp-badge"
+        data-product-id="{{ p.id }}"
+        data-initial-variant-id="{{ v.id }}"
+        data-entry-divisor="{{ entry_divisor }}"
+        data-mult="{{ mult }}"
+        data-bonus="{{ bonus }}"
+        data-override-unit-price="{% if priceoverride_raw != blank %}{{ priceoverride_raw | plus: 0.0 }}{% endif %}"
+        data-currency-scale="{{ currency_scale }}"
+        aria-live="polite"
+        role="status"
+        aria-label="Earn {{ entries | number_with_delimiter }} {{ noun | downcase }}"
+      >
+        <div class="shared-sweeps-pdp-badge__copy">
+          <span class="shared-sweeps-pdp-badge__prefix">EARN</span>
+          <span class="shared-sweeps-pdp-badge__count">{{ entries | number_with_delimiter }}</span>
+          <span class="shared-sweeps-pdp-badge__noun">{{ noun }}</span>
+        </div>
+
+        <span class="shared-sweeps-pdp-badge__mult">{{ mult_label }}×</span>
+      </div>
+
+      <script type="application/json" id="{{ badge_id }}-variants">{{ p.variants | json }}</script>
+
+      <style>
+        .shared-sweeps-pdp-badge{
+          --sweeps-accent:#8fb5af;
+          --sweeps-accent-strong:#7ea59f;
+          --sweeps-text:#626c76;
+          display:inline-grid;
+          grid-template-columns:minmax(0,auto) 92px;
+          align-items:stretch;
+          max-width:100%;
+          min-height:40px;
+          margin:10px 0 14px;
+          background:#ffffff;
+          color:var(--sweeps-text);
+          border:1px solid var(--sweeps-accent);
+          box-sizing:border-box;
+          overflow:hidden;
+          box-shadow:0 4px 12px rgba(0,0,0,.06);
+          -webkit-font-smoothing:antialiased;
+          -moz-osx-font-smoothing:grayscale;
+          text-rendering:geometricPrecision;
+        }
+
+        .shared-sweeps-pdp-badge__copy{
+          display:grid;
+          grid-auto-flow:column;
+          grid-auto-columns:max-content;
+          align-items:center;
+          justify-content:center;
+          column-gap:7px;
+          margin:0;
+          padding:0 16px;
+          min-width:0;
+          background:#ffffff;
+          color:var(--sweeps-text);
+          white-space:nowrap;
+          text-transform:uppercase;
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style:normal;
+          font-weight:700;
+          line-height:1;
+          box-sizing:border-box;
+          overflow:hidden;
+        }
+
+        .shared-sweeps-pdp-badge__prefix,
+        .shared-sweeps-pdp-badge__noun{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          font-size:10px;
+          line-height:1;
+          letter-spacing:.08em;
+          color:var(--sweeps-text);
+          flex:0 0 auto;
+        }
+
+        .shared-sweeps-pdp-badge__count{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          min-width:2.3ch;
+          color:var(--sweeps-accent-strong);
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style:normal;
+          font-weight:700;
+          font-size:24px;
+          line-height:1;
+          letter-spacing:0;
+          text-align:center;
+          flex:0 0 auto;
+          font-variant-numeric:lining-nums tabular-nums;
+          font-feature-settings:"lnum" 1, "tnum" 1;
+        }
+
+        .shared-sweeps-pdp-badge__mult{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          min-width:92px;
+          width:92px;
+          padding:0 12px;
+          background:var(--sweeps-accent);
+          color:#ffffff;
+          text-transform:uppercase;
+          text-align:center;
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style:normal;
+          font-weight:700;
+          font-size:17px;
+          line-height:1;
+          letter-spacing:.01em;
+          white-space:nowrap;
+          box-sizing:border-box;
+          font-variant-numeric:lining-nums tabular-nums;
+          font-feature-settings:"lnum" 1, "tnum" 1;
+        }
+
+        @media (max-width: 749px){
+          .shared-sweeps-pdp-badge{
+            grid-template-columns:minmax(0,auto) 82px;
+            min-height:36px;
+            margin-top:8px;
+            margin-bottom:12px;
+          }
+
+          .shared-sweeps-pdp-badge__copy{
+            column-gap:6px;
+            padding:0 13px;
+          }
+
+          .shared-sweeps-pdp-badge__prefix,
+          .shared-sweeps-pdp-badge__noun{
+            font-size:9px;
+            letter-spacing:.07em;
+          }
+
+          .shared-sweeps-pdp-badge__count{
+            font-size:20px;
+          }
+
+          .shared-sweeps-pdp-badge__mult{
+            min-width:82px;
+            width:82px;
+            font-size:15px;
+          }
+        }
+
+        @media (max-width: 389px){
+          .shared-sweeps-pdp-badge{
+            grid-template-columns:minmax(0,auto) 74px;
+            min-height:34px;
+          }
+
+          .shared-sweeps-pdp-badge__copy{
+            column-gap:5px;
+            padding:0 11px;
+          }
+
+          .shared-sweeps-pdp-badge__prefix,
+          .shared-sweeps-pdp-badge__noun{
+            font-size:8px;
+            letter-spacing:.06em;
+          }
+
+          .shared-sweeps-pdp-badge__count{
+            font-size:18px;
+          }
+
+          .shared-sweeps-pdp-badge__mult{
+            min-width:74px;
+            width:74px;
+            font-size:14px;
+          }
+        }
+      </style>
+
+      <script>
+        (function() {
+          var root = document.getElementById('{{ badge_id }}');
+          var variantsNode = document.getElementById('{{ badge_id }}-variants');
+          if (!root || !variantsNode) return;
+          if (root.dataset.bound === 'true') return;
+          root.dataset.bound = 'true';
+
+          var scope = root.closest('.product-section') || root.closest('.shopify-section') || document;
+          var variants = [];
+
+          try {
+            variants = JSON.parse(variantsNode.textContent || '[]');
+          } catch (e) {
+            variants = [];
+          }
+
+          var countEl = root.querySelector('.shared-sweeps-pdp-badge__count');
+          var nounEl = root.querySelector('.shared-sweeps-pdp-badge__noun');
+          var multEl = root.querySelector('.shared-sweeps-pdp-badge__mult');
+
+          var mult = parseFloat(root.dataset.mult || '1') || 1;
+          var bonus = parseFloat(root.dataset.bonus || '0') || 0;
+          var divisor = parseFloat(root.dataset.entryDivisor || '1') || 1;
+          var overrideUnitPrice = root.dataset.overrideUnitPrice !== '' ? parseFloat(root.dataset.overrideUnitPrice || '0') : null;
+
+          function isVisible(el) {
+            return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length));
+          }
+
+          function formatNumber(value) {
+            try {
+              return new Intl.NumberFormat().format(value);
+            } catch (e) {
+              return String(value);
+            }
+          }
+
+          function formatMultiplier(value) {
+            var num = parseFloat(value);
+            if (isNaN(num)) return '1';
+            if (Math.abs(num - Math.round(num)) < 0.000001) return String(Math.round(num));
+            return num.toFixed(2).replace(/\.?0+$/, '');
+          }
+
+          function parseMoneyToCents(value) {
+            if (!value) return null;
+
+            var str = String(value).replace(/\s+/g, '').replace(/[^\d,.\-]/g, '');
+            if (!str) return null;
+
+            var hasComma = str.indexOf(',') > -1;
+            var hasDot = str.indexOf('.') > -1;
+
+            if (hasComma && hasDot) {
+              if (str.lastIndexOf(',') > str.lastIndexOf('.')) {
+                str = str.replace(/\./g, '').replace(',', '.');
+              } else {
+                str = str.replace(/,/g, '');
+              }
+            } else if (hasComma && !hasDot) {
+              var commaParts = str.split(',');
+              if (commaParts[commaParts.length - 1].length === 2) {
+                str = commaParts.slice(0, -1).join('') + '.' + commaParts[commaParts.length - 1];
+              } else {
+                str = str.replace(/,/g, '');
+              }
+            } else {
+              str = str.replace(/,/g, '');
+            }
+
+            var num = parseFloat(str);
+            if (isNaN(num)) return null;
+            return Math.round(num * 100);
+          }
+
+          function getVariantId() {
+            var checked = scope.querySelector('input[name="id"]:checked');
+            if (checked && checked.value) return String(checked.value);
+
+            var fields = scope.querySelectorAll('select[name="id"], input[name="id"]');
+            for (var i = 0; i < fields.length; i++) {
+              if (fields[i].value) return String(fields[i].value);
+            }
+
+            return String(root.dataset.initialVariantId || '');
+          }
+
+          function getVariantObject() {
+            var id = getVariantId();
+            if (!id) return null;
+
+            for (var i = 0; i < variants.length; i++) {
+              if (String(variants[i].id) === id) return variants[i];
+            }
+
+            return null;
+          }
+
+          function getQty() {
+            var selectors = [
+              'input[name="quantity"]',
+              '.quantity__input',
+              '.js-qty__num',
+              'input[type="number"][name*="quantity"]',
+              'input[type="number"][id*="quantity"]'
+            ];
+
+            for (var s = 0; s < selectors.length; s++) {
+              var nodes = scope.querySelectorAll(selectors[s]);
+              for (var i = 0; i < nodes.length; i++) {
+                var el = nodes[i];
+                if (!el || el.value == null) continue;
+
+                if (isVisible(el) || document.activeElement === el || el.type === 'hidden' || el.readOnly) {
+                  var qty = parseInt(el.value, 10);
+                  if (!isNaN(qty) && qty > 0) return qty;
+                }
+              }
+            }
+
+            return 1;
+          }
+
+          function getDisplayedUnitPriceCents() {
+            var selectors = [
+              '[data-product-price]',
+              '.product__price',
+              '#ProductPrice',
+              '.price__current .money',
+              '.price__current',
+              '.price-item--sale',
+              '.current-price.money',
+              '.current-price',
+              '.price-item--regular',
+              '.product__price .money',
+              '.price .money'
+            ];
+
+            for (var s = 0; s < selectors.length; s++) {
+              var nodes = scope.querySelectorAll(selectors[s]);
+              for (var i = 0; i < nodes.length; i++) {
+                var el = nodes[i];
+                if (!el) continue;
+                var cents = parseMoneyToCents(el.textContent);
+                if (cents && cents > 0) return cents;
+              }
+            }
+
+            return null;
+          }
+
+          function updateBadge() {
+            var qty = getQty();
+            var variant = getVariantObject();
+            var variantPriceCents = variant && typeof variant.price !== 'undefined' ? parseInt(variant.price, 10) : null;
+            var displayedUnitPriceCents = getDisplayedUnitPriceCents();
+
+            var basePrice = 0;
+
+            if (overrideUnitPrice !== null && !isNaN(overrideUnitPrice) && overrideUnitPrice > 0) {
+              basePrice = overrideUnitPrice * qty;
+            } else {
+              var unitPriceCents = displayedUnitPriceCents || variantPriceCents;
+              if (!unitPriceCents || isNaN(unitPriceCents)) unitPriceCents = 0;
+              basePrice = (unitPriceCents / 100) * qty;
+            }
+
+            var rawBaseEntries = basePrice / divisor;
+            var flooredBaseEntries = Math.floor(rawBaseEntries);
+            var hasDecimalRemainder = Math.abs(rawBaseEntries - flooredBaseEntries) > 0.000001;
+            var baseEntries = hasDecimalRemainder ? flooredBaseEntries + 1 : flooredBaseEntries;
+
+            var entries = Math.floor(baseEntries * mult);
+
+            if (entries < 1 && basePrice > 0) {
+              entries = 1;
+            }
+
+            if (bonus > 0) {
+              entries = entries + bonus;
+            }
+
+            var noun = entries === 1 ? 'ENTRY' : 'ENTRIES';
+
+            countEl.textContent = formatNumber(entries);
+            nounEl.textContent = noun;
+            multEl.textContent = formatMultiplier(mult) + '×';
+            root.setAttribute('aria-label', 'Earn ' + formatNumber(entries) + ' ' + noun.toLowerCase());
+          }
+
+          var rafLock = false;
+          function queueUpdate() {
+            if (rafLock) return;
+            rafLock = true;
+            requestAnimationFrame(function() {
+              rafLock = false;
+              updateBadge();
+            });
+          }
+
+          function burstUpdate() {
+            queueUpdate();
+            setTimeout(queueUpdate, 60);
+            setTimeout(queueUpdate, 140);
+            setTimeout(queueUpdate, 260);
+            setTimeout(queueUpdate, 420);
+          }
+
+          updateBadge();
+
+          scope.addEventListener('change', burstUpdate, true);
+          scope.addEventListener('input', burstUpdate, true);
+
+          scope.addEventListener('click', function(event) {
+            var trigger = event.target.closest(
+              '.js-qty__adjust, .quantity__button, .quantity-selector__button, .qty__button, [data-quantity-button], [data-qty-button], .js-qty__adjust--plus, .js-qty__adjust--minus'
+            );
+            if (trigger) {
+              burstUpdate();
+            }
+          }, true);
+
+          document.addEventListener('variant:change', burstUpdate, true);
+          document.addEventListener('product:variant-change', burstUpdate, true);
+          document.addEventListener('price:change', burstUpdate, true);
+
+          if ('MutationObserver' in window) {
+            var observer = new MutationObserver(function() {
+              burstUpdate();
+            });
+
+            observer.observe(scope, {
+              subtree: true,
+              childList: true,
+              characterData: true,
+              attributes: true
+            });
+          }
+
+          setTimeout(burstUpdate, 150);
+          setTimeout(burstUpdate, 400);
+          setTimeout(burstUpdate, 900);
+          setTimeout(burstUpdate, 1500);
+        })();
+      </script>
+    {% endif %}
+  {% endif %}
+{% endif %}
