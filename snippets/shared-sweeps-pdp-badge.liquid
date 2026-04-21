@@ -95,6 +95,12 @@
       endif
 
       assign mult_label = mult | round: 2 | append: '' | replace: '.0', ''
+      assign sweeps_helper_text = 'Every $1 = 1 entry to the Dream Vacation Giveaway'
+
+      assign show_multiplier = false
+      if mult > 1
+        assign show_multiplier = true
+      endif
 
       assign _uid = section.id | default: p.id | default: 'global'
       assign badge_id = 'shared-sweeps-pdp-badge-' | append: _uid | append: '-' | append: p.id
@@ -103,7 +109,7 @@
     {% if base_price > 0 %}
       <div
         id="{{ badge_id }}"
-        class="shared-sweeps-pdp-badge"
+        class="shared-sweeps-pdp-badge{% if show_multiplier %} shared-sweeps-pdp-badge--has-mult{% endif %}"
         data-product-id="{{ p.id }}"
         data-initial-variant-id="{{ v.id }}"
         data-entry-divisor="{{ entry_divisor }}"
@@ -119,9 +125,27 @@
           <span class="shared-sweeps-pdp-badge__prefix">EARN</span>
           <span class="shared-sweeps-pdp-badge__count">{{ entries | number_with_delimiter }}</span>
           <span class="shared-sweeps-pdp-badge__noun">{{ noun }}</span>
+
+          <span
+            class="shared-sweeps-pdp-badge__info-wrap"
+            aria-label="{{ sweeps_helper_text }}"
+            tabindex="0"
+          >
+            <span class="shared-sweeps-pdp-badge__info-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" focusable="false" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.25"></circle>
+                <circle cx="8" cy="4.7" r="1" fill="currentColor"></circle>
+                <path d="M8 7.2V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+            </span>
+
+            <span class="shared-sweeps-pdp-badge__tooltip">{{ sweeps_helper_text }}</span>
+          </span>
         </div>
 
-        <span class="shared-sweeps-pdp-badge__mult">{{ mult_label }}×</span>
+        {% if show_multiplier %}
+          <span class="shared-sweeps-pdp-badge__mult">{{ mult_label }}×</span>
+        {% endif %}
       </div>
 
       <script type="application/json" id="{{ badge_id }}-variants">{{ p.variants | json }}</script>
@@ -131,8 +155,9 @@
           --sweeps-accent:#8fb5af;
           --sweeps-accent-strong:#7ea59f;
           --sweeps-text:#626c76;
+          position:relative;
           display:inline-grid;
-          grid-template-columns:auto 68px;
+          grid-template-columns:auto;
           align-items:stretch;
           max-width:100%;
           min-height:32px;
@@ -141,11 +166,15 @@
           color:var(--sweeps-text);
           border:1px solid var(--sweeps-accent);
           box-sizing:border-box;
-          overflow:hidden;
+          overflow:visible;
           box-shadow:0 2px 8px rgba(0,0,0,.05);
           -webkit-font-smoothing:antialiased;
           -moz-osx-font-smoothing:grayscale;
           text-rendering:geometricPrecision;
+        }
+
+        .shared-sweeps-pdp-badge--has-mult{
+          grid-template-columns:auto auto;
         }
 
         .shared-sweeps-pdp-badge__copy{
@@ -167,7 +196,7 @@
           font-weight:700;
           line-height:1;
           box-sizing:border-box;
-          overflow:hidden;
+          overflow:visible;
         }
 
         .shared-sweeps-pdp-badge__prefix,
@@ -199,15 +228,85 @@
           font-feature-settings:"lnum" 1, "tnum" 1;
         }
 
+        .shared-sweeps-pdp-badge__info-wrap{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          align-self:center;
+          width:16px;
+          min-width:16px;
+          height:16px;
+          margin-left:4px;
+          pointer-events:auto;
+          cursor:help;
+          outline:none;
+        }
+
+        .shared-sweeps-pdp-badge__info-icon{
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          width:16px;
+          min-width:16px;
+          height:16px;
+          color:var(--sweeps-accent);
+          line-height:0;
+          box-sizing:border-box;
+        }
+
+        .shared-sweeps-pdp-badge__info-icon svg{
+          display:block;
+          width:16px;
+          height:16px;
+        }
+
+        .shared-sweeps-pdp-badge__tooltip{
+          position:absolute;
+          left:calc(100% + 18px);
+          top:50%;
+          bottom:auto;
+          transform:translateY(-50%);
+          z-index:1002;
+          width:max-content;
+          min-width:260px;
+          max-width:320px;
+          padding:12px 16px;
+          background:rgba(255,255,255,.98);
+          border:1px solid var(--sweeps-accent);
+          box-shadow:0 6px 18px rgba(0,0,0,.10);
+          color:var(--sweeps-text);
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style:normal;
+          font-weight:700;
+          font-size:13px;
+          line-height:1.4;
+          letter-spacing:.01em;
+          text-transform:none;
+          white-space:normal;
+          text-align:center;
+          box-sizing:border-box;
+          opacity:0;
+          visibility:hidden;
+          pointer-events:none;
+          transition:opacity .18s ease, visibility .18s ease;
+        }
+
+        .shared-sweeps-pdp-badge__info-wrap:hover .shared-sweeps-pdp-badge__tooltip,
+        .shared-sweeps-pdp-badge__info-wrap:focus .shared-sweeps-pdp-badge__tooltip,
+        .shared-sweeps-pdp-badge__info-wrap:focus-within .shared-sweeps-pdp-badge__tooltip{
+          opacity:1;
+          visibility:visible;
+        }
+
         .shared-sweeps-pdp-badge__mult{
           display:flex;
           align-items:center;
           justify-content:center;
-          min-width:68px;
-          width:68px;
-          padding:0 8px;
-          background:var(--sweeps-accent);
-          color:#ffffff;
+          min-width:0;
+          padding:0 12px 0 10px;
+          background:#ffffff;
+          color:var(--sweeps-accent-strong);
+          border-left:1px solid var(--sweeps-accent);
           text-align:center;
           font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
           font-style:normal;
@@ -224,10 +323,14 @@
 
         @media (max-width: 749px){
           .shared-sweeps-pdp-badge{
-            grid-template-columns:minmax(0,1fr) 54px;
+            grid-template-columns:minmax(0,1fr);
             min-height:28px;
             margin-top:8px;
             margin-bottom:12px;
+          }
+
+          .shared-sweeps-pdp-badge--has-mult{
+            grid-template-columns:minmax(0,1fr) auto;
           }
 
           .shared-sweeps-pdp-badge__copy{
@@ -242,10 +345,41 @@
             letter-spacing:.03em;
           }
 
+          .shared-sweeps-pdp-badge__info-wrap{
+            width:14px;
+            min-width:14px;
+            height:14px;
+            margin-left:4px;
+          }
+
+          .shared-sweeps-pdp-badge__info-icon{
+            width:14px;
+            min-width:14px;
+            height:14px;
+          }
+
+          .shared-sweeps-pdp-badge__info-icon svg{
+            width:14px;
+            height:14px;
+          }
+
+          .shared-sweeps-pdp-badge__tooltip{
+            left:calc(100% + 12px);
+            top:50%;
+            right:auto;
+            bottom:auto;
+            transform:translateY(-50%);
+            width:170px;
+            min-width:170px;
+            max-width:190px;
+            padding:10px 12px;
+            font-size:12px;
+            line-height:1.35;
+          }
+
           .shared-sweeps-pdp-badge__mult{
-            min-width:54px;
-            width:54px;
-            padding:0 6px;
+            min-width:0;
+            padding:0 8px 0 6px;
             font-size:12px;
             font-weight:600;
           }
@@ -466,7 +600,11 @@
 
             countEl.textContent = formatNumber(entries);
             nounEl.textContent = noun;
-            multEl.textContent = formatMultiplier(mult) + '×';
+
+            if (multEl) {
+              multEl.textContent = formatMultiplier(mult) + '×';
+            }
+
             root.setAttribute('aria-label', 'Earn ' + formatNumber(entries) + ' ' + noun.toLowerCase());
           }
 

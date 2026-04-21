@@ -184,11 +184,15 @@
 				{%- endif -%}
 			</div>
 			<div class="small-12 columns">
-				{%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
-          <div class="footer--follow-on-shop">
-            {{ shop | login_button: action: 'follow' }}
-          </div>
-        {%- endif -%}
+			{% render 'shared-sweeps-footer-disclaimer' %}
+			</div>
+
+			<div class="small-12 columns">
+			{%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+				<div class="footer--follow-on-shop">
+				{{ shop | login_button: action: 'follow' }}
+				</div>
+			{%- endif -%}
 			</div>
 		</div>
 	</div>

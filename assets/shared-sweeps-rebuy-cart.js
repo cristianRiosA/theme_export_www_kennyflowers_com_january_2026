@@ -3,8 +3,27 @@
         itemsWrap: '[data-component-id="cart_items"], #cart_items, [data-smartcart-items]',
         item: 'li[aria-label="product"][role="listitem"], .rebuy-cart__flyout-item',
         info: '.rebuy-cart__flyout-item-info',
-        productLink: 'a[href*="/products/"]'
+        productLink: 'a[href*="/products/"]',
+        badge: '.shared-sweeps-rebuy-line-badge',
+        infoWrap: '.shared-sweeps-rebuy-line-badge__info-wrap',
+        tooltip: '.shared-sweeps-rebuy-line-badge__tooltip'
     };
+
+    var HELPER_TEXT = 'Every $1 = 1 entry to the Dream Vacation Giveaway';
+    var MOBILE_BREAKPOINT = 749;
+
+    var observerPauseCount = 0;
+    var tooltipEventsBound = false;
+
+    function pauseObserver() {
+        observerPauseCount += 1;
+    }
+
+    function resumeObserver() {
+        setTimeout(function () {
+            observerPauseCount = Math.max(0, observerPauseCount - 1);
+        }, 0);
+    }
 
     function debounce(fn, wait) {
         var t;
@@ -36,6 +55,10 @@
             .toLowerCase();
     }
 
+    function isMobileViewport() {
+        return window.innerWidth <= MOBILE_BREAKPOINT;
+    }
+
     function parseProductLink(node) {
         var link = node.querySelector(SELECTORS.productLink);
         if (!link) return { handle: '', variantId: '' };
@@ -60,7 +83,7 @@
 
     function getEntries(cartItem) {
         var props = cartItem.properties || {};
-        var mult = parseFloat(props._ss_mult || '1') || 1;
+        var multValue = parseFloat(props._ss_mult || '1') || 1;
         var bonus = parseFloat(props._ss_bonus || '0') || 0;
         var divisor = parseFloat(props._ss_entry_divisor || '1') || 1;
         var overrideUnitPrice =
@@ -82,7 +105,7 @@
         var hasDecimalRemainder = Math.abs(rawBaseEntries - flooredBaseEntries) > 0.000001;
         var baseEntries = hasDecimalRemainder ? flooredBaseEntries + 1 : flooredBaseEntries;
 
-        var entries = Math.floor(baseEntries * mult);
+        var entries = Math.floor(baseEntries * multValue);
 
         if (entries < 1 && basePrice > 0) entries = 1;
         if (bonus > 0) entries += bonus;
@@ -90,20 +113,37 @@
         return {
             entries: entries,
             noun: entries === 1 ? 'ENTRY' : 'ENTRIES',
-            mult: formatMultiplier(mult) + '×'
+            mult: formatMultiplier(multValue) + '×',
+            showMultiplier: multValue > 1
         };
     }
 
     function buildBadge(data) {
         var el = document.createElement('div');
-        el.className = 'shared-sweeps-rebuy-line-badge';
+        el.className =
+            'shared-sweeps-rebuy-line-badge' +
+            (data.showMultiplier ? ' shared-sweeps-rebuy-line-badge--has-mult' : '');
+        el.setAttribute('aria-label', formatNumber(data.entries) + ' ' + data.noun.toLowerCase());
+
         el.innerHTML =
             '<span class="shared-sweeps-rebuy-line-badge__copy">' +
-            '<span class="shared-sweeps-rebuy-line-badge__prefix">EARN</span>' +
             '<span class="shared-sweeps-rebuy-line-badge__count">' + formatNumber(data.entries) + '</span>' +
             '<span class="shared-sweeps-rebuy-line-badge__noun">' + data.noun + '</span>' +
+            '<span class="shared-sweeps-rebuy-line-badge__info-wrap" aria-label="' + HELPER_TEXT.replace(/"/g, '&quot;') + '" aria-expanded="false" role="button" tabindex="0">' +
+            '<span class="shared-sweeps-rebuy-line-badge__info-icon" aria-hidden="true">' +
+            '<svg viewBox="0 0 16 16" focusable="false" aria-hidden="true">' +
+            '<circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.25"></circle>' +
+            '<circle cx="8" cy="4.7" r="1" fill="currentColor"></circle>' +
+            '<path d="M8 7.2V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>' +
+            '</svg>' +
             '</span>' +
-            '<span class="shared-sweeps-rebuy-line-badge__mult">' + data.mult + '</span>';
+            '<span class="shared-sweeps-rebuy-line-badge__tooltip">' + HELPER_TEXT + '</span>' +
+            '</span>' +
+            '</span>' +
+            (data.showMultiplier
+                ? '<span class="shared-sweeps-rebuy-line-badge__mult">' + data.mult + '</span>'
+                : '');
+
         return el;
     }
 
@@ -117,17 +157,22 @@
         --sweeps-accent:#88b5b0;
         --sweeps-accent-strong:#7ea59f;
         --sweeps-text:#66707a;
+        position:relative;
         display:inline-grid;
-        grid-template-columns:auto 68px;
+        grid-template-columns:auto;
         align-items:stretch;
         min-height:32px;
         margin-top:8px;
         background:#ffffff;
         border:1px solid var(--sweeps-accent);
         box-shadow:0 2px 8px rgba(0,0,0,.05);
-        overflow:hidden;
+        overflow:visible;
         max-width:100%;
         box-sizing:border-box;
+      }
+
+      .shared-sweeps-rebuy-line-badge--has-mult{
+        grid-template-columns:auto auto;
       }
 
       .shared-sweeps-rebuy-line-badge__copy{
@@ -144,9 +189,9 @@
         font-weight:700;
         line-height:1;
         box-sizing:border-box;
+        overflow:visible;
       }
 
-      .shared-sweeps-rebuy-line-badge__prefix,
       .shared-sweeps-rebuy-line-badge__noun,
       .shared-sweeps-rebuy-line-badge__count{
         display:inline-flex;
@@ -159,7 +204,6 @@
         font-weight:700;
       }
 
-      .shared-sweeps-rebuy-line-badge__prefix,
       .shared-sweeps-rebuy-line-badge__noun{
         color:var(--sweeps-text);
       }
@@ -169,19 +213,85 @@
         text-align:center;
         color:var(--sweeps-accent-strong);
         letter-spacing:.01em;
-        font-variant-numeric: lining-nums tabular-nums;
+        font-variant-numeric:lining-nums tabular-nums;
         font-feature-settings:"lnum" 1, "tnum" 1;
+      }
+
+      .shared-sweeps-rebuy-line-badge__info-wrap{
+        position:relative;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        align-self:center;
+        width:16px;
+        min-width:16px;
+        height:16px;
+        margin-left:4px;
+        pointer-events:auto;
+        cursor:help;
+        outline:none;
+      }
+
+      .shared-sweeps-rebuy-line-badge__info-icon{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:16px;
+        min-width:16px;
+        height:16px;
+        color:var(--sweeps-accent);
+        line-height:0;
+        box-sizing:border-box;
+      }
+
+      .shared-sweeps-rebuy-line-badge__info-icon svg{
+        display:block;
+        width:16px;
+        height:16px;
+      }
+
+      .shared-sweeps-rebuy-line-badge__tooltip{
+        position:absolute;
+        left:50%;
+        bottom:calc(100% + 10px);
+        transform:translateX(-50%);
+        z-index:1004;
+        width:max-content;
+        min-width:240px;
+        max-width:260px;
+        padding:10px 12px;
+        background:rgba(255,255,255,.98);
+        border:1px solid var(--sweeps-accent);
+        box-shadow:0 6px 18px rgba(0,0,0,.10);
+        color:var(--sweeps-text);
+        font-size:13px;
+        font-weight:700;
+        line-height:1.35;
+        letter-spacing:.01em;
+        text-transform:none;
+        white-space:normal;
+        text-align:center;
+        box-sizing:border-box;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity .18s ease, visibility .18s ease;
+      }
+
+      .shared-sweeps-rebuy-line-badge__info-wrap[data-open="true"] .shared-sweeps-rebuy-line-badge__tooltip{
+        opacity:1;
+        visibility:visible;
       }
 
       .shared-sweeps-rebuy-line-badge__mult{
         display:flex;
         align-items:center;
         justify-content:center;
-        min-width:68px;
-        width:68px;
-        padding:0 8px;
-        background:var(--sweeps-accent);
-        color:#fff;
+        min-width:0;
+        padding:0 12px 0 10px;
+        background:#ffffff;
+        color:var(--sweeps-accent-strong);
+        border-left:1px solid var(--sweeps-accent);
         font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size:15px;
         font-weight:600;
@@ -189,15 +299,28 @@
         letter-spacing:0;
         text-align:center;
         text-transform:none;
-        font-variant-numeric: lining-nums tabular-nums;
+        font-variant-numeric:lining-nums tabular-nums;
         font-feature-settings:"lnum" 1, "tnum" 1;
         box-sizing:border-box;
       }
 
+      @media (min-width: 750px){
+        .shared-sweeps-rebuy-line-badge__info-wrap:hover .shared-sweeps-rebuy-line-badge__tooltip,
+        .shared-sweeps-rebuy-line-badge__info-wrap:focus .shared-sweeps-rebuy-line-badge__tooltip,
+        .shared-sweeps-rebuy-line-badge__info-wrap:focus-within .shared-sweeps-rebuy-line-badge__tooltip{
+          opacity:1;
+          visibility:visible;
+        }
+      }
+
       @media (max-width: 749px){
         .shared-sweeps-rebuy-line-badge{
-          grid-template-columns:minmax(0,1fr) 54px;
+          grid-template-columns:minmax(0,1fr);
           min-height:28px;
+        }
+
+        .shared-sweeps-rebuy-line-badge--has-mult{
+          grid-template-columns:minmax(0,1fr) auto;
         }
 
         .shared-sweeps-rebuy-line-badge__copy{
@@ -205,23 +328,131 @@
           padding:0 8px;
         }
 
-        .shared-sweeps-rebuy-line-badge__prefix,
         .shared-sweeps-rebuy-line-badge__noun,
         .shared-sweeps-rebuy-line-badge__count{
           font-size:11px;
           letter-spacing:.03em;
         }
 
+        .shared-sweeps-rebuy-line-badge__info-wrap{
+          width:14px;
+          min-width:14px;
+          height:14px;
+          margin-left:4px;
+          cursor:pointer;
+        }
+
+        .shared-sweeps-rebuy-line-badge__info-icon{
+          width:14px;
+          min-width:14px;
+          height:14px;
+        }
+
+        .shared-sweeps-rebuy-line-badge__info-icon svg{
+          width:14px;
+          height:14px;
+        }
+
+        .shared-sweeps-rebuy-line-badge__tooltip{
+          left:50%;
+          right:auto;
+          bottom:calc(100% + 8px);
+          top:auto;
+          transform:translateX(-50%);
+          width:max-content;
+          min-width:180px;
+          max-width:min(220px, calc(100vw - 24px));
+          padding:10px 12px;
+          font-size:12px;
+          line-height:1.35;
+        }
+
         .shared-sweeps-rebuy-line-badge__mult{
-          min-width:54px;
-          width:54px;
-          padding:0 6px;
+          min-width:0;
+          padding:0 8px 0 6px;
           font-size:12px;
           font-weight:600;
         }
       }
     `;
         document.head.appendChild(style);
+    }
+
+    function closeAllTooltips(except) {
+        var infoWraps = document.querySelectorAll(SELECTORS.infoWrap);
+        infoWraps.forEach(function (node) {
+            if (except && node === except) return;
+            node.removeAttribute('data-open');
+            node.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    function openTooltip(infoWrap) {
+        if (!infoWrap) return;
+        closeAllTooltips(infoWrap);
+        infoWrap.setAttribute('data-open', 'true');
+        infoWrap.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeTooltip(infoWrap) {
+        if (!infoWrap) return;
+        infoWrap.removeAttribute('data-open');
+        infoWrap.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleTooltip(infoWrap) {
+        if (!infoWrap) return;
+
+        if (infoWrap.getAttribute('data-open') === 'true') {
+            closeTooltip(infoWrap);
+        } else {
+            openTooltip(infoWrap);
+        }
+    }
+
+    function bindTooltipEvents() {
+        if (tooltipEventsBound) return;
+        tooltipEventsBound = true;
+
+        document.addEventListener('click', function (event) {
+            var infoWrap = event.target.closest(SELECTORS.infoWrap);
+
+            if (infoWrap) {
+                if (isMobileViewport()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    toggleTooltip(infoWrap);
+                }
+                return;
+            }
+
+            closeAllTooltips();
+        }, true);
+
+        document.addEventListener('keydown', function (event) {
+            var active = document.activeElement;
+            var infoWrap = active && active.matches && active.matches(SELECTORS.infoWrap) ? active : null;
+
+            if (event.key === 'Escape') {
+                closeAllTooltips();
+                return;
+            }
+
+            if (!infoWrap) return;
+
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleTooltip(infoWrap);
+            }
+        });
+
+        window.addEventListener('resize', debounce(function () {
+            closeAllTooltips();
+        }, 40));
+
+        window.addEventListener('scroll', debounce(function () {
+            closeAllTooltips();
+        }, 20), true);
     }
 
     function findMatchingCartItem(node, cartItems, usedIndexes) {
@@ -277,23 +508,31 @@
         var itemNodes = itemsWrap.querySelectorAll(SELECTORS.item);
         if (!itemNodes.length) return;
 
-        itemNodes.forEach(function (node) {
-            var existing = node.querySelector('.shared-sweeps-rebuy-line-badge');
-            if (existing) existing.remove();
-        });
+        pauseObserver();
 
-        var usedIndexes = {};
+        try {
+            itemNodes.forEach(function (node) {
+                var existing = node.querySelector(SELECTORS.badge);
+                if (existing) existing.remove();
+            });
 
-        itemNodes.forEach(function (node) {
-            var cartItem = findMatchingCartItem(node, cart.items, usedIndexes);
-            if (!cartItem) return;
+            closeAllTooltips();
 
-            var data = getEntries(cartItem);
-            if (!data.entries || data.entries < 1) return;
+            var usedIndexes = {};
 
-            var mount = node.querySelector(SELECTORS.info) || node;
-            mount.appendChild(buildBadge(data));
-        });
+            itemNodes.forEach(function (node) {
+                var cartItem = findMatchingCartItem(node, cart.items, usedIndexes);
+                if (!cartItem) return;
+
+                var data = getEntries(cartItem);
+                if (!data.entries || data.entries < 1) return;
+
+                var mount = node.querySelector(SELECTORS.info) || node;
+                mount.appendChild(buildBadge(data));
+            });
+        } finally {
+            resumeObserver();
+        }
     }
 
     function loadCartAndRender() {
@@ -311,8 +550,32 @@
         if (document.body.__sharedSweepsRebuyObserver) return;
         document.body.__sharedSweepsRebuyObserver = true;
 
-        var observer = new MutationObserver(function () {
-            debouncedRender();
+        var observer = new MutationObserver(function (mutations) {
+            if (observerPauseCount > 0) return;
+
+            var shouldRerender = mutations.some(function (mutation) {
+                var added = Array.prototype.slice.call(mutation.addedNodes || []);
+                var removed = Array.prototype.slice.call(mutation.removedNodes || []);
+                var changedNodes = added.concat(removed);
+
+                return changedNodes.some(function (node) {
+                    if (!node || node.nodeType !== 1) return false;
+
+                    if (
+                        node.id === 'shared-sweeps-rebuy-line-badge-styles' ||
+                        (node.classList && node.classList.contains('shared-sweeps-rebuy-line-badge')) ||
+                        (node.querySelector && node.querySelector(SELECTORS.badge))
+                    ) {
+                        return false;
+                    }
+
+                    return true;
+                });
+            });
+
+            if (shouldRerender) {
+                debouncedRender();
+            }
         });
 
         observer.observe(document.body, {
@@ -322,6 +585,8 @@
     }
 
     function init() {
+        injectStyles();
+        bindTooltipEvents();
         loadCartAndRender();
         initObserver();
 
