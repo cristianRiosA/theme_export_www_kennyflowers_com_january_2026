@@ -1,4 +1,5 @@
 {% assign sweeps_enabled = settings.sweeps_switch | default: true %}
+{% assign sweeps_show_image_multiplier_always = true %}
 
 {% liquid
   assign sweeps_country = localization.country.iso_code | default: '' | upcase
@@ -105,43 +106,28 @@
       endif
 
       assign mult_label = mult | round: 2 | append: '' | replace: '.0', ''
-      assign sweeps_helper_text = 'Every $1 = 1 entry to the Dream Vacation Giveaway'
 
       assign show_multiplier = false
-      if mult > 1
+      if sweeps_show_image_multiplier_always or mult > 1
         assign show_multiplier = true
       endif
     %}
 
     {% if base_price > 0 %}
       <div
-        class="shared-sweeps-image-badge{% if show_multiplier %} shared-sweeps-image-badge--has-mult{% endif %}"
-        aria-label="Earn {{ entries | number_with_delimiter }} {{ noun | downcase }}"
+        class="shared-sweeps-image-badge{% if show_multiplier %} shared-sweeps-image-badge--with-mult{% else %} shared-sweeps-image-badge--entries-only{% endif %}"
+        aria-label="{% if show_multiplier %}{{ mult_label }}x, {% endif %}{{ entries | number_with_delimiter }} {{ noun | downcase }}"
       >
-        <span class="shared-sweeps-image-badge__copy">
-          <span class="shared-sweeps-image-badge__prefix">EARN</span>
+        {% if show_multiplier %}
+          <div class="shared-sweeps-image-badge__top">
+            <span class="shared-sweeps-image-badge__mult">{{ mult_label }}X</span>
+          </div>
+        {% endif %}
+
+        <div class="shared-sweeps-image-badge__bottom">
           <span class="shared-sweeps-image-badge__count">{{ entries | number_with_delimiter }}</span>
           <span class="shared-sweeps-image-badge__noun">{{ noun }}</span>
-
-          <span
-            class="shared-sweeps-image-badge__info-wrap"
-            aria-label="{{ sweeps_helper_text }}"
-          >
-            <span class="shared-sweeps-image-badge__info-icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16" focusable="false" aria-hidden="true">
-                <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.25"></circle>
-                <circle cx="8" cy="4.7" r="1" fill="currentColor"></circle>
-                <path d="M8 7.2V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-              </svg>
-            </span>
-
-            <span class="shared-sweeps-image-badge__tooltip">{{ sweeps_helper_text }}</span>
-          </span>
-        </span>
-
-        {% if show_multiplier %}
-          <span class="shared-sweeps-image-badge__mult">{{ mult_label }}×</span>
-        {% endif %}
+        </div>
       </div>
 
       <style>
@@ -152,248 +138,207 @@
         }
 
         .product-card--featured-image-link .shared-sweeps-image-badge {
-          --sweeps-accent: #88b5b0;
-          --sweeps-text: #66707a;
+          --sweeps-bg: #ffffff;
+          --sweeps-ink: #7ea59f;
+          --sweeps-border: #7ea59f;
+          --sweeps-divider: rgba(126, 165, 159, 0.28);
+          --sweeps-shadow: 0 2px 8px rgba(24, 42, 35, 0.08);
+
           position: absolute;
-          left: 50%;
-          bottom: 10px;
-          transform: translateX(-50%) translateZ(0);
+          top: 4px;
+          right: 8px;
+          left: auto;
+          bottom: auto;
           z-index: 1001;
+
           display: inline-grid;
-          grid-template-columns: auto;
-          align-items: stretch;
-          width: max-content;
-          max-width: calc(100% - 20px);
-          min-height: 32px;
-          background: rgba(255, 255, 255, 0.98);
-          border: 1px solid var(--sweeps-accent);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          overflow: visible;
+          justify-items: center;
+          align-items: center;
+
+          background: var(--sweeps-bg);
+          border: 1.5px solid var(--sweeps-border);
+          box-shadow: var(--sweeps-shadow);
           box-sizing: border-box;
+          overflow: hidden;
           pointer-events: none;
+
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           text-rendering: geometricPrecision;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge--has-mult {
-          grid-template-columns: auto auto;
+        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only {
+          min-height: 32px;
+          padding: 0;
+          border-radius: 12px;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge__copy {
-          display: grid;
-          grid-auto-flow: column;
-          grid-auto-columns: max-content;
+        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__bottom {
+          display: inline-flex;
           align-items: center;
           justify-content: center;
-          column-gap: 5px;
-          min-width: 0;
-          padding: 0 12px;
-          background: rgba(255, 255, 255, 0.98);
-          color: var(--sweeps-text);
+          gap: 4px;
+          min-height: 32px;
+          padding: 0 13px;
           white-space: nowrap;
-          text-align: center;
-          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
-          font-style: normal;
-          font-weight: 700;
-          line-height: 1;
           box-sizing: border-box;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge__prefix,
-        .product-card--featured-image-link .shared-sweeps-image-badge__noun,
-        .product-card--featured-image-link .shared-sweeps-image-badge__count {
+        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__count,
+        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__noun {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 13px;
+          color: var(--sweeps-ink);
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style: normal;
+          font-weight: 700;
+          font-size: 10px;
           line-height: 1;
-          letter-spacing: .04em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
-          font-style: normal;
-          font-weight: 700;
+          white-space: nowrap;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge__prefix,
-        .product-card--featured-image-link .shared-sweeps-image-badge__noun {
-          color: var(--sweeps-text);
+        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult {
+          min-width: 98px;
+          border-radius: 14px;
+          grid-template-rows: auto auto;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge__count {
-          min-width: auto;
-          color: var(--sweeps-accent);
-          letter-spacing: .01em;
-          text-align: center;
-          font-variant-numeric: lining-nums tabular-nums;
-          font-feature-settings: "lnum" 1, "tnum" 1;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge__info-wrap {
-          display: inline-flex;
+        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__top {
+          width: 100%;
+          display: flex;
           align-items: center;
           justify-content: center;
-          align-self: center;
-          width: 16px;
-          min-width: 16px;
-          height: 16px;
-          margin-left: 4px;
-          pointer-events: auto;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge__info-icon {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 16px;
-          min-width: 16px;
-          height: 16px;
-          color: var(--sweeps-accent);
-          line-height: 0;
+          padding: 6px 10px 4px;
           box-sizing: border-box;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge__info-icon svg {
-          display: block;
-          width: 16px;
-          height: 16px;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge__tooltip {
-          position: absolute;
-          left: 50%;
-          bottom: calc(100% + 10px);
-          transform: translateX(-50%);
-          z-index: 1002;
-          width: max-content;
-          min-width: 240px;
-          max-width: calc(100% + 80px);
-          padding: 10px 12px;
-          background: rgba(255, 255, 255, 0.98);
-          border: 1px solid var(--sweeps-accent);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-          color: var(--sweeps-text);
-          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
-          font-style: normal;
-          font-weight: 700;
-          font-size: 13px;
-          line-height: 1.35;
-          letter-spacing: .01em;
-          text-transform: none;
-          white-space: normal;
-          text-align: center;
-          box-sizing: border-box;
-          opacity: 0;
-          visibility: hidden;
-          pointer-events: none;
-          transition: opacity 0.18s ease, visibility 0.18s ease;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge__info-wrap:hover .shared-sweeps-image-badge__tooltip,
-        .product-card--featured-image-link .shared-sweeps-image-badge__info-wrap:focus-within .shared-sweeps-image-badge__tooltip {
-          opacity: 1;
-          visibility: visible;
         }
 
         .product-card--featured-image-link .shared-sweeps-image-badge__mult {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          min-width: 0;
-          padding: 0 12px 0 10px;
-          background: rgba(255, 255, 255, 0.98);
-          color: var(--sweeps-accent);
-          border-left: 1px solid var(--sweeps-accent);
-          text-align: center;
+          color: var(--sweeps-ink);
           font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
           font-style: normal;
-          font-weight: 600;
+          font-weight: 800;
           font-size: 15px;
-          line-height: 1;
-          letter-spacing: 0;
-          text-transform: none;
+          line-height: 0.95;
+          letter-spacing: -0.04em;
+          text-transform: uppercase;
+          white-space: nowrap;
           font-variant-numeric: lining-nums tabular-nums;
           font-feature-settings: "lnum" 1, "tnum" 1;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom {
+          position: relative;
+          width: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          padding: 6px 10px 8px;
+          white-space: nowrap;
           box-sizing: border-box;
         }
 
+        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 8px;
+          right: 8px;
+          height: 1px;
+          background: var(--sweeps-divider);
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__count,
+        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__noun {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--sweeps-ink);
+          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
+          font-style: normal;
+          font-weight: 700;
+          font-size: 10px;
+          line-height: 1;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__count {
+          font-variant-numeric: lining-nums tabular-nums;
+          font-feature-settings: "lnum" 1, "tnum" 1;
+        }
+
         .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {
-          bottom: 46px;
+          top: 4px;
+          right: 8px;
+          bottom: auto;
+          left: auto;
         }
 
         @media only screen and (max-width: 767px) {
           .product-card--featured-image-link .shared-sweeps-image-badge {
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            transform: translateZ(0);
-            width: auto;
-            max-width: none;
-            min-height: 28px;
-            grid-template-columns: minmax(0, 1fr);
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--has-mult {
-            grid-template-columns: minmax(0, 1fr) auto;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__copy {
-            grid-auto-columns: max-content;
-            column-gap: 4px;
-            padding: 0 8px;
-            justify-content: center;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__prefix {
-            display: none;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__noun,
-          .product-card--featured-image-link .shared-sweeps-image-badge__count {
-            font-size: 11px;
-            letter-spacing: .03em;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__info-wrap {
-            width: 14px;
-            min-width: 14px;
-            height: 14px;
-            margin-left: 4px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__info-icon {
-            width: 14px;
-            min-width: 14px;
-            height: 14px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__info-icon svg {
-            width: 14px;
-            height: 14px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge__tooltip {
-            left: 8px;
+            top: 4px;
             right: 8px;
-            bottom: calc(100% + 8px);
-            transform: none;
-            width: auto;
-            min-width: 0;
-            max-width: none;
-            padding: 10px 12px;
-            font-size: 12px;
-            line-height: 1.35;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only {
+            min-height: 30px;
+            border-radius: 11px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__bottom {
+            min-height: 30px;
+            padding: 0 12px;
+            gap: 3px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__count,
+          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__noun {
+            font-size: 9px;
+            letter-spacing: 0.08em;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult {
+            min-width: 90px;
+            border-radius: 13px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__top {
+            padding: 5px 9px 3px;
           }
 
           .product-card--featured-image-link .shared-sweeps-image-badge__mult {
-            min-width: 0;
-            padding: 0 8px 0 6px;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 14px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom {
+            padding: 5px 9px 7px;
+            gap: 2px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom::before {
+            left: 7px;
+            right: 7px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__count,
+          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__noun {
+            font-size: 9px;
+            letter-spacing: 0.08em;
           }
 
           .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {
-            bottom: 44px;
+            top: 4px;
+            right: 8px;
+            bottom: auto;
+            left: auto;
           }
         }
       </style>

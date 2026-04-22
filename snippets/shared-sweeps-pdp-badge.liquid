@@ -1,4 +1,5 @@
 {% assign sweeps_enabled = settings.sweeps_switch | default: true %}
+{% assign sweeps_show_pdp_multiplier_always = true %}
 
 {% liquid
   assign sweeps_country = localization.country.iso_code | default: '' | upcase
@@ -98,7 +99,7 @@
       assign sweeps_helper_text = 'Every $1 = 1 entry to the Dream Vacation Giveaway'
 
       assign show_multiplier = false
-      if mult > 1
+      if sweeps_show_pdp_multiplier_always or mult > 1
         assign show_multiplier = true
       endif
 
@@ -117,6 +118,7 @@
         data-bonus="{{ bonus }}"
         data-override-unit-price="{% if priceoverride_raw != blank %}{{ priceoverride_raw | plus: 0.0 }}{% endif %}"
         data-currency-scale="{{ currency_scale }}"
+        data-show-multiplier="{% if show_multiplier %}true{% else %}false{% endif %}"
         aria-live="polite"
         role="status"
         aria-label="Earn {{ entries | number_with_delimiter }} {{ noun | downcase }}"
@@ -406,6 +408,7 @@
           var countEl = root.querySelector('.shared-sweeps-pdp-badge__count');
           var nounEl = root.querySelector('.shared-sweeps-pdp-badge__noun');
           var multEl = root.querySelector('.shared-sweeps-pdp-badge__mult');
+          var showMultiplier = String(root.dataset.showMultiplier || 'false') === 'true';
 
           var mult = parseFloat(root.dataset.mult || '1') || 1;
           var bonus = parseFloat(root.dataset.bonus || '0') || 0;
@@ -601,11 +604,12 @@
             countEl.textContent = formatNumber(entries);
             nounEl.textContent = noun;
 
-            if (multEl) {
-              multEl.textContent = formatMultiplier(mult) + '×';
+            if (showMultiplier && multEl) {
+              multEl.textContent = formatMultiplier(mult) + 'X';
+              root.setAttribute('aria-label', formatMultiplier(mult) + 'x, ' + formatNumber(entries) + ' ' + noun.toLowerCase());
+            } else {
+              root.setAttribute('aria-label', 'Earn ' + formatNumber(entries) + ' ' + noun.toLowerCase());
             }
-
-            root.setAttribute('aria-label', 'Earn ' + formatNumber(entries) + ' ' + noun.toLowerCase());
           }
 
           var rafLock = false;
