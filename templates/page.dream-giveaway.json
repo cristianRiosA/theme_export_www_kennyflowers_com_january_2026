@@ -147,7 +147,8 @@
         "icon_aJGT3h"
       ],
       "custom_css": [
-        ".text-with-icons__inner {padding: 40px 0px;}"
+        ".text-with-icons__inner {padding: 40px 0px;}",
+        ".body-font {font-weight:bolder;}"
       ],
       "name": "Text with icons",
       "settings": {
