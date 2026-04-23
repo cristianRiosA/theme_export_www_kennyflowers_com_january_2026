@@ -156,7 +156,7 @@
         "icon_position": "top",
         "icon_size": "medium",
         "heading_size": "large",
-        "mobile_swipe": true,
+        "mobile_swipe": false,
         "color_bg": "#9abcd5",
         "color_heading": "#1c6ba8",
         "color_text": "#3f3f3f",
