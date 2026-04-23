@@ -2653,3 +2653,8 @@ aspect-ratio: 0.8 !important;
   border-radius:0px !important;
   font-family: "SaaSeries - CD" !important;
 }
+
+.shared-sweeps-image-badge .shared-sweeps-image-badge--entries-only {
+  border-radius:10px;
+  min-height:24px !important;
+}
