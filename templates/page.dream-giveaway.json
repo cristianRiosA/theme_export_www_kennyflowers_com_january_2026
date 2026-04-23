@@ -180,6 +180,7 @@
           "type": "icon",
           "settings": {
             "icon": "ruler",
+            "image": "shopify://shop_images/step1.png",
             "heading": "SHOP MORE",
             "text": "<p>Every $1 earns you 1 entry—plus more ways to win with bonus entries.</p>"
           }
@@ -188,6 +189,7 @@
           "type": "icon",
           "settings": {
             "icon": "ruler",
+            "image": "shopify://shop_images/step2.png",
             "heading": "EARN MORE",
             "text": "<p>The more you shop, the more entries you get.</p>"
           }
@@ -196,6 +198,7 @@
           "type": "icon",
           "settings": {
             "icon": "ruler",
+            "image": "shopify://shop_images/step3.png",
             "heading": "WIN BIG",
             "text": "<p>One lucky winner will score $100k or trip of a lifetime.</p>"
           }
@@ -207,7 +210,7 @@
         "icon_aJGT3h"
       ],
       "custom_css": [
-        "h6, h5, h4, h3 {font-weight: 900;}"
+        ".text-with-icons__inner {padding: 40px 0px;}"
       ],
       "name": "Text with icons",
       "settings": {
