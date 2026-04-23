@@ -14,6 +14,14 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "2f7893ee-7b84-4f15-911a-801b94ffa38e": {
+          "type": "text",
+          "settings": {
+            "icon": "none",
+            "text": "$100k or trip of a lifetime sweepstakes*",
+            "link": "shopify://pages/dream-giveaway"
+          }
+        },
         "text_UKkfPj": {
           "type": "text",
           "settings": {
@@ -46,23 +54,14 @@
             "text": "Free Shipping on orders $150+ | Free returns/exchanges",
             "link": ""
           }
-        },
-        "2f7893ee-7b84-4f15-911a-801b94ffa38e": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "icon": "none",
-            "text": "NEW: THE PARADISO COLLECTION. Dive in now",
-            "link": "shopify://collections/paradiso"
-          }
         }
       },
       "block_order": [
+        "2f7893ee-7b84-4f15-911a-801b94ffa38e",
         "text_UKkfPj",
         "text_YKQKCV",
         "text_a4MTem",
-        "5b1ab378-833d-4a94-a02e-8325ec1551d0",
-        "2f7893ee-7b84-4f15-911a-801b94ffa38e"
+        "5b1ab378-833d-4a94-a02e-8325ec1551d0"
       ],
       "settings": {
         "announcement_bar": true,
