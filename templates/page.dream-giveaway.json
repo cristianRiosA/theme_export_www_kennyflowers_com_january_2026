@@ -110,69 +110,6 @@
         "disable_bottom_spacing": true
       }
     },
-    "multicolumn_b8keqk": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_g7QKKq": {
-          "type": "column",
-          "settings": {
-            "image_full_width": false,
-            "image_link": "",
-            "retina": true,
-            "title": "1 – Shop More",
-            "text": "<p>Every $1 earns you 1 entry—plus more ways to win with bonus entries.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_jVgUmf": {
-          "type": "column",
-          "settings": {
-            "image_full_width": false,
-            "image_link": "",
-            "retina": true,
-            "title": "Earn More",
-            "text": "<p>The more you shop, the more entries you get.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_kpTJLQ": {
-          "type": "column",
-          "settings": {
-            "image_full_width": false,
-            "image_link": "",
-            "retina": true,
-            "title": "Win Big",
-            "text": "<p>One lucky winner will score $100k or trip of a lifetime.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_g7QKKq",
-        "column_jVgUmf",
-        "column_kpTJLQ"
-      ],
-      "custom_css": [],
-      "name": "Multicolumn",
-      "settings": {
-        "heading": "How to Enter",
-        "heading_left": false,
-        "description": "",
-        "full_width": true,
-        "display_type": "grid",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "text_alignment": "center",
-        "heading_size": "h5",
-        "mobile_swipe": false,
-        "show_progress_bar": true,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
     "text_with_icons_PUi997": {
       "type": "text-with-icons",
       "blocks": {
@@ -398,7 +335,6 @@
     "main",
     "image_with_text_overlay_Bneh6i",
     "rich_text_pEJ69U",
-    "multicolumn_b8keqk",
     "text_with_icons_PUi997",
     "collapsible_content_BbLV4e",
     "gallery_mmNa8E"
