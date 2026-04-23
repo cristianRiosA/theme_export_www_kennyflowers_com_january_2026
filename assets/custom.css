@@ -2681,6 +2681,7 @@ aspect-ratio: 0.8 !important;
 }
 
 .goldText{
+  margin-left:10px;
   background-clip: text;
   color:transparent;
   animation: AnimationName 10s linear infinite;
