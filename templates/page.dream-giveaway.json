@@ -21,25 +21,23 @@
     "image_with_text_overlay_Bneh6i": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "subheading_hCjBqy": {
-          "type": "subheading",
-          "disabled": true,
-          "settings": {
-            "text": "Add a tagline"
-          }
-        },
         "heading_HDbGXi": {
           "type": "heading",
           "settings": {
-            "text": "Win the vacation of a lifetime",
+            "text": "WIN A $100K VACATION*",
             "heading_size": "h1-xlarge"
+          }
+        },
+        "subheading_hCjBqy": {
+          "type": "subheading",
+          "settings": {
+            "text": "(or $100k in Cash)"
           }
         },
         "text_xF8ncc": {
           "type": "text",
-          "disabled": true,
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Every $1 spent = 1 entry</p>",
             "description_size": "medium"
           }
         },
@@ -53,8 +51,8 @@
         }
       },
       "block_order": [
-        "subheading_hCjBqy",
         "heading_HDbGXi",
+        "subheading_hCjBqy",
         "text_xF8ncc",
         "button_DHBwjK"
       ],
@@ -74,36 +72,30 @@
         "disable_bottom_spacing": true
       }
     },
-    "rich_text_pEJ69U": {
+    "rich_text_BmYeh3": {
       "type": "rich-text",
       "blocks": {
-        "heading_q6HET7": {
+        "heading_qkJ6T9": {
           "type": "heading",
           "settings": {
-            "text": "Trip of a lifetime",
+            "text": "HOW TO ENTER",
             "size": "h3"
-          }
-        },
-        "text_NJHQBV": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We partnered with Sharedsweeps to bring you an unforgettable experience</p>",
-            "custom_liquid": "",
-            "size": "text-size-regular"
           }
         }
       },
       "block_order": [
-        "heading_q6HET7",
-        "text_NJHQBV"
+        "heading_qkJ6T9"
+      ],
+      "custom_css": [
+        "div {background-color: #9abcd5;}"
       ],
       "name": "Rich text",
       "settings": {
-        "section_width": "full-width-row",
+        "section_width": "full-width-row-full",
         "text_width": "xlarge",
         "text_position": "center",
         "text_alignment": "center",
-        "color_bg": "rgba(0,0,0,0)",
+        "color_bg": "#9abcd5",
         "color_text": "#151515",
         "color_links": "#151515",
         "disable_top_spacing": false,
@@ -147,7 +139,7 @@
         "icon_aJGT3h"
       ],
       "custom_css": [
-        ".text-with-icons__inner {padding: 40px 0px;}",
+        ".text-with-icons__inner {padding: 0px 0px 40px;}",
         ".body-font {font-weight: bolder; font-family: \"SaaSeries - CD\", sans-serif !important; font-weight: 400 !important; font-size: 28px;}"
       ],
       "name": "Text with icons",
@@ -229,6 +221,42 @@
         "overlay_color": "#000000",
         "overlay_opacity": 27,
         "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_pEJ69U": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_q6HET7": {
+          "type": "heading",
+          "settings": {
+            "text": "Trip of a lifetime",
+            "size": "h3"
+          }
+        },
+        "text_NJHQBV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We partnered with Share Sweeps to bring you an unforgettable experience</p>",
+            "custom_liquid": "",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q6HET7",
+        "text_NJHQBV"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "section_width": "full-width-row",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
     },
@@ -506,9 +534,10 @@
   "order": [
     "main",
     "image_with_text_overlay_Bneh6i",
-    "rich_text_pEJ69U",
+    "rich_text_BmYeh3",
     "text_with_icons_PUi997",
     "gallery_mmNa8E",
+    "rich_text_pEJ69U",
     "gallery_qwh7rT",
     "collapsible_content_BbLV4e",
     "recently_viewed_products_Tf8QPE",
