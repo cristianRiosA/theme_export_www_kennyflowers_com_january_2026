@@ -23,15 +23,17 @@
     
 	{%- if show_announcement_bar -%}
 		{{- 'announcement-bar.css' | asset_url | stylesheet_tag -}}
+		{% render 'shared-sweeps-cart-entries-announcement', mode: 'assets' %}
 		<div class="announcement-bar">
 			<div class="announcement-bar--inner direction-{{ direction }} announcement-bar--{{ announcement_bar_layout }}" style="--marquee-speed: {{ speed }}">
 				{%- if announcement_bar_layout == 'marquee' -%}
 					{%- capture scrolling_text -%}
 					<div>
+						{% render 'shared-sweeps-cart-entries-announcement', mode: 'item' %}
 						{%- liquid
-								assign index = 0
-								assign size = section.blocks.size
-						 -%}
+							assign index = 0
+							assign size = section.blocks.size
+						-%}
 						{%- for index in (0..size) -%}
 							<div class="announcement-bar--item" {{ section.blocks[index].shopify_attributes }}>
 								{%- if section.blocks[index].settings.link -%}
@@ -48,7 +50,6 @@
 					{{ scrolling_text }}{{ scrolling_text }}{{ scrolling_text }}
 				{%- elsif announcement_bar_layout == 'carousel' -%}
 					<slide-show class="carousel" data-autoplay="{{ autoplay }}">
-                      
 						{%- for block in section.blocks -%}
 							<div class="announcement-bar--item carousel__slide" {{ block.shopify_attributes }}>
 								{%- if block.settings.link -%}
@@ -63,7 +64,10 @@
 								{%- endif -%}
 							</div>
 						{%- endfor -%}
-						{%- if section.blocks.size > 1 -%}
+
+						{% render 'shared-sweeps-cart-entries-announcement', mode: 'carousel_item' %}
+
+						{%- if section.blocks.size > 0 -%}
 						<div class="flickity-nav flickity-prev" tabindex="0">{% render 'svg-icons' with 'thb-caret-left' %}</div>
 						<div class="flickity-nav flickity-next" tabindex="0">{% render 'svg-icons' with 'thb-caret-right' %}</div>
 						{%- endif -%}
@@ -74,9 +78,7 @@
 	{%- endif -%}
 
   <script>
-
     const countDownEveryDay = new Date();
-    // Set the time to midnight (23:59:59.000)
     countDownEveryDay.setHours(23, 59, 59, 0);
     console.log(new Date(countDownEveryDay).getTime());
     
@@ -104,7 +106,6 @@
       }
     }
 
-    // Call the function to check and display the div if applicable
     showCashbackDivIfApplicable();
     showNiftDivIfApplicable();
 
@@ -113,53 +114,50 @@
 	if (countdownEl) {
 		const timerDateStr = (countdownEl.getAttribute("data-timer") || "").trim();
 
-		// If no date provided, don't run the countdown (prevents NaN)
 		if (!timerDateStr) {
-		countdownEl.innerHTML = "";
+		  countdownEl.innerHTML = "";
 		} else {
-		const targetMs = new Date(timerDateStr).getTime();
+		  const targetMs = new Date(timerDateStr).getTime();
 
-		// If invalid date string, don't run the countdown (prevents NaN)
-		if (Number.isNaN(targetMs)) {
+		  if (Number.isNaN(targetMs)) {
 			console.warn("Invalid countdown_datetime:", timerDateStr);
 			countdownEl.innerHTML = "";
-		} else {
+		  } else {
 			const intervalId = setInterval(() => {
-			const now = Date.now();
-			const distance = targetMs - now;
+			  const now = Date.now();
+			  const distance = targetMs - now;
 
-			if (distance <= 0) {
+			  if (distance <= 0) {
 				countdownEl.innerHTML = "";
 				clearInterval(intervalId);
 				return;
-			}
+			  }
 
-			const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-			const countdown =
+			  const countdown =
 				days < 1
-				? `<span class='cd-number'>${hours}</span><span class='cd-label'>h</span><span class='cd-number'>${minutes}</span><span class='cd-label'>m</span><span class='cd-number'>${seconds}</span><span class='cd-label'>s</span>`
-				: `<span class='cd-number'>${days}</span><span class='cd-label'>d</span><span class='cd-number'>${hours}</span><span class='cd-label'>h</span><span class='cd-number'>${minutes}</span><span class='cd-label'>m</span><span class='cd-number'>${seconds}</span><span class='cd-label'>s</span>`;
+				  ? `<span class='cd-number'>${hours}</span><span class='cd-label'>h</span><span class='cd-number'>${minutes}</span><span class='cd-label'>m</span><span class='cd-number'>${seconds}</span><span class='cd-label'>s</span>`
+				  : `<span class='cd-number'>${days}</span><span class='cd-label'>d</span><span class='cd-number'>${hours}</span><span class='cd-label'>h</span><span class='cd-number'>${minutes}</span><span class='cd-label'>m</span><span class='cd-number'>${seconds}</span><span class='cd-label'>s</span>`;
 
-			countdownEl.innerHTML = `<span class="cd-div">${countdown}</span>`;
+			  countdownEl.innerHTML = `<span class="cd-div">${countdown}</span>`;
 			}, 1000);
-		}
+		  }
 		}
 	}
   </script>
 
   <style>
-      .announcement-code-highlight {
-        font-weight: 800;
-        color: #60bf79;
-      }
-      
-    
-    </style>
+    .announcement-code-highlight {
+      font-weight: 800;
+      color: #60bf79;
+    }
+  </style>
 {%- endif -%}
+
 {% schema %}
 {
 	"name": "Announcement bar",
@@ -284,182 +282,50 @@
 					"type": "select",
 					"id": "icon",
 					"options": [
-						{
-							"value": "none",
-							"label": "None"
-						},
-						{
-							"value": "apple",
-							"label": "Apple"
-						},
-						{
-							"value": "banana",
-							"label": "Banana"
-						},
-						{
-							"value": "bottle",
-							"label": "Bottle"
-						},
-						{
-							"value": "box",
-							"label": "Box"
-						},
-						{
-							"value": "carrot",
-							"label": "Carrot"
-						},
-						{
-							"value": "chat_bubble",
-							"label": "Chat bubble"
-						},
-						{
-							"value": "check_mark",
-							"label": "Check mark"
-						},
-						{
-							"value": "clipboard",
-							"label": "Clipboard"
-						},
-						{
-							"value": "dairy",
-							"label": "Dairy"
-						},
-						{
-							"value": "dairy_free",
-							"label": "Dairy free"
-						},
-						{
-							"value": "dryer",
-							"label": "Dryer"
-						},
-						{
-							"value": "eye",
-							"label": "Eye"
-						},
-						{
-							"value": "fire",
-							"label": "Fire"
-						},
-						{
-							"value": "gluten_free",
-							"label": "Gluten free"
-						},
-						{
-							"value": "heart",
-							"label": "Heart"
-						},
-						{
-							"value": "iron",
-							"label": "Iron"
-						},
-						{
-							"value": "leaf",
-							"label": "Leaf"
-						},
-						{
-							"value": "leather",
-							"label": "Leather"
-						},
-						{
-							"value": "lightning_bolt",
-							"label": "Lightning bolt"
-						},
-						{
-							"value": "lipstick",
-							"label": "Lipstick"
-						},
-						{
-							"value": "lock",
-							"label": "Lock"
-						},
-						{
-							"value": "map_pin",
-							"label": "Map pin"
-						},
-						{
-							"value": "nut_free",
-							"label": "Nut free"
-						},
-						{
-							"value": "pants",
-							"label": "Pants"
-						},
-						{
-							"value": "paw_print",
-							"label": "Paw print"
-						},
-						{
-							"value": "pepper",
-							"label": "Pepper"
-						},
-						{
-							"value": "perfume",
-							"label": "Perfume"
-						},
-						{
-							"value": "plane",
-							"label": "Plane"
-						},
-						{
-							"value": "plant",
-							"label": "Plant"
-						},
-						{
-							"value": "price_tag",
-							"label": "Price tag"
-						},
-						{
-							"value": "question_mark",
-							"label": "Question mark"
-						},
-						{
-							"value": "recycle",
-							"label": "Recycle"
-						},
-						{
-							"value": "return",
-							"label": "Return"
-						},
-						{
-							"value": "ruler",
-							"label": "Ruler"
-						},
-						{
-							"value": "serving_dish",
-							"label": "Serving dish"
-						},
-						{
-							"value": "shirt",
-							"label": "Shirt"
-						},
-						{
-							"value": "shoe",
-							"label": "Shoe"
-						},
-						{
-							"value": "silhouette",
-							"label": "Silhouette"
-						},
-						{
-							"value": "snowflake",
-							"label": "Snowflake"
-						},
-						{
-							"value": "star",
-							"label": "Star"
-						},
-						{
-							"value": "stopwatch",
-							"label": "Stopwatch"
-						},
-						{
-							"value": "truck",
-							"label": "Truck"
-						},
-						{
-							"value": "washing",
-							"label": "Washing"
-						}
+						{ "value": "none", "label": "None" },
+						{ "value": "apple", "label": "Apple" },
+						{ "value": "banana", "label": "Banana" },
+						{ "value": "bottle", "label": "Bottle" },
+						{ "value": "box", "label": "Box" },
+						{ "value": "carrot", "label": "Carrot" },
+						{ "value": "chat_bubble", "label": "Chat bubble" },
+						{ "value": "check_mark", "label": "Check mark" },
+						{ "value": "clipboard", "label": "Clipboard" },
+						{ "value": "dairy", "label": "Dairy" },
+						{ "value": "dairy_free", "label": "Dairy free" },
+						{ "value": "dryer", "label": "Dryer" },
+						{ "value": "eye", "label": "Eye" },
+						{ "value": "fire", "label": "Fire" },
+						{ "value": "gluten_free", "label": "Gluten free" },
+						{ "value": "heart", "label": "Heart" },
+						{ "value": "iron", "label": "Iron" },
+						{ "value": "leaf", "label": "Leaf" },
+						{ "value": "leather", "label": "Leather" },
+						{ "value": "lightning_bolt", "label": "Lightning bolt" },
+						{ "value": "lipstick", "label": "Lipstick" },
+						{ "value": "lock", "label": "Lock" },
+						{ "value": "map_pin", "label": "Map pin" },
+						{ "value": "nut_free", "label": "Nut free" },
+						{ "value": "pants", "label": "Pants" },
+						{ "value": "paw_print", "label": "Paw print" },
+						{ "value": "pepper", "label": "Pepper" },
+						{ "value": "perfume", "label": "Perfume" },
+						{ "value": "plane", "label": "Plane" },
+						{ "value": "plant", "label": "Plant" },
+						{ "value": "price_tag", "label": "Price tag" },
+						{ "value": "question_mark", "label": "Question mark" },
+						{ "value": "recycle", "label": "Recycle" },
+						{ "value": "return", "label": "Return" },
+						{ "value": "ruler", "label": "Ruler" },
+						{ "value": "serving_dish", "label": "Serving dish" },
+						{ "value": "shirt", "label": "Shirt" },
+						{ "value": "shoe", "label": "Shoe" },
+						{ "value": "silhouette", "label": "Silhouette" },
+						{ "value": "snowflake", "label": "Snowflake" },
+						{ "value": "star", "label": "Star" },
+						{ "value": "stopwatch", "label": "Stopwatch" },
+						{ "value": "truck", "label": "Truck" },
+						{ "value": "washing", "label": "Washing" }
 					],
 					"default": "none",
 					"label": "Icon"
@@ -480,18 +346,10 @@
 	],
   "default": {
     "blocks": [
-      {
-        "type": "text"
-      },
-			{
-        "type": "text"
-      },
-			{
-        "type": "text"
-      },
-			{
-        "type": "text"
-      }
+      { "type": "text" },
+      { "type": "text" },
+      { "type": "text" },
+      { "type": "text" }
     ]
   }
 }

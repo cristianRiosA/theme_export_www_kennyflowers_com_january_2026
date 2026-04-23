@@ -1,5 +1,5 @@
 {% assign sweeps_enabled = settings.sweeps_switch | default: true %}
-{% assign sweeps_show_pdp_multiplier_always = true %}
+{% assign sweeps_show_pdp_multiplier_always = false %}
 
 {% liquid
   assign sweeps_country = localization.country.iso_code | default: '' | upcase
@@ -154,9 +154,10 @@
 
       <style>
         .shared-sweeps-pdp-badge{
-          --sweeps-accent:#8fb5af;
-          --sweeps-accent-strong:#7ea59f;
-          --sweeps-text:#626c76;
+          --sweeps-accent:#d8c4aa;
+          --sweeps-accent-strong:#b59672;
+          --sweeps-text:#b59672;
+          --sweeps-mult:#111111;
           position:relative;
           display:inline-grid;
           grid-template-columns:auto;
@@ -307,7 +308,7 @@
           min-width:0;
           padding:0 12px 0 10px;
           background:#ffffff;
-          color:var(--sweeps-accent-strong);
+          color:var(--sweeps-mult);
           border-left:1px solid var(--sweeps-accent);
           text-align:center;
           font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;

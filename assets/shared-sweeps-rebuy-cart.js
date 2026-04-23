@@ -138,15 +138,16 @@
         style.id = 'shared-sweeps-rebuy-line-badge-styles';
         style.textContent = `
       .shared-sweeps-rebuy-line-badge{
-        --sweeps-accent:#88b5b0;
-        --sweeps-accent-strong:#7ea59f;
-        --sweeps-text:#66707a;
+        --sweeps-accent:#d8c4aa;
+        --sweeps-accent-strong:#b59672;
+        --sweeps-text:#b59672;
+        --sweeps-mult:#111111;
         position:relative;
         display:inline-grid;
         grid-template-columns:auto;
         align-items:stretch;
         min-height:32px;
-        margin-top:8px;
+        margin:8px 0 10px;
         background:#ffffff;
         border:1px solid var(--sweeps-accent);
         box-shadow:0 2px 8px rgba(0,0,0,.05);
@@ -207,7 +208,7 @@
         min-width:0;
         padding:0 12px 0 10px;
         background:#ffffff;
-        color:var(--sweeps-accent-strong);
+        color:var(--sweeps-mult);
         border-left:1px solid var(--sweeps-accent);
         font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size:15px;
@@ -225,6 +226,7 @@
         .shared-sweeps-rebuy-line-badge{
           grid-template-columns:minmax(0,1fr);
           min-height:28px;
+          margin:8px 0 8px;
         }
 
         .shared-sweeps-rebuy-line-badge--has-mult{

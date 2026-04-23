@@ -1,0 +1,173 @@
+{% liquid
+  assign mode = mode | default: 'item'
+  assign sweeps_show_zero_cart_entries_in_announcement = false
+%}
+
+{% if mode == 'item' %}
+  <div
+    class="announcement-bar--item shared-sweeps-cart-entries-announcement-item"
+    data-show-zero="{% if sweeps_show_zero_cart_entries_in_announcement %}true{% else %}false{% endif %}"
+    hidden
+  >
+    <span class="shared-sweeps-cart-entries-announcement-item__inner">
+      <span class="shared-sweeps-cart-entries-announcement-item__count">0</span>
+      <span class="shared-sweeps-cart-entries-announcement-item__noun">ENTRIES</span>
+      <span class="shared-sweeps-cart-entries-announcement-item__suffix">IN CART</span>
+    </span>
+  </div>
+{% elsif mode == 'carousel_item' %}
+  <div
+    class="announcement-bar--item carousel__slide shared-sweeps-cart-entries-announcement-item"
+    data-show-zero="{% if sweeps_show_zero_cart_entries_in_announcement %}true{% else %}false{% endif %}"
+    hidden
+  >
+    <span class="shared-sweeps-cart-entries-announcement-item__inner">
+      <span class="shared-sweeps-cart-entries-announcement-item__count">0</span>
+      <span class="shared-sweeps-cart-entries-announcement-item__noun">ENTRIES</span>
+      <span class="shared-sweeps-cart-entries-announcement-item__suffix">IN CART</span>
+    </span>
+  </div>
+{% elsif mode == 'assets' %}
+  <script>
+    (function () {
+      if (window.__sharedSweepsAnnouncementEntriesBound) return;
+      window.__sharedSweepsAnnouncementEntriesBound = true;
+
+      var ITEM_SELECTOR = '.shared-sweeps-cart-entries-announcement-item';
+
+      function formatNumber(value) {
+        try {
+          return new Intl.NumberFormat().format(value);
+        } catch (e) {
+          return String(value);
+        }
+      }
+
+      function getLineEntries(item) {
+        var props = item && item.properties ? item.properties : {};
+        var eligible = String(props._ss_eligible || '').toLowerCase() === 'true';
+
+        if (!eligible) return 0;
+
+        var multValue = parseFloat(props._ss_mult || '1') || 1;
+        var bonus = parseFloat(props._ss_bonus || '0') || 0;
+        var divisor = parseFloat(props._ss_entry_divisor || '1') || 1;
+        var overrideUnitPrice =
+          props._ss_override_unit_price !== '' && props._ss_override_unit_price != null
+            ? parseFloat(props._ss_override_unit_price || '0')
+            : null;
+
+        var qty = parseInt(item.quantity || 1, 10) || 1;
+
+        var basePrice = 0;
+        if (overrideUnitPrice !== null && !isNaN(overrideUnitPrice) && overrideUnitPrice > 0) {
+          basePrice = overrideUnitPrice * qty;
+        } else {
+          basePrice = ((item.original_price || item.price || 0) / 100) * qty;
+        }
+
+        var rawBaseEntries = basePrice / divisor;
+        var flooredBaseEntries = Math.floor(rawBaseEntries);
+        var hasDecimalRemainder = Math.abs(rawBaseEntries - flooredBaseEntries) > 0.000001;
+        var baseEntries = hasDecimalRemainder ? flooredBaseEntries + 1 : flooredBaseEntries;
+
+        var entries = Math.floor(baseEntries * multValue);
+
+        if (entries < 1 && basePrice > 0) entries = 1;
+        if (bonus > 0) entries += bonus;
+
+        return entries;
+      }
+
+      function getCartEntriesTotal(cart) {
+        if (!cart || !cart.items || !cart.items.length) return 0;
+
+        return cart.items.reduce(function (total, item) {
+          return total + getLineEntries(item);
+        }, 0);
+      }
+
+      function updateAnnouncementItems(totalEntries) {
+        var items = document.querySelectorAll(ITEM_SELECTOR);
+
+        items.forEach(function (item) {
+          var showZero = item.getAttribute('data-show-zero') === 'true';
+          var countEl = item.querySelector('.shared-sweeps-cart-entries-announcement-item__count');
+          var nounEl = item.querySelector('.shared-sweeps-cart-entries-announcement-item__noun');
+
+          if (!countEl || !nounEl) return;
+
+          if (totalEntries < 1 && !showZero) {
+            item.hidden = true;
+            return;
+          }
+
+          item.hidden = false;
+          countEl.textContent = formatNumber(totalEntries);
+          nounEl.textContent = totalEntries === 1 ? 'ENTRY' : 'ENTRIES';
+        });
+
+        setTimeout(function () {
+          window.dispatchEvent(new Event('resize'));
+        }, 0);
+      }
+
+      function loadCartAndUpdate() {
+        fetch('/cart.js', { credentials: 'same-origin' })
+          .then(function (res) { return res.json(); })
+          .then(function (cart) {
+            updateAnnouncementItems(getCartEntriesTotal(cart));
+          })
+          .catch(function (err) {
+            console.warn('Shared sweeps announcement entries error:', err);
+          });
+      }
+
+      function debounce(fn, wait) {
+        var t;
+        return function () {
+          clearTimeout(t);
+          t = setTimeout(fn, wait);
+        };
+      }
+
+      var debouncedUpdate = debounce(loadCartAndUpdate, 100);
+
+      document.addEventListener('rebuy:smartcart.show', debouncedUpdate, true);
+      document.addEventListener('rebuy:cart.change', debouncedUpdate, true);
+      document.addEventListener('cart:refresh', debouncedUpdate, true);
+      document.addEventListener('cart:item-added', debouncedUpdate, true);
+      document.addEventListener('cart:open', debouncedUpdate, true);
+      window.addEventListener('pageshow', debouncedUpdate);
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadCartAndUpdate);
+      } else {
+        loadCartAndUpdate();
+      }
+
+      setTimeout(loadCartAndUpdate, 400);
+      setTimeout(loadCartAndUpdate, 1200);
+    })();
+  </script>
+
+  <style>
+    .shared-sweeps-cart-entries-announcement-item__inner{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.28em;
+      white-space:nowrap;
+    }
+
+    .shared-sweeps-cart-entries-announcement-item__count,
+    .shared-sweeps-cart-entries-announcement-item__noun,
+    .shared-sweeps-cart-entries-announcement-item__suffix{
+      display:inline-block;
+    }
+
+    .shared-sweeps-cart-entries-announcement-item[hidden]{
+      display:none !important;
+    }
+  </style>
+{% endif %}
