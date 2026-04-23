@@ -331,7 +331,7 @@
         "description": "",
         "uppercase_heading": true,
         "disable_top_spacing": false,
-        "disable_bottom_spacing": false
+        "disable_bottom_spacing": true
       }
     },
     "recently_viewed_products_Tf8QPE": {
