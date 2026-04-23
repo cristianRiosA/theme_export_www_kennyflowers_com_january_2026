@@ -1,1 +1,297 @@
-{"sections":{"main-collection-banner":{"type":"main-collection-banner","settings":{"show_collection_image":true,"show_collection_description":false,"show_subcollections":false,"make_heading_uppercase":true,"text_alignment":"center","overlay_color":"#000000","overlay_opacity":40}},"rich_text_UQzYrb":{"type":"rich-text","blocks":{"text_BmiWJi":{"type":"text","settings":{"text":"<p>This one's major. 150+ styles, up to 60% off while they last. Go low this weekend.<\/p>","custom_liquid":"","size":"text-size-regular"}}},"block_order":["text_BmiWJi"],"name":"Rich text","settings":{"section_width":"full-width-row-full","text_width":"xlarge","text_position":"center","text_alignment":"center","color_bg":"rgba(0,0,0,0)","color_text":"#151515","color_links":"#151515","disable_top_spacing":true,"disable_bottom_spacing":true}},"rich_text_j4tW3J":{"type":"rich-text","blocks":{"text_UiwqQm":{"type":"text","disabled":true,"settings":{"text":"<p><strong>Kick off ‘25 with an extra 25% off sale today. Code: KF25<\/strong><\/p>","custom_liquid":"","size":"text-size-regular"}}},"block_order":["text_UiwqQm"],"settings":{"section_width":"grid","text_width":"medium","text_position":"center","text_alignment":"center","color_bg":"rgba(0,0,0,0)","color_text":"#151515","color_links":"#151515","disable_top_spacing":true,"disable_bottom_spacing":true}},"6e227754-56ab-491c-9b1e-26ce521b525e":{"type":"countdown-banner","disabled":true,"custom_css":[".h1-xlarge,.description-size--large,.countdown-banner--timer {font-family: \"SaaSeries - CD\";}"],"settings":{"section_width":"full-width-row-full","section_layout":"horizontal","desktop_height":"desktop-height-450","mobile_height":"mobile-height-350","bg_image":"shopify:\/\/shop_images\/kenny-flowers-tropical-vacation-swim-ubud-bali-floral-fronds-print-2022-womens-mens-resort-wear-swim-trunks-bikini-hawaiian-shirt-matching-00002-2_270b2907-3cd5-4b71-acba-9e7bb0b607a8.jpg","subheading":"","heading":"LAST CALL","heading_size":"h1-xlarge","content":"Shop the Warehouse Sale before it's gone for good","content_size":"large","button_text":"","button_link":"","timer_year":2023,"timer_month":"10","timer_day":"07","timer_hour":"00","timer_minute":"00","color_bg":"#f5f3ef","color_text":"#ffffff","overlay_color":"#000000","overlay_opacity":30,"disable_top_spacing":true,"disable_bottom_spacing":true}},"4feab899-8fbd-4c46-a9d5-7bf93e96c32d":{"type":"spacer","disabled":true,"settings":{"spacer_mobile":25,"spacer_desktop":40,"border_separator":false,"border_separator_full":false}},"166366972953e881f5":{"type":"collection-list","disabled":true,"settings":{"heading":"","heading_left":false,"description":"","full_width":true,"collection_list":["short-sleeve","long-sleeve","mens-golf-shirts","best-selling-mens-collection"],"image_ratio":"portrait","layout":"grid","style":"style2","columns_desktop":5,"columns_mobile":"1","show_progress_bar":true,"mobile_swipe":true,"overlay_color":"#000000","overlay_opacity":0,"disable_top_spacing":true,"disable_bottom_spacing":false}},"48e83cb4-17ee-4796-bcbd-36be50efa8ab":{"type":"custom-liquid","custom_css":[],"settings":{"custom_liquid":"<div class=\"new-release-filter\">\n<a class=\"new-release-filter-button\" href=\"https:\/\/www.kennyflowers.com\/collections\/new-releases\">All<\/a>\n<a class=\"new-release-filter-button new-release-filter-button-men\" onclick=\"toggleMen()\">Men<\/a>\n<a class=\"new-release-filter-button new-release-filter-button-women\" onclick=\"toggleWomen()\">Women<\/a>\n<a class=\"new-release-filter-button new-release-filter-button-kids\" onclick=\"toggleKids()\">Kids<\/a>\n<\/div>","section_width":"full-width-row"}},"product-grid":{"type":"main-collection-product-grid","blocks":{"2eb8e6da-98ad-442c-b31e-fcc9bc0532b9":{"type":"promotion","disabled":true,"settings":{"promotion_collection":"","promotion_position":3,"promotion_width":"2","image":"shopify:\/\/shop_images\/kenny-flowers-mens-short-sleeve-button-down-hawaiian-shirt-black-white-pedregal-11_b476661e-16ae-48a4-be2b-aacc0893d472.jpg","title":"Cool Stuff","text":"Let's see what's up!","link_label":"","link":"shopify:\/\/collections\/jumpsuits","use_text_button":true,"block_link":"shopify:\/\/collections\/jumpsuits","content_position":"middle-center","text_alignment":"center","overlay_color":"#000000","overlay_opacity":15}},"bc620171-971e-4117-b1dc-41571235615f":{"type":"promotion","disabled":true,"settings":{"promotion_collection":"","promotion_position":10,"promotion_width":"1","title":"Behind the Brand","text":"","link_label":"","link":"","use_text_button":false,"block_link":"","content_position":"middle-center","text_alignment":"center","overlay_color":"#000000","overlay_opacity":70}}},"block_order":["2eb8e6da-98ad-442c-b31e-fcc9bc0532b9","bc620171-971e-4117-b1dc-41571235615f"],"settings":{"full_width":true,"products_per_page":16,"columns_desktop":4,"pagination_type":"infinite","enable_filtering":true,"enable_sorting":false,"show_counts":false,"filter_color_swatches":true,"facets_desktop":"drawer","sidebar_size":"medium","box_filter_list":""}},"16636704759cbf64c5":{"type":"spacer","settings":{"spacer_mobile":50,"spacer_desktop":125,"border_separator":false,"border_separator_full":false}},"f85cb100-f483-41ec-83ba-885d6e7794fb":{"type":"custom-liquid","custom_css":[".footer-collection-description {width: 90%; margin: 0 auto 0; padding: 30px 100px; text-align: center;}"],"settings":{"custom_liquid":"<div class=\"footer-collection-description\">{{ collection.description }}<\/div>","section_width":"full-width-row"}},"166367231494317262":{"type":"rich-text","blocks":{"1fc06b12-e359-41a2-b694-099a6a7d4133":{"type":"heading","disabled":true,"settings":{"text":"{{ collection.title }}","size":"h3"}},"16636723131a14a571-2":{"type":"text","settings":{"text":"<p>{{ collection.metafields.my_fields.seo_text | metafield_tag }}<\/p>","custom_liquid":"","size":"text-size-regular"}}},"block_order":["1fc06b12-e359-41a2-b694-099a6a7d4133","16636723131a14a571-2"],"settings":{"section_width":"full-width-row-full","text_width":"xlarge","text_position":"center","text_alignment":"center","color_bg":"rgba(0,0,0,0)","color_text":"#151515","color_links":"#151515","disable_top_spacing":true,"disable_bottom_spacing":true}},"166367228131c52c01":{"type":"spacer","settings":{"spacer_mobile":35,"spacer_desktop":40,"border_separator":false,"border_separator_full":false}}},"order":["main-collection-banner","rich_text_UQzYrb","rich_text_j4tW3J","6e227754-56ab-491c-9b1e-26ce521b525e","4feab899-8fbd-4c46-a9d5-7bf93e96c32d","166366972953e881f5","48e83cb4-17ee-4796-bcbd-36be50efa8ab","product-grid","16636704759cbf64c5","f85cb100-f483-41ec-83ba-885d6e7794fb","166367231494317262","166367228131c52c01"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-collection-banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_image": true,
+        "show_collection_description": false,
+        "show_subcollections": false,
+        "make_heading_uppercase": true,
+        "text_alignment": "center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 40
+      }
+    },
+    "rich_text_UQzYrb": {
+      "type": "rich-text",
+      "blocks": {
+        "text_BmiWJi": {
+          "type": "text",
+          "settings": {
+            "text": "{{ collection.description }}",
+            "custom_liquid": "",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "text_BmiWJi"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "section_width": "full-width-row-full",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_j4tW3J": {
+      "type": "rich-text",
+      "blocks": {
+        "text_UiwqQm": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>Kick off ‘25 with an extra 25% off sale today. Code: KF25</strong></p>",
+            "custom_liquid": "",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "text_UiwqQm"
+      ],
+      "settings": {
+        "section_width": "grid",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "6e227754-56ab-491c-9b1e-26ce521b525e": {
+      "type": "countdown-banner",
+      "disabled": true,
+      "custom_css": [
+        ".h1-xlarge,.description-size--large,.countdown-banner--timer {font-family: \"SaaSeries - CD\";}"
+      ],
+      "settings": {
+        "section_width": "full-width-row-full",
+        "section_layout": "horizontal",
+        "desktop_height": "desktop-height-450",
+        "mobile_height": "mobile-height-350",
+        "bg_image": "shopify://shop_images/kenny-flowers-tropical-vacation-swim-ubud-bali-floral-fronds-print-2022-womens-mens-resort-wear-swim-trunks-bikini-hawaiian-shirt-matching-00002-2_270b2907-3cd5-4b71-acba-9e7bb0b607a8.jpg",
+        "subheading": "",
+        "heading": "LAST CALL",
+        "heading_size": "h1-xlarge",
+        "content": "Shop the Warehouse Sale before it's gone for good",
+        "content_size": "large",
+        "button_text": "",
+        "button_link": "",
+        "timer_year": 2023,
+        "timer_month": "10",
+        "timer_day": "07",
+        "timer_hour": "00",
+        "timer_minute": "00",
+        "color_bg": "#f5f3ef",
+        "color_text": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "4feab899-8fbd-4c46-a9d5-7bf93e96c32d": {
+      "type": "spacer",
+      "disabled": true,
+      "settings": {
+        "spacer_mobile": 25,
+        "spacer_desktop": 40,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "166366972953e881f5": {
+      "type": "collection-list",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection_list": [
+          "short-sleeve",
+          "long-sleeve",
+          "mens-golf-shirts",
+          "best-selling-mens-collection"
+        ],
+        "image_ratio": "portrait",
+        "layout": "grid",
+        "style": "style2",
+        "columns_desktop": 5,
+        "columns_mobile": "1",
+        "show_progress_bar": true,
+        "mobile_swipe": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "48e83cb4-17ee-4796-bcbd-36be50efa8ab": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "settings": {
+        "custom_liquid": "<div class=\"new-release-filter\">\n<a class=\"new-release-filter-button\" href=\"https://www.kennyflowers.com/collections/new-releases\">All</a>\n<a class=\"new-release-filter-button new-release-filter-button-men\" onclick=\"toggleMen()\">Men</a>\n<a class=\"new-release-filter-button new-release-filter-button-women\" onclick=\"toggleWomen()\">Women</a>\n<a class=\"new-release-filter-button new-release-filter-button-kids\" onclick=\"toggleKids()\">Kids</a>\n</div>",
+        "section_width": "full-width-row"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "2eb8e6da-98ad-442c-b31e-fcc9bc0532b9": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "promotion_collection": "",
+            "promotion_position": 3,
+            "promotion_width": "2",
+            "image": "shopify://shop_images/kenny-flowers-mens-short-sleeve-button-down-hawaiian-shirt-black-white-pedregal-11_b476661e-16ae-48a4-be2b-aacc0893d472.jpg",
+            "title": "Cool Stuff",
+            "text": "Let's see what's up!",
+            "link_label": "",
+            "link": "shopify://collections/jumpsuits",
+            "use_text_button": true,
+            "block_link": "shopify://collections/jumpsuits",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "overlay_color": "#000000",
+            "overlay_opacity": 15
+          }
+        },
+        "bc620171-971e-4117-b1dc-41571235615f": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "promotion_collection": "",
+            "promotion_position": 10,
+            "promotion_width": "1",
+            "title": "Behind the Brand",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70
+          }
+        }
+      },
+      "block_order": [
+        "2eb8e6da-98ad-442c-b31e-fcc9bc0532b9",
+        "bc620171-971e-4117-b1dc-41571235615f"
+      ],
+      "settings": {
+        "full_width": true,
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "pagination_type": "infinite",
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "show_counts": false,
+        "filter_color_swatches": true,
+        "facets_desktop": "drawer",
+        "sidebar_size": "medium",
+        "box_filter_list": ""
+      }
+    },
+    "16636704759cbf64c5": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 50,
+        "spacer_desktop": 125,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "f85cb100-f483-41ec-83ba-885d6e7794fb": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".footer-collection-description {width: 90%; margin: 0 auto 0; padding: 30px 100px; text-align: center;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"footer-collection-description\">{{ collection.description }}</div>",
+        "section_width": "full-width-row"
+      }
+    },
+    "166367231494317262": {
+      "type": "rich-text",
+      "blocks": {
+        "1fc06b12-e359-41a2-b694-099a6a7d4133": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "text": "{{ collection.title }}",
+            "size": "h3"
+          }
+        },
+        "16636723131a14a571-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ collection.metafields.my_fields.seo_text | metafield_tag }}</p>",
+            "custom_liquid": "",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "1fc06b12-e359-41a2-b694-099a6a7d4133",
+        "16636723131a14a571-2"
+      ],
+      "settings": {
+        "section_width": "full-width-row-full",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "166367228131c52c01": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 35,
+        "spacer_desktop": 40,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    }
+  },
+  "order": [
+    "main-collection-banner",
+    "rich_text_UQzYrb",
+    "rich_text_j4tW3J",
+    "6e227754-56ab-491c-9b1e-26ce521b525e",
+    "4feab899-8fbd-4c46-a9d5-7bf93e96c32d",
+    "166366972953e881f5",
+    "48e83cb4-17ee-4796-bcbd-36be50efa8ab",
+    "product-grid",
+    "16636704759cbf64c5",
+    "f85cb100-f483-41ec-83ba-885d6e7794fb",
+    "166367231494317262",
+    "166367228131c52c01"
+  ]
+}
