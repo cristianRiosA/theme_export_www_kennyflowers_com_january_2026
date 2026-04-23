@@ -331,30 +331,6 @@
         "disable_bottom_spacing": false
       }
     },
-    "collection_list_w43yKw": {
-      "type": "collection-list",
-      "name": "Collection list",
-      "settings": {
-        "heading": "Shop by Category",
-        "heading_left": false,
-        "description": "<p>Add a short description for your collections</p>",
-        "full_width": true,
-        "collection_list": [
-          "new-releases"
-        ],
-        "image_ratio": "portrait",
-        "layout": "grid",
-        "style": "style1",
-        "columns_desktop": 4,
-        "columns_mobile": "1",
-        "show_progress_bar": true,
-        "mobile_swipe": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 30,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
     "recently_viewed_products_Tf8QPE": {
       "type": "recently-viewed-products",
       "name": "Recently viewed products",
@@ -367,6 +343,25 @@
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
       }
+    },
+    "featured_collection_4Cnk6e": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "heading": "New Releases",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection": "new-releases",
+        "display_type": "grid",
+        "product_limit": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
     }
   },
   "order": [
@@ -376,7 +371,7 @@
     "text_with_icons_PUi997",
     "gallery_mmNa8E",
     "collapsible_content_BbLV4e",
-    "collection_list_w43yKw",
-    "recently_viewed_products_Tf8QPE"
+    "recently_viewed_products_Tf8QPE",
+    "featured_collection_4Cnk6e"
   ]
 }
