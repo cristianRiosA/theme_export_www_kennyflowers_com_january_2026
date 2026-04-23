@@ -54,9 +54,9 @@
         "collapsible_tab_iHiXdX": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Collapsible row",
+            "heading": "How is the winner contacted?",
             "open": false,
-            "content": "",
+            "content": "<p>The winner will be contacted directly on or around June 10, 2026. We will never ask you for information or money to collect your prize.</p>",
             "page": "",
             "custom_liquid": ""
           }
@@ -64,9 +64,39 @@
         "collapsible_tab_AbfgBC": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Collapsible row",
+            "heading": "How do I claim my prize?",
             "open": false,
-            "content": "",
+            "content": "<p>After the winner is contacted, you will be able to choose the package or $100,000. After you fill out the proper legal paperwork, which we will provide, you can make your decision.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_HLPpc3": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "When is the winner announced?",
+            "open": false,
+            "content": "<p>The winner will be announced on or around June 15, 2026.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_Tkd3LE": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Is there a free method to of entry?",
+            "open": false,
+            "content": "<p>Yes! Please check the official rules for the details on the free method of entry.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_bBB3Vz": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Who is Shared Sweeps?",
+            "open": false,
+            "content": "<p>Shared Sweeps is a shared giveaway platform that partners with brands like us to enable their customers to earn entries to the giveaway — just for purchasing on their site.</p>",
             "page": "",
             "custom_liquid": ""
           }
@@ -77,11 +107,14 @@
         "collapsible_tab_wCmdMH",
         "collapsible_tab_cB6kPK",
         "collapsible_tab_iHiXdX",
-        "collapsible_tab_AbfgBC"
+        "collapsible_tab_AbfgBC",
+        "collapsible_tab_HLPpc3",
+        "collapsible_tab_Tkd3LE",
+        "collapsible_tab_bBB3Vz"
       ],
       "name": "Collapsible content",
       "settings": {
-        "heading": "FAQ",
+        "heading": "FAQS",
         "description": "",
         "uppercase_heading": true,
         "disable_top_spacing": false,
