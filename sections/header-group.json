@@ -204,7 +204,7 @@
         "menu_badge_JA7jXp": {
           "type": "menu_badge",
           "settings": {
-            "badge_position": "5",
+            "badge_position": "2",
             "text": "3X",
             "color_bg": "#d3ece2",
             "color_text": "#272422"
