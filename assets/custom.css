@@ -2655,6 +2655,7 @@ aspect-ratio: 0.8 !important;
 }
 
 .shared-sweeps-image-badge {
-  border-radius:10px;
-  min-height:24px !important;
+      border-radius: 7px !important;
+    min-height: 24px !important;
+    font-family: 'SaaSeriesFD';
 }
