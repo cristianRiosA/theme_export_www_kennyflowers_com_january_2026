@@ -2655,10 +2655,14 @@ aspect-ratio: 0.8 !important;
 }
 
 .shared-sweeps-image-badge {
-      border-radius: 7px !important;
+    border-radius: 7px !important;
     min-height: 24px !important;
     font-family: 'SaaSeriesFD';
     font-family: 'SaaSeriesFD';
     top: 6px !important;
     right: 6px !important;
+}
+
+.shared-sweeps-image-badge__bottom {
+  min-height:24px;
 }
