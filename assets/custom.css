@@ -2659,8 +2659,13 @@ aspect-ratio: 0.8 !important;
     min-height: 24px !important;
     font-family: 'SaaSeriesFD';
     font-family: 'SaaSeriesFD';
+}
+
+@media only screen and (min-width: 767px) {
+  .shared-sweeps-image-badge {
     top: 6px !important;
     right: 6px !important;
+  }
 }
 
 .shared-sweeps-image-badge__bottom {
