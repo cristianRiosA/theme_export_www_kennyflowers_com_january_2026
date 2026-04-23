@@ -2664,5 +2664,5 @@ aspect-ratio: 0.8 !important;
 }
 
 .shared-sweeps-image-badge__bottom {
-  min-height:24px;
+  min-height:24px !important;
 }
