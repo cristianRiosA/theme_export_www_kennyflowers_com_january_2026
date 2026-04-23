@@ -11,10 +11,255 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "show_page_title": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "collapsible_content_BbLV4e": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_tab_6f33Kt": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How do I enter the giveaway?",
+            "open": false,
+            "content": "<p>Every dollar spent on quay.com during the times we are promoting the giveaway gets you entries to win! You can also enter by mail — check out official rules for details.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_wCmdMH": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How many entries do I have?",
+            "open": false,
+            "content": "<p>Entries are shown on each product page—so you always know what you're earning as you shop.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_cB6kPK": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "When does the giveaway end?",
+            "open": false,
+            "content": "<p>The giveaway ends on June 4, 2026.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_iHiXdX": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Collapsible row",
+            "open": false,
+            "content": "",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_AbfgBC": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Collapsible row",
+            "open": false,
+            "content": "",
+            "page": "",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_6f33Kt",
+        "collapsible_tab_wCmdMH",
+        "collapsible_tab_cB6kPK",
+        "collapsible_tab_iHiXdX",
+        "collapsible_tab_AbfgBC"
+      ],
+      "name": "Collapsible content",
+      "settings": {
+        "heading": "FAQ",
+        "description": "",
+        "uppercase_heading": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "image_with_text_overlay_Bneh6i": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_hCjBqy": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "Add a tagline"
+          }
+        },
+        "heading_HDbGXi": {
+          "type": "heading",
+          "settings": {
+            "text": "Win the vacation of a lifetime",
+            "heading_size": "h1-xlarge"
+          }
+        },
+        "text_xF8ncc": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "description_size": "medium"
+          }
+        },
+        "button_DHBwjK": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_hCjBqy",
+        "heading_HDbGXi",
+        "text_xF8ncc",
+        "button_DHBwjK"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "section_width": "full-width-row-full",
+        "image": "shopify://shop_images/Greece_Grid_1200x600_6b9312f6-cc87-48ef-9ff4-a7985528bdd7.png",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-450",
+        "mobile_height": "mobile-height-500",
+        "content_width": "medium",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 40,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_pEJ69U": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_q6HET7": {
+          "type": "heading",
+          "settings": {
+            "text": "Talk about your brand",
+            "size": "h3"
+          }
+        },
+        "text_NJHQBV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "custom_liquid": "",
+            "size": "text-size-regular"
+          }
+        },
+        "button_BwEbAN": {
+          "type": "button",
+          "settings": {
+            "link_label": "Learn More",
+            "link": "",
+            "button_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_q6HET7",
+        "text_NJHQBV",
+        "button_BwEbAN"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "section_width": "grid",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "transparent",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "gallery_mmNa8E": {
+      "type": "gallery",
+      "blocks": {
+        "image_MWBHnM": {
+          "type": "image",
+          "settings": {
+            "subheading": "Add a tagline",
+            "title": "Column",
+            "text": "Pair text with an image to focus on your chosen image",
+            "link_label": "Explore",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_DQTmUW": {
+          "type": "image",
+          "settings": {
+            "subheading": "Add a tagline",
+            "title": "Column",
+            "text": "Pair text with an image to focus on your chosen image",
+            "link_label": "Explore",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_4wJYMt": {
+          "type": "image",
+          "settings": {
+            "subheading": "Add a tagline",
+            "title": "Column",
+            "text": "Pair text with an image to focus on your chosen image",
+            "link_label": "Explore",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        }
+      },
+      "block_order": [
+        "image_MWBHnM",
+        "image_DQTmUW",
+        "image_4wJYMt"
+      ],
+      "name": "Gallery",
+      "settings": {
+        "columns_desktop": 3,
+        "section_width": "full-width-row-full",
+        "mobile_swipe": false,
+        "image_ratio": "adapt",
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "column_spacing": "small",
+        "heading_size": "h2",
+        "overlay_color": "#000000",
+        "overlay_opacity": 70,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "collapsible_content_BbLV4e",
+    "image_with_text_overlay_Bneh6i",
+    "rich_text_pEJ69U",
+    "gallery_mmNa8E"
   ]
 }
