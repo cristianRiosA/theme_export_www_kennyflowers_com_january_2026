@@ -2658,4 +2658,7 @@ aspect-ratio: 0.8 !important;
       border-radius: 7px !important;
     min-height: 24px !important;
     font-family: 'SaaSeriesFD';
+    font-family: 'SaaSeriesFD';
+    top: 6px !important;
+    right: 6px !important;
 }
