@@ -107,7 +107,7 @@
         "color_text": "#151515",
         "color_links": "#151515",
         "disable_top_spacing": false,
-        "disable_bottom_spacing": false
+        "disable_bottom_spacing": true
       }
     },
     "multicolumn_b8keqk": {
@@ -171,6 +171,56 @@
         "show_progress_bar": true,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
+      }
+    },
+    "text_with_icons_PUi997": {
+      "type": "text-with-icons",
+      "blocks": {
+        "icon_Tjnqw8": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "SHOP MORE",
+            "text": "<p>Every $1 earns you 1 entry—plus more ways to win with bonus entries.</p>"
+          }
+        },
+        "icon_JQkTye": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "EARN MORE",
+            "text": "<p>The more you shop, the more entries you get.</p>"
+          }
+        },
+        "icon_aJGT3h": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "WIN BIG",
+            "text": "<p>One lucky winner will score $100k or trip of a lifetime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon_Tjnqw8",
+        "icon_JQkTye",
+        "icon_aJGT3h"
+      ],
+      "custom_css": [
+        "h1 {font-weight:bold;}"
+      ],
+      "name": "Text with icons",
+      "settings": {
+        "text_alignment": "left",
+        "icon_position": "top",
+        "icon_size": "medium",
+        "heading_size": "large",
+        "mobile_swipe": true,
+        "color_bg": "#9abcd5",
+        "color_heading": "#151515",
+        "color_text": "#151515",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
       }
     },
     "collapsible_content_BbLV4e": {
@@ -346,6 +396,7 @@
     "image_with_text_overlay_Bneh6i",
     "rich_text_pEJ69U",
     "multicolumn_b8keqk",
+    "text_with_icons_PUi997",
     "collapsible_content_BbLV4e",
     "gallery_mmNa8E"
   ]
