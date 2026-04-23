@@ -381,6 +381,25 @@
         "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
+    },
+    "featured_collection_QRfQ9w": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "heading": "3X Entries",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection": "final-sail",
+        "display_type": "carousel",
+        "product_limit": 12,
+        "columns_desktop": 4,
+        "show_view_all": false,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
     }
   },
   "order": [
@@ -392,6 +411,7 @@
     "collapsible_content_BbLV4e",
     "recently_viewed_products_Tf8QPE",
     "featured_collection_4Cnk6e",
-    "featured_collection_GeJ6yw"
+    "featured_collection_GeJ6yw",
+    "featured_collection_QRfQ9w"
   ]
 }
