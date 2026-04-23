@@ -172,8 +172,8 @@
           "settings": {
             "image": "shopify://shop_images/mediterranean_1.png",
             "subheading": "Choose",
-            "title": "Mediterranean",
-            "text": "Pair text with an image to focus on your chosen image",
+            "title": "You choose the destination",
+            "text": "Mediterannean\nSt. Barths\nMaldives",
             "link_label": "",
             "link": "",
             "use_text_button": false,
@@ -221,12 +221,109 @@
         "section_width": "full-width-row-full",
         "mobile_swipe": false,
         "image_ratio": "adapt",
-        "content_position": "bottom-left",
+        "content_position": "middle-center",
         "text_alignment": "left",
-        "column_spacing": "small",
+        "column_spacing": "large",
         "heading_size": "h2",
         "overlay_color": "#000000",
         "overlay_opacity": 27,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "gallery_qwh7rT": {
+      "type": "gallery",
+      "blocks": {
+        "image_hf7pH3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/choose-destination.png",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_9UNBjf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/business-class.png",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_Nn9QtP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5-star-hotel.png",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_dJWaqq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/kenny-flowers-suitcase.png",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_86rF89": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5k-donation.png",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        }
+      },
+      "block_order": [
+        "image_hf7pH3",
+        "image_9UNBjf",
+        "image_Nn9QtP",
+        "image_dJWaqq",
+        "image_86rF89"
+      ],
+      "name": "Gallery",
+      "settings": {
+        "columns_desktop": 5,
+        "section_width": "full-width-row-full",
+        "mobile_swipe": false,
+        "image_ratio": "adapt",
+        "content_position": "middle-center",
+        "text_alignment": "left",
+        "column_spacing": "large",
+        "heading_size": "h2",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
@@ -411,6 +508,7 @@
     "rich_text_pEJ69U",
     "text_with_icons_PUi997",
     "gallery_mmNa8E",
+    "gallery_qwh7rT",
     "collapsible_content_BbLV4e",
     "recently_viewed_products_Tf8QPE",
     "featured_collection_4Cnk6e",
