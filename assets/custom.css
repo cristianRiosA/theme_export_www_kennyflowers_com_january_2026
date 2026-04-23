@@ -2654,7 +2654,7 @@ aspect-ratio: 0.8 !important;
   font-family: "SaaSeries - CD" !important;
 }
 
-.shared-sweeps-image-badge .shared-sweeps-image-badge--entries-only {
+.shared-sweeps-image-badge {
   border-radius:10px;
   min-height:24px !important;
 }
