@@ -99,7 +99,7 @@
       ],
       "name": "Rich text",
       "settings": {
-        "section_width": "grid",
+        "section_width": "full-width-row",
         "text_width": "xlarge",
         "text_position": "center",
         "text_alignment": "center",
@@ -170,10 +170,11 @@
         "image_MWBHnM": {
           "type": "image",
           "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
+            "image": "shopify://shop_images/mediterranean_1.png",
+            "subheading": "Choose",
+            "title": "Mediterranean",
             "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
+            "link_label": "",
             "link": "",
             "use_text_button": false,
             "block_link": "",
@@ -183,10 +184,11 @@
         "image_DQTmUW": {
           "type": "image",
           "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
+            "image": "shopify://shop_images/image_18.png",
+            "subheading": "Choose",
+            "title": "St Barths",
             "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
+            "link_label": "",
             "link": "",
             "use_text_button": false,
             "block_link": "",
@@ -196,10 +198,11 @@
         "image_4wJYMt": {
           "type": "image",
           "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
+            "image": "shopify://shop_images/photo-1512100356356-de1b84283e18_1.png",
+            "subheading": "Choose",
+            "title": "Maldives",
             "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
+            "link_label": "",
             "link": "",
             "use_text_button": false,
             "block_link": "",
@@ -223,7 +226,7 @@
         "column_spacing": "small",
         "heading_size": "h2",
         "overlay_color": "#000000",
-        "overlay_opacity": 70,
+        "overlay_opacity": 27,
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
@@ -375,7 +378,7 @@
         "display_type": "carousel",
         "product_limit": 12,
         "columns_desktop": 4,
-        "show_view_all": false,
+        "show_view_all": true,
         "mobile_swipe": true,
         "show_progress_bar": true,
         "disable_top_spacing": false,
@@ -394,7 +397,7 @@
         "display_type": "carousel",
         "product_limit": 12,
         "columns_desktop": 4,
-        "show_view_all": false,
+        "show_view_all": true,
         "mobile_swipe": true,
         "show_progress_bar": true,
         "disable_top_spacing": false,
