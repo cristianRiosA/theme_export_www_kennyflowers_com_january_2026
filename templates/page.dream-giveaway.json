@@ -57,7 +57,7 @@
         "button_DHBwjK"
       ],
       "custom_css": [
-        ".subheading {margin-top:-20px; font-family:'SaaSeriesCD'; font-size:24px;}"
+        ".subheading {margin-top: -20px; font-family: \"SaaSeriesCD\"; font-size: 20px;}"
       ],
       "name": "Image with text overlay",
       "settings": {
