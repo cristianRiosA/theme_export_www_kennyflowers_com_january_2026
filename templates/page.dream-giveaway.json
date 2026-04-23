@@ -449,7 +449,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "New Releases – 1X Entries",
+        "heading": "New Releases",
         "heading_left": false,
         "description": "",
         "full_width": true,
@@ -468,7 +468,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "Best Sellers – 1X Entries",
+        "heading": "Best Sellers",
         "heading_left": false,
         "description": "",
         "full_width": true,
