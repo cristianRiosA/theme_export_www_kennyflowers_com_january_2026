@@ -215,11 +215,12 @@
         "image_DQTmUW",
         "image_4wJYMt"
       ],
+      "disabled": true,
       "name": "Gallery",
       "settings": {
         "columns_desktop": 3,
-        "section_width": "full-width-row-full",
-        "mobile_swipe": false,
+        "section_width": "full-width-row",
+        "mobile_swipe": true,
         "image_ratio": "adapt",
         "content_position": "middle-center",
         "text_alignment": "left",
