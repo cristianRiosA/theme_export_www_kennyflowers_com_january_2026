@@ -2648,3 +2648,7 @@ aspect-ratio: 0.8 !important;
 .masters-green {
   color:#006747;
 }
+
+.shared-sweeps-image-badge .shared-sweeps-image-badge--entries-only {
+  border-radius:0px !important;
+}
