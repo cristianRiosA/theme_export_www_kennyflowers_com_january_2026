@@ -148,7 +148,7 @@
       ],
       "custom_css": [
         ".text-with-icons__inner {padding: 40px 0px;}",
-        ".body-font {font-weight:bolder;}"
+        ".body-font {font-weight: bolder; font-family: \"SaaSeries - CD\", sans-serif !important; font-weight: 400 !important; font-size:28px;}"
       ],
       "name": "Text with icons",
       "settings": {
@@ -158,8 +158,8 @@
         "heading_size": "large",
         "mobile_swipe": true,
         "color_bg": "#9abcd5",
-        "color_heading": "#151515",
-        "color_text": "#151515",
+        "color_heading": "#1c6ba8",
+        "color_text": "#3f3f3f",
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
