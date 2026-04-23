@@ -348,7 +348,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "New Releases",
+        "heading": "New Releases – 1X Entries",
         "heading_left": false,
         "description": "",
         "full_width": true,
@@ -367,7 +367,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "Best Sellers",
+        "heading": "Best Sellers – 1X Entries",
         "heading_left": false,
         "description": "",
         "full_width": true,
@@ -386,7 +386,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "3X Entries",
+        "heading": "Spring Sale – 3X Entries",
         "heading_left": false,
         "description": "",
         "full_width": true,

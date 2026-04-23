@@ -201,15 +201,6 @@
             "promo_4_link": ""
           }
         },
-        "menu_badge_JA7jXp": {
-          "type": "menu_badge",
-          "settings": {
-            "badge_position": "2",
-            "text": "3X",
-            "color_bg": "#d3ece2",
-            "color_text": "#272422"
-          }
-        },
         "megamenu_destination_4gHKVL": {
           "type": "megamenu_destination",
           "settings": {
@@ -224,7 +215,6 @@
         "megamenu_LHq7AG",
         "megamenu_xAyjgX",
         "megamenu_A8iHXQ",
-        "menu_badge_JA7jXp",
         "megamenu_destination_4gHKVL"
       ],
       "custom_css": [
