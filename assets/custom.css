@@ -2674,8 +2674,14 @@ aspect-ratio: 0.8 !important;
 
 
 
-.golden-color-off {
+.goldBG {
   background: linear-gradient(45deg, #AE8625, #F7EF8A, #D2AC47, #EDC967, #AE8625, #F7EF8A, #D2AC47, #EDC967,  #AE8625, #F7EF8A);
   background-size: 400% 100%;
   background-position: 0 0;
+}
+
+.goldText{
+  background-clip: text;
+  color:transparent;
+  animation: AnimationName 10s linear infinite;
 }
