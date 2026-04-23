@@ -18,6 +18,161 @@
         "disable_bottom_spacing": false
       }
     },
+    "image_with_text_overlay_Bneh6i": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_hCjBqy": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "Add a tagline"
+          }
+        },
+        "heading_HDbGXi": {
+          "type": "heading",
+          "settings": {
+            "text": "Win the vacation of a lifetime",
+            "heading_size": "h1-xlarge"
+          }
+        },
+        "text_xF8ncc": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "description_size": "medium"
+          }
+        },
+        "button_DHBwjK": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop To Enter",
+            "button_link": "shopify://collections/new-releases",
+            "button_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_hCjBqy",
+        "heading_HDbGXi",
+        "text_xF8ncc",
+        "button_DHBwjK"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "section_width": "full-width-row-full",
+        "image": "shopify://shop_images/Greece_Grid_1200x600_6b9312f6-cc87-48ef-9ff4-a7985528bdd7.png",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-450",
+        "mobile_height": "mobile-height-500",
+        "content_width": "medium",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 40,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_pEJ69U": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_q6HET7": {
+          "type": "heading",
+          "settings": {
+            "text": "Trip of a lifetime",
+            "size": "h3"
+          }
+        },
+        "text_NJHQBV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We partnered with Share Sweeps to bring you an unforgettable experience</p>",
+            "custom_liquid": "",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q6HET7",
+        "text_NJHQBV"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "section_width": "grid",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "transparent",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "multicolumn_b8keqk": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_g7QKKq": {
+          "type": "column",
+          "settings": {
+            "image_full_width": false,
+            "image_link": "",
+            "retina": true,
+            "title": "1 – Shop More",
+            "text": "<p>Every $1 earns you 1 entry—plus more ways to win with bonus entries.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_jVgUmf": {
+          "type": "column",
+          "settings": {
+            "image_full_width": false,
+            "image_link": "",
+            "retina": true,
+            "title": "Earn More",
+            "text": "<p>The more you shop, the more entries you get.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_kpTJLQ": {
+          "type": "column",
+          "settings": {
+            "image_full_width": false,
+            "image_link": "",
+            "retina": true,
+            "title": "Win Big",
+            "text": "<p>One lucky winner will score $100k or trip of a lifetime.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_g7QKKq",
+        "column_jVgUmf",
+        "column_kpTJLQ"
+      ],
+      "custom_css": [],
+      "name": "Multicolumn",
+      "settings": {
+        "heading": "How to Enter",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "display_type": "grid",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "text_alignment": "center",
+        "heading_size": "h5",
+        "mobile_swipe": false,
+        "show_progress_bar": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "collapsible_content_BbLV4e": {
       "type": "collapsible-content",
       "blocks": {
@@ -121,108 +276,6 @@
         "disable_bottom_spacing": false
       }
     },
-    "image_with_text_overlay_Bneh6i": {
-      "type": "image-with-text-overlay",
-      "blocks": {
-        "subheading_hCjBqy": {
-          "type": "subheading",
-          "disabled": true,
-          "settings": {
-            "text": "Add a tagline"
-          }
-        },
-        "heading_HDbGXi": {
-          "type": "heading",
-          "settings": {
-            "text": "Win the vacation of a lifetime",
-            "heading_size": "h1-xlarge"
-          }
-        },
-        "text_xF8ncc": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "description_size": "medium"
-          }
-        },
-        "button_DHBwjK": {
-          "type": "button",
-          "disabled": true,
-          "settings": {
-            "button_text": "Shop Now",
-            "button_link": "",
-            "button_outline": false
-          }
-        }
-      },
-      "block_order": [
-        "subheading_hCjBqy",
-        "heading_HDbGXi",
-        "text_xF8ncc",
-        "button_DHBwjK"
-      ],
-      "name": "Image with text overlay",
-      "settings": {
-        "section_width": "full-width-row-full",
-        "image": "shopify://shop_images/Greece_Grid_1200x600_6b9312f6-cc87-48ef-9ff4-a7985528bdd7.png",
-        "image_parallax": false,
-        "desktop_height": "desktop-height-450",
-        "mobile_height": "mobile-height-500",
-        "content_width": "medium",
-        "content_position": "middle-center",
-        "text_alignment": "center",
-        "overlay_color": "#000000",
-        "overlay_opacity": 40,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
-      }
-    },
-    "rich_text_pEJ69U": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_q6HET7": {
-          "type": "heading",
-          "settings": {
-            "text": "Talk about your brand",
-            "size": "h3"
-          }
-        },
-        "text_NJHQBV": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "custom_liquid": "",
-            "size": "text-size-regular"
-          }
-        },
-        "button_BwEbAN": {
-          "type": "button",
-          "settings": {
-            "link_label": "Learn More",
-            "link": "",
-            "button_outline": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_q6HET7",
-        "text_NJHQBV",
-        "button_BwEbAN"
-      ],
-      "name": "Rich text",
-      "settings": {
-        "section_width": "grid",
-        "text_width": "medium",
-        "text_position": "center",
-        "text_alignment": "center",
-        "color_bg": "transparent",
-        "color_text": "#151515",
-        "color_links": "#151515",
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
     "gallery_mmNa8E": {
       "type": "gallery",
       "blocks": {
@@ -290,9 +343,10 @@
   },
   "order": [
     "main",
-    "collapsible_content_BbLV4e",
     "image_with_text_overlay_Bneh6i",
     "rich_text_pEJ69U",
+    "multicolumn_b8keqk",
+    "collapsible_content_BbLV4e",
     "gallery_mmNa8E"
   ]
 }
