@@ -103,7 +103,7 @@
         "text_width": "xlarge",
         "text_position": "center",
         "text_alignment": "center",
-        "color_bg": "transparent",
+        "color_bg": "rgba(0,0,0,0)",
         "color_text": "#151515",
         "color_links": "#151515",
         "disable_top_spacing": false,
@@ -148,7 +148,7 @@
       ],
       "custom_css": [
         ".text-with-icons__inner {padding: 40px 0px;}",
-        ".body-font {font-weight: bolder; font-family: \"SaaSeries - CD\", sans-serif !important; font-weight: 400 !important; font-size:28px;}"
+        ".body-font {font-weight: bolder; font-family: \"SaaSeries - CD\", sans-serif !important; font-weight: 400 !important; font-size: 28px;}"
       ],
       "name": "Text with icons",
       "settings": {
@@ -160,6 +160,70 @@
         "color_bg": "#9abcd5",
         "color_heading": "#1c6ba8",
         "color_text": "#3f3f3f",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "gallery_mmNa8E": {
+      "type": "gallery",
+      "blocks": {
+        "image_MWBHnM": {
+          "type": "image",
+          "settings": {
+            "subheading": "Add a tagline",
+            "title": "Column",
+            "text": "Pair text with an image to focus on your chosen image",
+            "link_label": "Explore",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_DQTmUW": {
+          "type": "image",
+          "settings": {
+            "subheading": "Add a tagline",
+            "title": "Column",
+            "text": "Pair text with an image to focus on your chosen image",
+            "link_label": "Explore",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "image_4wJYMt": {
+          "type": "image",
+          "settings": {
+            "subheading": "Add a tagline",
+            "title": "Column",
+            "text": "Pair text with an image to focus on your chosen image",
+            "link_label": "Explore",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        }
+      },
+      "block_order": [
+        "image_MWBHnM",
+        "image_DQTmUW",
+        "image_4wJYMt"
+      ],
+      "name": "Gallery",
+      "settings": {
+        "columns_desktop": 3,
+        "section_width": "full-width-row-full",
+        "mobile_swipe": false,
+        "image_ratio": "adapt",
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "column_spacing": "small",
+        "heading_size": "h2",
+        "overlay_color": "#000000",
+        "overlay_opacity": 70,
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
@@ -267,66 +331,39 @@
         "disable_bottom_spacing": false
       }
     },
-    "gallery_mmNa8E": {
-      "type": "gallery",
-      "blocks": {
-        "image_MWBHnM": {
-          "type": "image",
-          "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
-            "link": "",
-            "use_text_button": false,
-            "block_link": "",
-            "product_list": []
-          }
-        },
-        "image_DQTmUW": {
-          "type": "image",
-          "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
-            "link": "",
-            "use_text_button": false,
-            "block_link": "",
-            "product_list": []
-          }
-        },
-        "image_4wJYMt": {
-          "type": "image",
-          "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
-            "link": "",
-            "use_text_button": false,
-            "block_link": "",
-            "product_list": []
-          }
-        }
-      },
-      "block_order": [
-        "image_MWBHnM",
-        "image_DQTmUW",
-        "image_4wJYMt"
-      ],
-      "name": "Gallery",
+    "collection_list_w43yKw": {
+      "type": "collection-list",
+      "name": "Collection list",
       "settings": {
-        "columns_desktop": 3,
-        "section_width": "full-width-row-full",
-        "mobile_swipe": false,
-        "image_ratio": "adapt",
-        "content_position": "bottom-left",
-        "text_alignment": "left",
-        "column_spacing": "small",
-        "heading_size": "h2",
+        "heading": "Shop by Category",
+        "heading_left": false,
+        "description": "<p>Add a short description for your collections</p>",
+        "full_width": true,
+        "collection_list": [
+          "new-releases"
+        ],
+        "image_ratio": "portrait",
+        "layout": "grid",
+        "style": "style1",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "show_progress_bar": true,
+        "mobile_swipe": true,
         "overlay_color": "#000000",
-        "overlay_opacity": 70,
+        "overlay_opacity": 30,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "recently_viewed_products_Tf8QPE": {
+      "type": "recently-viewed-products",
+      "name": "Recently viewed products",
+      "settings": {
+        "heading": "Recently viewed products",
+        "heading_left": true,
+        "description": "<p>Describe your recently viewed products here</p>",
+        "full_width": true,
+        "mobile_swipe": true,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
       }
@@ -337,7 +374,9 @@
     "image_with_text_overlay_Bneh6i",
     "rich_text_pEJ69U",
     "text_with_icons_PUi997",
+    "gallery_mmNa8E",
     "collapsible_content_BbLV4e",
-    "gallery_mmNa8E"
+    "collection_list_w43yKw",
+    "recently_viewed_products_Tf8QPE"
   ]
 }
