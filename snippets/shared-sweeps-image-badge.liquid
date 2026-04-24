@@ -115,19 +115,21 @@
 
     {% if base_price > 0 %}
       <div
-        class="shared-sweeps-image-badge{% if show_multiplier %} shared-sweeps-image-badge--with-mult{% else %} shared-sweeps-image-badge--entries-only{% endif %}"
-        aria-label="{% if show_multiplier %}{{ mult_label }}x, {% endif %}{{ entries | number_with_delimiter }} {{ noun | downcase }}"
+        class="shared-sweeps-image-badge{% if show_multiplier %} shared-sweeps-image-badge--with-mult{% endif %}"
+        aria-label="{% if show_multiplier %}{{ entries | number_with_delimiter }} {{ noun | downcase }}, {{ mult_label }}x{% else %}{{ entries | number_with_delimiter }} {{ noun | downcase }}{% endif %}"
       >
-        {% if show_multiplier %}
-          <div class="shared-sweeps-image-badge__top">
-            <span class="shared-sweeps-image-badge__mult">{{ mult_label }}X</span>
-          </div>
-        {% endif %}
+        <span class="shared-sweeps-image-badge__entries-box">
+          <span class="shared-sweeps-image-badge__entries">
+            <span class="shared-sweeps-image-badge__count">{{ entries | number_with_delimiter }}</span>
+            <span class="shared-sweeps-image-badge__noun">{{ noun }}</span>
+          </span>
+        </span>
 
-        <div class="shared-sweeps-image-badge__bottom">
-          <span class="shared-sweeps-image-badge__count">{{ entries | number_with_delimiter }}</span>
-          <span class="shared-sweeps-image-badge__noun">{{ noun }}</span>
-        </div>
+        {% if show_multiplier %}
+          <span class="shared-sweeps-image-badge__mult-box">
+            <span class="shared-sweeps-image-badge__mult">{{ mult_label }}X</span>
+          </span>
+        {% endif %}
       </div>
 
       <style>
@@ -138,142 +140,93 @@
         }
 
         .product-card--featured-image-link .shared-sweeps-image-badge {
-          --sweeps-bg: #ffffff;
-          --sweeps-ink: #b59672;
-          --sweeps-ink-strong: #111111;
-          --sweeps-border: #d8c4aa;
-          --sweeps-divider: rgba(181, 150, 114, 0.30);
-          --sweeps-shadow: 0 2px 8px rgba(24, 42, 35, 0.08);
-
           position: absolute;
           top: 4px;
           right: 8px;
           left: auto;
           bottom: auto;
           z-index: 1001;
-
-          display: inline-grid;
-          justify-items: center;
+          display: inline-flex;
           align-items: center;
-
-          background: var(--sweeps-bg);
-          border: 1.5px solid var(--sweeps-border);
-          box-shadow: var(--sweeps-shadow);
-          box-sizing: border-box;
-          overflow: hidden;
+          justify-content: flex-end;
+          gap: 4px;
+          max-width: calc(100% - 16px);
           pointer-events: none;
-
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           text-rendering: geometricPrecision;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only {
-          min-height: 32px;
-          padding: 0;
-          border-radius: 12px;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__bottom {
+        .product-card--featured-image-link .shared-sweeps-image-badge__entries-box,
+        .product-card--featured-image-link .shared-sweeps-image-badge__mult-box {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 4px;
-          min-height: 32px;
-          padding: 0 13px;
-          white-space: nowrap;
+          min-height: 28px;
+          background: rgba(12, 43, 66, 0.75);
+          border: 1px solid #ffffff;
+          border-radius: 16px;
           box-sizing: border-box;
+          box-shadow: 0 4px 10px rgba(7, 24, 39, 0.14);
+          overflow: hidden;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__count,
-        .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__noun {
+        .product-card--featured-image-link .shared-sweeps-image-badge__entries-box {
+          min-width: 0;
+          max-width: 100%;
+          padding: 0 10px;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__entries {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: var(--sweeps-ink);
-          font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
-          font-style: normal;
-          font-weight: 700;
-          font-size: 10px;
-          line-height: 1;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+          gap: 5px;
+          min-width: 0;
           white-space: nowrap;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult {
-          min-width: 98px;
-          border-radius: 14px;
-          grid-template-rows: auto auto;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__top {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 6px 10px 4px;
-          box-sizing: border-box;
-        }
-
+        .product-card--featured-image-link .shared-sweeps-image-badge__count,
+        .product-card--featured-image-link .shared-sweeps-image-badge__noun,
         .product-card--featured-image-link .shared-sweeps-image-badge__mult {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: var(--sweeps-ink-strong);
-          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-          font-style: normal;
-          font-weight: 800;
-          font-size: 15px;
-          line-height: 0.95;
-          letter-spacing: -0.04em;
+          color: #ffffff;
+          line-height: 1;
           text-transform: uppercase;
           white-space: nowrap;
-          font-variant-numeric: lining-nums tabular-nums;
-          font-feature-settings: "lnum" 1, "tnum" 1;
         }
 
-        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom {
-          position: relative;
-          width: 100%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 3px;
-          padding: 6px 10px 8px;
-          white-space: nowrap;
-          box-sizing: border-box;
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 8px;
-          right: 8px;
-          height: 1px;
-          background: var(--sweeps-divider);
-        }
-
-        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__count,
-        .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__noun {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--sweeps-ink);
+        .product-card--featured-image-link .shared-sweeps-image-badge__count,
+        .product-card--featured-image-link .shared-sweeps-image-badge__noun {
           font-family: {{ badge_font.family }}, {{ badge_font.fallback_families }};
           font-style: normal;
           font-weight: 700;
           font-size: 10px;
-          line-height: 1;
           letter-spacing: 0.08em;
-          text-transform: uppercase;
-          white-space: nowrap;
         }
 
         .product-card--featured-image-link .shared-sweeps-image-badge__count {
           font-variant-numeric: lining-nums tabular-nums;
           font-feature-settings: "lnum" 1, "tnum" 1;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__mult-box {
+          flex: 0 0 auto;
+          padding: 0 9px;
+          min-width: 42px;
+        }
+
+        .product-card--featured-image-link .shared-sweeps-image-badge__mult {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 13px;
+          letter-spacing: 0;
+          font-variant-numeric: lining-nums tabular-nums;
+          font-feature-settings: "lnum" 1, "tnum" 1;
+          text-align: center;
         }
 
         .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {
@@ -290,52 +243,38 @@
             left: 50%;
             bottom: 10px;
             transform: translateX(-50%);
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only {
-            min-height: 30px;
-            border-radius: 11px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__bottom {
-            min-height: 30px;
-            padding: 0 12px;
             gap: 3px;
+            max-width: calc(100% - 20px);
           }
 
-          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__count,
-          .product-card--featured-image-link .shared-sweeps-image-badge--entries-only .shared-sweeps-image-badge__noun {
+          .product-card--featured-image-link .shared-sweeps-image-badge__entries-box,
+          .product-card--featured-image-link .shared-sweeps-image-badge__mult-box {
+            min-height: 26px;
+            border-radius: 14px;
+            border-width: 1px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__entries-box {
+            padding: 0 9px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__entries {
+            gap: 4px;
+          }
+
+          .product-card--featured-image-link .shared-sweeps-image-badge__count,
+          .product-card--featured-image-link .shared-sweeps-image-badge__noun {
             font-size: 9px;
             letter-spacing: 0.08em;
           }
 
-          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult {
-            min-width: 90px;
-            border-radius: 13px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__top {
-            padding: 5px 9px 3px;
+          .product-card--featured-image-link .shared-sweeps-image-badge__mult-box {
+            min-width: 38px;
+            padding: 0 8px;
           }
 
           .product-card--featured-image-link .shared-sweeps-image-badge__mult {
-            font-size: 14px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom {
-            padding: 5px 9px 7px;
-            gap: 2px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__bottom::before {
-            left: 7px;
-            right: 7px;
-          }
-
-          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__count,
-          .product-card--featured-image-link .shared-sweeps-image-badge--with-mult .shared-sweeps-image-badge__noun {
-            font-size: 9px;
-            letter-spacing: 0.08em;
+            font-size: 12px;
           }
 
           .product-card--featured-image:has(.toggle_size_preview_fit) .product-card--featured-image-link .shared-sweeps-image-badge {

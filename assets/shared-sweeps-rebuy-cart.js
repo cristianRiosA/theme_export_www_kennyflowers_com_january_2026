@@ -120,12 +120,16 @@
         );
 
         el.innerHTML =
+            '<span class="shared-sweeps-rebuy-line-badge__copy-box">' +
             '<span class="shared-sweeps-rebuy-line-badge__copy">' +
             '<span class="shared-sweeps-rebuy-line-badge__count">' + formatNumber(data.entries) + '</span>' +
             '<span class="shared-sweeps-rebuy-line-badge__noun">' + data.noun + '</span>' +
             '</span>' +
+            '</span>' +
             (data.showMultiplier
-                ? '<span class="shared-sweeps-rebuy-line-badge__mult">' + data.mult + '</span>'
+                ? '<span class="shared-sweeps-rebuy-line-badge__mult-box">' +
+                '<span class="shared-sweeps-rebuy-line-badge__mult">' + data.mult + '</span>' +
+                '</span>'
                 : '');
 
         return el;
@@ -138,26 +142,39 @@
         style.id = 'shared-sweeps-rebuy-line-badge-styles';
         style.textContent = `
       .shared-sweeps-rebuy-line-badge{
-        --sweeps-accent:#d8c4aa;
-        --sweeps-accent-strong:#b59672;
-        --sweeps-text:#b59672;
-        --sweeps-mult:#111111;
+        --sweeps-bg:#0C2B42;
+        --sweeps-text:#ffffff;
+        --sweeps-border:#ffffff;
+        --sweeps-shadow:0 2px 8px rgba(0,0,0,.05);
+        --sweeps-mult-bg:#ffffff;
+        --sweeps-mult-text:#0C2B42;
+        --sweeps-mult-border:#0C2B42;
         position:relative;
-        display:inline-grid;
-        grid-template-columns:auto;
+        display:inline-flex;
         align-items:stretch;
-        min-height:32px;
+        gap:4px;
         margin:8px 0 10px;
-        background:#ffffff;
-        border:1px solid var(--sweeps-accent);
-        box-shadow:0 2px 8px rgba(0,0,0,.05);
-        overflow:hidden;
         max-width:100%;
         box-sizing:border-box;
       }
 
-      .shared-sweeps-rebuy-line-badge--has-mult{
-        grid-template-columns:auto auto;
+      .shared-sweeps-rebuy-line-badge__copy-box,
+      .shared-sweeps-rebuy-line-badge__mult-box{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        min-height:32px;
+        box-shadow:var(--sweeps-shadow);
+        overflow:hidden;
+        box-sizing:border-box;
+      }
+
+      .shared-sweeps-rebuy-line-badge__copy-box{
+        min-width:0;
+        max-width:100%;
+        background:var(--sweeps-bg);
+        border:1px solid var(--sweeps-border);
+        border-radius:0;
       }
 
       .shared-sweeps-rebuy-line-badge__copy{
@@ -186,30 +203,31 @@
         letter-spacing:.04em;
         text-transform:uppercase;
         font-weight:700;
-      }
-
-      .shared-sweeps-rebuy-line-badge__noun{
         color:var(--sweeps-text);
       }
 
       .shared-sweeps-rebuy-line-badge__count{
         min-width:auto;
         text-align:center;
-        color:var(--sweeps-accent-strong);
         letter-spacing:.01em;
         font-variant-numeric:lining-nums tabular-nums;
         font-feature-settings:"lnum" 1, "tnum" 1;
+      }
+
+      .shared-sweeps-rebuy-line-badge__mult-box{
+        flex:0 0 auto;
+        min-width:0;
+        padding:0 10px;
+        background:var(--sweeps-mult-bg);
+        border:1px solid var(--sweeps-mult-border);
+        border-radius:0;
       }
 
       .shared-sweeps-rebuy-line-badge__mult{
         display:flex;
         align-items:center;
         justify-content:center;
-        min-width:0;
-        padding:0 12px 0 10px;
-        background:#ffffff;
-        color:var(--sweeps-mult);
-        border-left:1px solid var(--sweeps-accent);
+        color:var(--sweeps-mult-text);
         font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size:15px;
         font-weight:600;
@@ -224,13 +242,14 @@
 
       @media (max-width: 749px){
         .shared-sweeps-rebuy-line-badge{
-          grid-template-columns:minmax(0,1fr);
-          min-height:28px;
+          gap:3px;
           margin:8px 0 8px;
         }
 
-        .shared-sweeps-rebuy-line-badge--has-mult{
-          grid-template-columns:minmax(0,1fr) auto;
+        .shared-sweeps-rebuy-line-badge__copy-box,
+        .shared-sweeps-rebuy-line-badge__mult-box{
+          min-height:28px;
+          border-radius:0;
         }
 
         .shared-sweeps-rebuy-line-badge__copy{
@@ -244,9 +263,11 @@
           letter-spacing:.03em;
         }
 
+        .shared-sweeps-rebuy-line-badge__mult-box{
+          padding:0 8px;
+        }
+
         .shared-sweeps-rebuy-line-badge__mult{
-          min-width:0;
-          padding:0 8px 0 6px;
           font-size:12px;
           font-weight:600;
         }
