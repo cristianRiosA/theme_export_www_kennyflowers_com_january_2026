@@ -2648,3 +2648,41 @@ aspect-ratio: 0.8 !important;
 .masters-green {
   color:#006747;
 }
+
+.shared-sweeps-image-badge .shared-sweeps-image-badge--entries-only {
+  border-radius:0px !important;
+  font-family: "SaaSeries - CD" !important;
+}
+
+.shared-sweeps-image-badge {
+    border-radius: 7px !important;
+    min-height: 24px !important;
+    font-family: 'SaaSeriesFD';
+    font-family: 'SaaSeriesFD';
+}
+
+@media only screen and (min-width: 767px) {
+  .shared-sweeps-image-badge {
+    top: 6px !important;
+    right: 6px !important;
+  }
+}
+
+.shared-sweeps-image-badge__bottom {
+  min-height:24px !important;
+}
+
+
+
+.goldBG {
+  background: linear-gradient(45deg, #AE8625, #F7EF8A, #D2AC47, #EDC967, #AE8625, #F7EF8A, #D2AC47, #EDC967,  #AE8625, #F7EF8A);
+  background-size: 400% 100%;
+  background-position: 0 0;
+}
+
+.goldText{
+  margin-left:10px;
+  background-clip: text;
+  color:transparent;
+  animation: AnimationName 10s linear infinite;
+}
