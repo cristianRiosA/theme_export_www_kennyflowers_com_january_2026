@@ -12,33 +12,6 @@
     "16479477632637c9a7": {
       "type": "slideshow",
       "blocks": {
-        "slide_8jWeUF": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Grid_1200x600_4.png",
-            "mobile_image": "shopify://shop_images/Kenny-Flowers-womens-blue-white-greece-maxi-resort-dress-with-smocked-back-10copy.jpg",
-            "slide_link": "shopify://collections/new-releases",
-            "video_background": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "subheading": "Every $1 Spent = 1 Entry",
-            "heading": "Win a $100k Dream Vacation*",
-            "heading_size": "h1-large",
-            "content": "(Or $100k Cash if that's more your style)",
-            "description_size": "medium",
-            "content_position": "bottom-left",
-            "text_alignment": "left",
-            "content_size": "medium",
-            "overlay_color": "#000000",
-            "overlay_opacity": 70,
-            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
-            "button_1_text": "Shop to enter",
-            "button_1_link": "shopify://collections/new-releases",
-            "button_1_outline": false,
-            "button_2_text": "",
-            "button_2_link": "",
-            "button_2_outline": false
-          }
-        },
         "164794776393e76b8e-0": {
           "type": "slide",
           "settings": {
@@ -63,6 +36,33 @@
             "button_1_outline": false,
             "button_2_text": "Shop Women",
             "button_2_link": "shopify://collections/women",
+            "button_2_outline": false
+          }
+        },
+        "slide_8jWeUF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Grid_1200x600_4.png",
+            "mobile_image": "shopify://shop_images/Kenny-Flowers-womens-blue-white-greece-maxi-resort-dress-with-smocked-back-10copy.jpg",
+            "slide_link": "shopify://collections/new-releases",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Every $1 Spent = 1 Entry",
+            "heading": "Win a $100k Dream Vacation*",
+            "heading_size": "h1-large",
+            "content": "(Or $100k Cash if that's more your style)",
+            "description_size": "medium",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop to enter",
+            "button_1_link": "shopify://collections/new-releases",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "",
             "button_2_outline": false
           }
         },
@@ -175,8 +175,8 @@
         }
       },
       "block_order": [
-        "slide_8jWeUF",
         "164794776393e76b8e-0",
+        "slide_8jWeUF",
         "slide_F3hM9G",
         "slide_7FaHyj",
         "slide_z9NwjX",
