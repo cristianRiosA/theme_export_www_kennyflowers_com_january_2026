@@ -99,16 +99,16 @@
           "type": "shopify://apps/c-edd-estimated-delivery-date/blocks/delivery_coder_theme/4a0685bc-c234-45b2-8382-5ad6a8e3e3fd",
           "settings": {}
         },
-        "custom_liquid_6dUghX": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% assign is_final_sale_meta = product.metafields.my_fields.final_sale | default: false %}\n\n{% if product.tags contains 'FINAL_SALE' or is_final_sale_meta == true %}\n  <div style=\"height: 20px;\"></div>\n{% else %}\n  <div style=\"width: 100%;\n      text-align: center;\n      font-size: 16px;\n      margin-bottom: 10px;\n      margin-top: 10px;\n      font-family: 'SaaSeries - CD';\">\n    Free returns & exchanges if needed\n  </div>\n{% endif %}"
-          }
-        },
         "custom_liquid_n4ztwf": {
           "type": "custom_liquid",
           "settings": {
             "custom_liquid": "{% if product.tags contains 'SHIPPING_MAY_6' %}\n  <p class=\"shipping-update\">\n    <b>Shipping Update:</b> Due to high launch demand, this item will now ship by May 6th.\n  </p>\n{% endif %}"
+          }
+        },
+        "custom_liquid_6dUghX": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign is_final_sale_meta = product.metafields.my_fields.final_sale | default: false %}\n\n{% if product.tags contains 'FINAL_SALE' or is_final_sale_meta == true %}\n  <div style=\"height: 20px;\"></div>\n{% else %}\n  <div style=\"width: 100%;\n      text-align: center;\n      font-size: 16px;\n      margin-bottom: 10px;\n      margin-top: 10px;\n      font-family: 'SaaSeries - CD';\">\n    Free returns & exchanges if needed\n  </div>\n{% endif %}"
           }
         },
         "tabs_studio_product_tabs_block_tKnExD": {
@@ -158,8 +158,8 @@
         "buy_buttons",
         "custom_liquid_CthyJt",
         "c_edd_estimated_delivery_date_delivery_coder_theme_kHAJ8U",
-        "custom_liquid_6dUghX",
         "custom_liquid_n4ztwf",
+        "custom_liquid_6dUghX",
         "tabs_studio_product_tabs_block_tKnExD",
         "complementary_tfymG3",
         "custom_liquid_6nEQFx",
