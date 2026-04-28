@@ -32,7 +32,7 @@
             "overlay_opacity": 43,
             "overlay_gradient": "",
             "button_1_text": "Shop Women",
-            "button_1_link": "shopify://collections/women",
+            "button_1_link": "shopify://collections/new-releases",
             "button_1_outline": false,
             "button_2_text": "Shop Men",
             "button_2_link": "shopify://collections/men",
