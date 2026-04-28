@@ -2686,3 +2686,8 @@ aspect-ratio: 0.8 !important;
   color:transparent;
   animation: AnimationName 10s linear infinite;
 }
+
+.shipping-update {
+  font-size:16px;
+  text-align:center;
+}
