@@ -2688,7 +2688,8 @@ aspect-ratio: 0.8 !important;
 }
 
 .shipping-update {
-  font-size:16px;
-  text-align:center;
-  padding:0px 40px;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0px 40px;
 }
