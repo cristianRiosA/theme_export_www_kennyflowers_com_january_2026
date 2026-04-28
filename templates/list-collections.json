@@ -1,1 +1,118 @@
-{"sections":{"main":{"type":"main-list-collections","blocks":{"collection_C7d4tU":{"type":"collection","settings":{"collection":"paradiso"}},"collection_RDceEH":{"type":"collection","settings":{"collection":"greece"}},"collection_9gNtTY":{"type":"collection","settings":{"collection":"margaritaville-by-kenny-flowers"}},"collection_YmaJtC":{"type":"collection","settings":{"collection":"golf"}},"collection_xHJTER":{"type":"collection","settings":{"collection":"blue-zone-approved"}},"collection_LGzkMX":{"type":"collection","settings":{"collection":"the-amalfi-collection"}},"collection_kQ6Mhg":{"type":"collection","settings":{"collection":"kenny-flowers-the-bvis-collection"}},"collection_LYJCYN":{"type":"collection","settings":{"collection":"the-nantucket"}},"collection_JbcnUk":{"type":"collection","settings":{"collection":"the-africa-collection"}},"collection_R8hhMU":{"type":"collection","settings":{"collection":"jungle"}},"collection_9Vfecz":{"type":"collection","settings":{"collection":"10th-anniversary"}}},"block_order":["collection_C7d4tU","collection_RDceEH","collection_9gNtTY","collection_YmaJtC","collection_xHJTER","collection_LGzkMX","collection_kQ6Mhg","collection_LYJCYN","collection_JbcnUk","collection_R8hhMU","collection_9Vfecz"],"custom_css":[".collection-card__link {text-shadow: 0px 0px 10px black;}"],"settings":{"heading":"Shop By Destination","heading_left":false,"description":"","full_width":true,"sort":"date","image_ratio":"portrait","style":"style2","columns_desktop":4,"collection_list_pagination_num":12,"overlay_color":"#000000","overlay_opacity":0,"disable_top_spacing":false,"disable_bottom_spacing":false}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "blocks": {
+        "collection_YmaJtC": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-valencia-collection"
+          }
+        },
+        "collection_C7d4tU": {
+          "type": "collection",
+          "settings": {
+            "collection": "paradiso"
+          }
+        },
+        "collection_RDceEH": {
+          "type": "collection",
+          "settings": {
+            "collection": "greece"
+          }
+        },
+        "collection_9gNtTY": {
+          "type": "collection",
+          "settings": {
+            "collection": "margaritaville-by-kenny-flowers"
+          }
+        },
+        "collection_xHJTER": {
+          "type": "collection",
+          "settings": {
+            "collection": "blue-zone-approved"
+          }
+        },
+        "collection_LGzkMX": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-amalfi-collection"
+          }
+        },
+        "collection_kQ6Mhg": {
+          "type": "collection",
+          "settings": {
+            "collection": "kenny-flowers-the-bvis-collection"
+          }
+        },
+        "collection_LYJCYN": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-nantucket"
+          }
+        },
+        "collection_JbcnUk": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-africa-collection"
+          }
+        },
+        "collection_R8hhMU": {
+          "type": "collection",
+          "settings": {
+            "collection": "jungle"
+          }
+        },
+        "collection_9Vfecz": {
+          "type": "collection",
+          "settings": {
+            "collection": "10th-anniversary"
+          }
+        }
+      },
+      "block_order": [
+        "collection_YmaJtC",
+        "collection_C7d4tU",
+        "collection_RDceEH",
+        "collection_9gNtTY",
+        "collection_xHJTER",
+        "collection_LGzkMX",
+        "collection_kQ6Mhg",
+        "collection_LYJCYN",
+        "collection_JbcnUk",
+        "collection_R8hhMU",
+        "collection_9Vfecz"
+      ],
+      "custom_css": [
+        ".collection-card__link {text-shadow: 0px 0px 10px black;}"
+      ],
+      "settings": {
+        "heading": "Shop By Destination",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "sort": "date",
+        "image_ratio": "portrait",
+        "style": "style2",
+        "columns_desktop": 4,
+        "collection_list_pagination_num": 12,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
