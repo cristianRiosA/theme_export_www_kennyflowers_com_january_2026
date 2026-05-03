@@ -24,6 +24,7 @@
         },
         "text_UKkfPj": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "text": "FREE GIFT W/ YOUR ORDER TODAY",
