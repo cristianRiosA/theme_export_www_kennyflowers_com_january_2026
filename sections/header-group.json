@@ -32,11 +32,10 @@
         },
         "text_YKQKCV": {
           "type": "text",
-          "disabled": true,
           "settings": {
             "icon": "none",
-            "text": "LAST CALL: UP TO 60% OFF ENDS TONIGHT",
-            "link": "shopify://collections/final-sail"
+            "text": "Order today, get by Memorial Day Weekend",
+            "link": "shopify://collections/summer-2026"
           }
         },
         "text_a4MTem": {
