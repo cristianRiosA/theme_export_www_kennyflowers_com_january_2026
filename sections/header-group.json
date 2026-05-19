@@ -26,7 +26,7 @@
           "type": "text",
           "settings": {
             "icon": "none",
-            "text": "Free 3-day Shipping on orders $150+ | Free returns/exchanges",
+            "text": "Free Shipping on orders $150+ | Free returns/exchanges",
             "link": ""
           }
         },
@@ -71,7 +71,7 @@
         "autoplay": true,
         "autoplay_length": 3,
         "countdown_timer": false,
-        "countdown_datetime": "May 18, 2026 23:59:59"
+        "countdown_datetime": "May 19, 2026 11:59:59"
       }
     },
     "header": {
