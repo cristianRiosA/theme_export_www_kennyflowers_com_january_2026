@@ -16,6 +16,7 @@
       "blocks": {
         "text_YKQKCV": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "text": "Order today, get by Memorial Day Weekend",
