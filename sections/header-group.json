@@ -14,15 +14,6 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "text_YKQKCV": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "icon": "none",
-            "text": "Order today, get by Memorial Day Weekend",
-            "link": "shopify://collections/summer-2026"
-          }
-        },
         "text_UKkfPj": {
           "type": "text",
           "settings": {
@@ -54,14 +45,23 @@
             "text": "NEW: Margaritaville by KF Round 2 - Dive in now",
             "link": "shopify://collections/margaritaville-by-kenny-flowers"
           }
+        },
+        "text_YKQKCV": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "icon": "none",
+            "text": "Order today, get by Memorial Day Weekend",
+            "link": "shopify://collections/summer-2026"
+          }
         }
       },
       "block_order": [
-        "text_YKQKCV",
         "text_UKkfPj",
         "2f7893ee-7b84-4f15-911a-801b94ffa38e",
         "5b1ab378-833d-4a94-a02e-8325ec1551d0",
-        "text_a4MTem"
+        "text_a4MTem",
+        "text_YKQKCV"
       ],
       "settings": {
         "announcement_bar": true,
@@ -72,7 +72,7 @@
         "autoplay": true,
         "autoplay_length": 3,
         "countdown_timer": false,
-        "countdown_datetime": "May 19, 2026 11:59:59"
+        "countdown_datetime": "May 20, 2026 11:59:59"
       }
     },
     "header": {
