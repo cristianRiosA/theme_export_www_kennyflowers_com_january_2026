@@ -14,14 +14,6 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "text_UKkfPj": {
-          "type": "text",
-          "settings": {
-            "icon": "none",
-            "text": "FREE GIFT W/ YOUR ORDER TODAY",
-            "link": ""
-          }
-        },
         "2f7893ee-7b84-4f15-911a-801b94ffa38e": {
           "type": "text",
           "settings": {
@@ -30,11 +22,11 @@
             "link": "shopify://pages/dream-giveaway"
           }
         },
-        "5b1ab378-833d-4a94-a02e-8325ec1551d0": {
+        "text_UKkfPj": {
           "type": "text",
           "settings": {
             "icon": "none",
-            "text": "Free Shipping on orders $150+ | Free returns/exchanges",
+            "text": "FREE GIFT W/ YOUR ORDER TODAY",
             "link": ""
           }
         },
@@ -44,6 +36,14 @@
             "icon": "none",
             "text": "NEW: Margaritaville by KF Round 2 - Dive in now",
             "link": "shopify://collections/margaritaville-by-kenny-flowers"
+          }
+        },
+        "5b1ab378-833d-4a94-a02e-8325ec1551d0": {
+          "type": "text",
+          "settings": {
+            "icon": "none",
+            "text": "Free Shipping on orders $150+ | Free returns/exchanges",
+            "link": ""
           }
         },
         "text_YKQKCV": {
@@ -57,10 +57,10 @@
         }
       },
       "block_order": [
-        "text_UKkfPj",
         "2f7893ee-7b84-4f15-911a-801b94ffa38e",
-        "5b1ab378-833d-4a94-a02e-8325ec1551d0",
+        "text_UKkfPj",
         "text_a4MTem",
+        "5b1ab378-833d-4a94-a02e-8325ec1551d0",
         "text_YKQKCV"
       ],
       "settings": {
