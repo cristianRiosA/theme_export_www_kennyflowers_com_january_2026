@@ -14,20 +14,20 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "text_UKkfPj": {
-          "type": "text",
-          "settings": {
-            "icon": "none",
-            "text": "FREE GIFT W/ YOUR ORDER TODAY",
-            "link": ""
-          }
-        },
         "2f7893ee-7b84-4f15-911a-801b94ffa38e": {
           "type": "text",
           "settings": {
             "icon": "none",
             "text": "Ends soon - $100k or trip of a lifetime sweepstakes* | $1 Spent = 1 Entry",
             "link": "shopify://pages/dream-giveaway"
+          }
+        },
+        "text_UKkfPj": {
+          "type": "text",
+          "settings": {
+            "icon": "none",
+            "text": "FREE GIFT W/ YOUR ORDER TODAY",
+            "link": ""
           }
         },
         "text_a4MTem": {
@@ -57,8 +57,8 @@
         }
       },
       "block_order": [
-        "text_UKkfPj",
         "2f7893ee-7b84-4f15-911a-801b94ffa38e",
+        "text_UKkfPj",
         "text_a4MTem",
         "5b1ab378-833d-4a94-a02e-8325ec1551d0",
         "text_YKQKCV"
