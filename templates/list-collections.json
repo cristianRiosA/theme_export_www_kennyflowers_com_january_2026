@@ -103,9 +103,9 @@
         ".collection-card__link {text-shadow: 0px 0px 10px black;}"
       ],
       "settings": {
-        "heading": "Summer, Your Way",
+        "heading": "Shop by Destination",
         "heading_left": false,
-        "description": "",
+        "description": "<p>Summer, Your Way</p>",
         "full_width": true,
         "sort": "date",
         "image_ratio": "portrait",
