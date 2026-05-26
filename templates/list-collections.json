@@ -12,16 +12,10 @@
     "main": {
       "type": "main-list-collections",
       "blocks": {
-        "collection_YmaJtC": {
+        "collection_irjbnm": {
           "type": "collection",
           "settings": {
-            "collection": "the-valencia-collection"
-          }
-        },
-        "collection_C7d4tU": {
-          "type": "collection",
-          "settings": {
-            "collection": "paradiso"
+            "collection": "summer-2026"
           }
         },
         "collection_RDceEH": {
@@ -30,10 +24,34 @@
             "collection": "greece"
           }
         },
+        "collection_LGzkMX": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-amalfi-collection"
+          }
+        },
         "collection_9gNtTY": {
           "type": "collection",
           "settings": {
             "collection": "margaritaville-by-kenny-flowers"
+          }
+        },
+        "collection_LYJCYN": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-nantucket"
+          }
+        },
+        "collection_C7d4tU": {
+          "type": "collection",
+          "settings": {
+            "collection": "paradiso"
+          }
+        },
+        "collection_YmaJtC": {
+          "type": "collection",
+          "settings": {
+            "collection": "the-valencia-collection"
           }
         },
         "collection_xHJTER": {
@@ -42,22 +60,10 @@
             "collection": "blue-zone-approved"
           }
         },
-        "collection_LGzkMX": {
-          "type": "collection",
-          "settings": {
-            "collection": "the-amalfi-collection"
-          }
-        },
         "collection_kQ6Mhg": {
           "type": "collection",
           "settings": {
             "collection": "kenny-flowers-the-bvis-collection"
-          }
-        },
-        "collection_LYJCYN": {
-          "type": "collection",
-          "settings": {
-            "collection": "the-nantucket"
           }
         },
         "collection_JbcnUk": {
@@ -80,14 +86,15 @@
         }
       },
       "block_order": [
-        "collection_YmaJtC",
-        "collection_C7d4tU",
+        "collection_irjbnm",
         "collection_RDceEH",
-        "collection_9gNtTY",
-        "collection_xHJTER",
         "collection_LGzkMX",
-        "collection_kQ6Mhg",
+        "collection_9gNtTY",
         "collection_LYJCYN",
+        "collection_C7d4tU",
+        "collection_YmaJtC",
+        "collection_xHJTER",
+        "collection_kQ6Mhg",
         "collection_JbcnUk",
         "collection_R8hhMU",
         "collection_9Vfecz"
