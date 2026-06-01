@@ -203,6 +203,10 @@ h2, h3 {
   .menu-logo-container .thb-full-menu li[role="menuitem"]:nth-of-type(7) {
     display:none;
   }
+
+  .menu-logo-container .thb-full-menu li[role="menuitem"]:nth-of-type(10) {
+    display:none;
+  }
 }
 
 @media only screen and (max-width: 1275px) { 
