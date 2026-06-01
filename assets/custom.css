@@ -198,6 +198,11 @@ h2, h3 {
 
 /* MEGAMENU */
 
+@media only screen and (max-width: 1700px) { 
+  .menu-logo-container .thb-full-menu li[role="menuitem"]:nth-of-type(10) {
+    display:none;
+  }
+}
 
 @media only screen and (max-width: 1420px) { 
   .menu-logo-container .thb-full-menu li[role="menuitem"]:nth-of-type(7) {
@@ -208,10 +213,6 @@ h2, h3 {
 
 @media only screen and (max-width: 1275px) { 
   .menu-logo-container .thb-full-menu li[role="menuitem"]:nth-of-type(6) {
-    display:none;
-  }
-
-  .menu-logo-container .thb-full-menu li[role="menuitem"]:nth-of-type(10) {
     display:none;
   }
 }
