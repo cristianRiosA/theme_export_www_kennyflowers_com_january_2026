@@ -283,6 +283,83 @@
         "disable_bottom_spacing": true
       }
     },
+    "featured_collection_ccLGWL": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Hawaiian Shirts for Dad",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
+        "collection": "all-shirts",
+        "display_type": "carousel",
+        "product_limit": 10,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "1448d43b-0e25-44a5-a3a9-ac946a4ee992": {
+      "type": "featured-product",
+      "blocks": {
+        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-title-1": {
+          "type": "title",
+          "settings": {
+            "uppercase": true,
+            "show_products_rating": true,
+            "show_custom_badges": true
+          }
+        },
+        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-variant_picker-1": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "color_picker": false,
+            "color_picker_size": "regular",
+            "color_picker_use_variants": false,
+            "variant_is_disabled": true,
+            "sizing_guide_variant": "Size",
+            "sizing_guide_text": "",
+            "sizing_guide_icon": "none",
+            "sizing_guide_page": "",
+            "custom_liquid": ""
+          }
+        },
+        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-buy_buttons-1": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "outline_button": true,
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-title-1",
+        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-variant_picker-1",
+        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-buy_buttons-1"
+      ],
+      "settings": {
+        "heading": "Give the Gift of Flowers",
+        "heading_left": false,
+        "description": "<p>Let him choose, good gift guaranteed.</p>",
+        "full_width": false,
+        "product": "the-stage-coach-short-sleeve-shirt",
+        "show_taxes_included": true,
+        "enable_sticky_info": false,
+        "media_layout": "thumbnails",
+        "display_slider_pagination": true,
+        "media_aspect_ratio": "adapt",
+        "display_captions": false,
+        "hide_variants": false,
+        "lightbox": false,
+        "enable_video_looping": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "featured_collection_cWxJUL": {
       "type": "featured-collection",
       "settings": {
@@ -372,24 +449,6 @@
         "disable_bottom_spacing": true
       }
     },
-    "featured_collection_ccLGWL": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Hawaiian Shirts for Dad",
-        "heading_left": true,
-        "description": "",
-        "full_width": true,
-        "collection": "all-shirts",
-        "display_type": "carousel",
-        "product_limit": 10,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "mobile_swipe": true,
-        "show_progress_bar": true,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": false
-      }
-    },
     "featured_collection_KYa6RT": {
       "type": "featured-collection",
       "settings": {
@@ -424,66 +483,6 @@
         "show_progress_bar": true,
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
-      }
-    },
-    "1448d43b-0e25-44a5-a3a9-ac946a4ee992": {
-      "type": "featured-product",
-      "blocks": {
-        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-title-1": {
-          "type": "title",
-          "settings": {
-            "uppercase": true,
-            "show_products_rating": true,
-            "show_custom_badges": true
-          }
-        },
-        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-variant_picker-1": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "color_picker": false,
-            "color_picker_size": "regular",
-            "color_picker_use_variants": false,
-            "variant_is_disabled": true,
-            "sizing_guide_variant": "Size",
-            "sizing_guide_text": "",
-            "sizing_guide_icon": "none",
-            "sizing_guide_page": "",
-            "custom_liquid": ""
-          }
-        },
-        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-buy_buttons-1": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_quantity_selector": true,
-            "outline_button": true,
-            "show_dynamic_checkout": true
-          }
-        }
-      },
-      "block_order": [
-        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-title-1",
-        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-variant_picker-1",
-        "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-buy_buttons-1"
-      ],
-      "disabled": true,
-      "settings": {
-        "heading": "Give the Gift of Flowers",
-        "heading_left": false,
-        "description": "<p>Let him choose, good gift guaranteed.</p>",
-        "full_width": false,
-        "product": "gift-card",
-        "show_taxes_included": true,
-        "enable_sticky_info": false,
-        "media_layout": "grid",
-        "display_slider_pagination": true,
-        "media_aspect_ratio": "adapt",
-        "display_captions": false,
-        "hide_variants": false,
-        "lightbox": false,
-        "enable_video_looping": false,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
       }
     },
     "0b724e18-3ef8-4446-bce8-828d921780d9": {
@@ -541,13 +540,13 @@
     "rich_text_AHr77X",
     "8048eda8-47e2-4e20-a0d0-fc537925db2e",
     "c8f60573-366c-4ce9-b534-1edb68fadda9",
+    "featured_collection_ccLGWL",
+    "1448d43b-0e25-44a5-a3a9-ac946a4ee992",
     "featured_collection_cWxJUL",
     "collection_list_cKQUkz",
     "769ba1f7-7a55-4901-8bfc-41cd982a23f1",
-    "featured_collection_ccLGWL",
     "featured_collection_KYa6RT",
     "featured_collection_YjfPii",
-    "1448d43b-0e25-44a5-a3a9-ac946a4ee992",
     "0b724e18-3ef8-4446-bce8-828d921780d9",
     "featured_collection_YQCmHk"
   ]
