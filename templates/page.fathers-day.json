@@ -319,9 +319,8 @@
         },
         "text_TXVqq6": {
           "type": "text",
-          "disabled": true,
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Red, White & Ready. The Americana Collection is here for a limited run - the shirt he'll live in from the 4th of July dock party to every cookout after. Matching boys' shirt available, they're going to love this. Once they're gone, they're gone.</p>",
             "description_size": "medium"
           }
         },
@@ -342,7 +341,7 @@
       ],
       "name": "Featured product card",
       "settings": {
-        "section_width": "grid",
+        "section_width": "full-width-row",
         "product": "the-stage-coach-short-sleeve-shirt",
         "image": "shopify://shop_images/palm-tree-cart.png",
         "image_parallax": false,
@@ -417,14 +416,14 @@
         "disable_bottom_spacing": false
       }
     },
-    "featured_collection_cWxJUL": {
+    "featured_collection_KYa6RT": {
       "type": "featured-collection",
       "settings": {
-        "heading": "like father like son",
+        "heading": "Golf shirts for dad",
         "heading_left": true,
         "description": "",
         "full_width": true,
-        "collection": "father-and-son-matching-shirts-and-swim",
+        "collection": "mens-golf-shirts",
         "display_type": "carousel",
         "product_limit": 10,
         "columns_desktop": 4,
@@ -506,24 +505,6 @@
         "disable_bottom_spacing": true
       }
     },
-    "featured_collection_KYa6RT": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Golf shirts for dad",
-        "heading_left": true,
-        "description": "",
-        "full_width": true,
-        "collection": "mens-golf-shirts",
-        "display_type": "carousel",
-        "product_limit": 10,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "mobile_swipe": true,
-        "show_progress_bar": true,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": false
-      }
-    },
     "featured_collection_YjfPii": {
       "type": "featured-collection",
       "settings": {
@@ -570,6 +551,24 @@
         "disable_bottom_spacing": false
       }
     },
+    "featured_collection_cWxJUL": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "like father like son",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
+        "collection": "father-and-son-matching-shirts-and-swim",
+        "display_type": "carousel",
+        "product_limit": 10,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
     "featured_collection_YQCmHk": {
       "type": "featured-collection",
       "settings": {
@@ -600,12 +599,12 @@
     "featured_collection_ccLGWL",
     "featured_product_card_9EbfiQ",
     "1448d43b-0e25-44a5-a3a9-ac946a4ee992",
-    "featured_collection_cWxJUL",
+    "featured_collection_KYa6RT",
     "collection_list_cKQUkz",
     "769ba1f7-7a55-4901-8bfc-41cd982a23f1",
-    "featured_collection_KYa6RT",
     "featured_collection_YjfPii",
     "0b724e18-3ef8-4446-bce8-828d921780d9",
+    "featured_collection_cWxJUL",
     "featured_collection_YQCmHk"
   ]
 }
