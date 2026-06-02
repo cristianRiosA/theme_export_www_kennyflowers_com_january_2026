@@ -253,6 +253,36 @@
         "disable_bottom_spacing": false
       }
     },
+    "c8f60573-366c-4ce9-b534-1edb68fadda9": {
+      "type": "collection-list",
+      "custom_css": [
+        ".collection-card.style2 .collection-card__content .collection-card__link {display: flex; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;}"
+      ],
+      "settings": {
+        "heading": "Find the Perfect Gift For Dad",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
+        "collection_list": [
+          "father-and-son-matching-shirts-and-swim",
+          "mens-golf-shirts",
+          "kenny-flowers-x-mclaren-formula-1-team",
+          "margaritaville-by-kenny-flowers",
+          "mens-cabana-sets"
+        ],
+        "image_ratio": "portrait",
+        "layout": "carousel",
+        "style": "style2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_progress_bar": true,
+        "mobile_swipe": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
     "featured_collection_cWxJUL": {
       "type": "featured-collection",
       "settings": {
@@ -456,36 +486,6 @@
         "disable_bottom_spacing": false
       }
     },
-    "c8f60573-366c-4ce9-b534-1edb68fadda9": {
-      "type": "collection-list",
-      "custom_css": [
-        ".collection-card.style2 .collection-card__content .collection-card__link {display: flex; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;}"
-      ],
-      "settings": {
-        "heading": "Find the Perfect Gift For...",
-        "heading_left": true,
-        "description": "",
-        "full_width": true,
-        "collection_list": [
-          "father-and-son-matching-shirts-and-swim",
-          "mens-golf-shirts",
-          "kenny-flowers-x-mclaren-formula-1-team",
-          "margaritaville-by-kenny-flowers",
-          "mens-cabana-sets"
-        ],
-        "image_ratio": "portrait",
-        "layout": "carousel",
-        "style": "style2",
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "show_progress_bar": true,
-        "mobile_swipe": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 30,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": true
-      }
-    },
     "0b724e18-3ef8-4446-bce8-828d921780d9": {
       "type": "rich-text",
       "blocks": {
@@ -540,6 +540,7 @@
     "380b19f4-6ea7-410c-bacc-e81bd8b61ef9",
     "rich_text_AHr77X",
     "8048eda8-47e2-4e20-a0d0-fc537925db2e",
+    "c8f60573-366c-4ce9-b534-1edb68fadda9",
     "featured_collection_cWxJUL",
     "collection_list_cKQUkz",
     "769ba1f7-7a55-4901-8bfc-41cd982a23f1",
@@ -547,7 +548,6 @@
     "featured_collection_KYa6RT",
     "featured_collection_YjfPii",
     "1448d43b-0e25-44a5-a3a9-ac946a4ee992",
-    "c8f60573-366c-4ce9-b534-1edb68fadda9",
     "0b724e18-3ef8-4446-bce8-828d921780d9",
     "featured_collection_YQCmHk"
   ]
