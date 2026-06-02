@@ -301,6 +301,62 @@
         "disable_bottom_spacing": false
       }
     },
+    "featured_product_card_9EbfiQ": {
+      "type": "featured-product-card",
+      "blocks": {
+        "subheading_LcBBcw": {
+          "type": "subheading",
+          "settings": {
+            "text": "Featured Gift"
+          }
+        },
+        "heading_ggCNUP": {
+          "type": "heading",
+          "settings": {
+            "text": "The Americana Shirt",
+            "heading_size": "h1"
+          }
+        },
+        "text_TXVqq6": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "description_size": "medium"
+          }
+        },
+        "button_Erazci": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_LcBBcw",
+        "heading_ggCNUP",
+        "text_TXVqq6",
+        "button_Erazci"
+      ],
+      "name": "Featured product card",
+      "settings": {
+        "section_width": "grid",
+        "product": "the-stage-coach-short-sleeve-shirt",
+        "image": "shopify://shop_images/palm-tree-cart.png",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-550",
+        "mobile_height": "mobile-height-500",
+        "content_width": "medium",
+        "content_position": "middle",
+        "text_alignment": "left",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "1448d43b-0e25-44a5-a3a9-ac946a4ee992": {
       "type": "featured-product",
       "blocks": {
@@ -341,6 +397,7 @@
         "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-variant_picker-1",
         "template--16959053660379__1448d43b-0e25-44a5-a3a9-ac946a4ee992-buy_buttons-1"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Give the Gift of Flowers",
         "heading_left": false,
@@ -349,7 +406,7 @@
         "product": "the-stage-coach-short-sleeve-shirt",
         "show_taxes_included": true,
         "enable_sticky_info": false,
-        "media_layout": "thumbnails",
+        "media_layout": "grid",
         "display_slider_pagination": true,
         "media_aspect_ratio": "adapt",
         "display_captions": false,
@@ -541,6 +598,7 @@
     "8048eda8-47e2-4e20-a0d0-fc537925db2e",
     "c8f60573-366c-4ce9-b534-1edb68fadda9",
     "featured_collection_ccLGWL",
+    "featured_product_card_9EbfiQ",
     "1448d43b-0e25-44a5-a3a9-ac946a4ee992",
     "featured_collection_cWxJUL",
     "collection_list_cKQUkz",
