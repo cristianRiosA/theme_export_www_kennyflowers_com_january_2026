@@ -1,26 +1,37 @@
 {%- liquid
 	assign grid_collection_image = nil
 	assign index_c = index | modulo: 6 | plus: 1
+	assign is_gift_guide = false
+	if request.page_type == 'page' and request.template.name == 'fathers-day'
+		assign is_gift_guide = true
+	endif
 -%}
 {%- if grid_collection == empty -%}
 	{%- assign grid_collection_url = '#' -%}
 	{%- assign grid_collection_title = 'onboarding.collection_title' | t -%}
 {%- else -%}
 	{%- assign grid_collection_url = grid_collection.url -%}
-	{%- comment -%} Use short_collection_title metafield if available, otherwise fall back to regular title {%- endcomment -%}
-	{%- if grid_collection.metafields.custom.short_collection_title != blank -%}
+	{%- comment -%} Title: use Gift Guide Name metafield on fathers-day template, else short title, else regular title {%- endcomment -%}
+	{%- if is_gift_guide and grid_collection.metafields.custom.secondary_collection_name != blank -%}
+		{%- assign grid_collection_title = grid_collection.metafields.custom.secondary_collection_name -%}
+	{%- elsif grid_collection.metafields.custom.short_collection_title != blank -%}
 		{%- assign grid_collection_title = grid_collection.metafields.custom.short_collection_title -%}
 	{%- else -%}
 		{%- assign grid_collection_title = grid_collection.title -%}
 	{%- endif -%}
-	{%- comment -%} Use collection_photo_portrait metafield if available, otherwise fall back to featured_image {%- endcomment -%}
-	{%- assign portrait_metafield = grid_collection.metafields.my_fields.collection_photo_portrait -%}
-	{%- if portrait_metafield != blank -%}
-		{%- assign grid_collection_image = portrait_metafield -%}
+	{%- comment -%} Image: use Gift Guide Portrait metafield on fathers-day template, else portrait metafield, else featured_image {%- endcomment -%}
+	{%- if is_gift_guide and grid_collection.metafields.custom.secondary_portrait_image != blank -%}
+		{%- assign grid_collection_image = grid_collection.metafields.custom.secondary_portrait_image -%}
 		{%- assign use_metafield_image = true -%}
-	{%- elsif grid_collection.featured_image -%}
-		{%- assign grid_collection_image = grid_collection.featured_image -%}
-		{%- assign use_metafield_image = false -%}
+	{%- else -%}
+		{%- assign portrait_metafield = grid_collection.metafields.my_fields.collection_photo_portrait -%}
+		{%- if portrait_metafield != blank -%}
+			{%- assign grid_collection_image = portrait_metafield -%}
+			{%- assign use_metafield_image = true -%}
+		{%- elsif grid_collection.featured_image -%}
+			{%- assign grid_collection_image = grid_collection.featured_image -%}
+			{%- assign use_metafield_image = false -%}
+		{%- endif -%}
 	{%- endif -%}
 {%- endif -%}
 {%- liquid
