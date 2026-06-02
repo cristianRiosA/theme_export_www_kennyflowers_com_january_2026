@@ -223,8 +223,8 @@
         "button_nRwhCB"
       ],
       "settings": {
-        "section_width": "grid",
-        "text_width": "medium",
+        "section_width": "full-width-row",
+        "text_width": "xlarge",
         "text_position": "center",
         "text_alignment": "center",
         "color_bg": "rgba(0,0,0,0)",
