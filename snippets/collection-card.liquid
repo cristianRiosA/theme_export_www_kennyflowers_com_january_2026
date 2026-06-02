@@ -1,13 +1,12 @@
-<!-- DEBUG: page.template_suffix={{ page.template_suffix }} | page.handle={{ page.handle }} -->
-
 {%- liquid
 	assign grid_collection_image = nil
 	assign index_c = index | modulo: 6 | plus: 1
 	assign is_gift_guide = false
-	if request.page_type == 'page' and request.template.name == 'fathers-day'
+	if page.template_suffix == 'fathers-day'
 		assign is_gift_guide = true
 	endif
 -%}
+
 {%- if grid_collection == empty -%}
 	{%- assign grid_collection_url = '#' -%}
 	{%- assign grid_collection_title = 'onboarding.collection_title' | t -%}
