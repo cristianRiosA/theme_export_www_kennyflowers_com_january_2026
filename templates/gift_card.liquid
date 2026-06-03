@@ -3,6 +3,9 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
+
+	{% render 'iub-cookie-banner' %}
+	
     <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -32,7 +35,6 @@
 
 		{% render 'head-variables' %}
 
-	{% render 'iub-cookie-banner' %}
   </head>
 
   <body>
