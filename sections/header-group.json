@@ -30,12 +30,12 @@
             "link": ""
           }
         },
-        "text_a4MTem": {
+        "text_YKQKCV": {
           "type": "text",
           "settings": {
             "icon": "none",
-            "text": "NEW: Margaritaville by KF Round 2 - Dive in now",
-            "link": "shopify://collections/margaritaville-by-kenny-flowers"
+            "text": "Don’t forget about dad - get him a shirt he’ll love. ",
+            "link": "shopify://pages/fathers-day-gift-guide"
           }
         },
         "5b1ab378-833d-4a94-a02e-8325ec1551d0": {
@@ -46,22 +46,21 @@
             "link": ""
           }
         },
-        "text_YKQKCV": {
+        "text_a4MTem": {
           "type": "text",
-          "disabled": true,
           "settings": {
             "icon": "none",
-            "text": "Up to 60% off + 5x Entries | This weekend only",
-            "link": "shopify://collections/final-sail"
+            "text": "NEW: Margaritaville by KF Round 2 - Dive in now",
+            "link": "shopify://collections/margaritaville-by-kenny-flowers"
           }
         }
       },
       "block_order": [
         "2f7893ee-7b84-4f15-911a-801b94ffa38e",
         "text_UKkfPj",
-        "text_a4MTem",
+        "text_YKQKCV",
         "5b1ab378-833d-4a94-a02e-8325ec1551d0",
-        "text_YKQKCV"
+        "text_a4MTem"
       ],
       "settings": {
         "announcement_bar": true,
