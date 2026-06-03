@@ -48,6 +48,7 @@
         },
         "text_a4MTem": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "text": "NEW: Margaritaville by KF Round 2 - Dive in now",
